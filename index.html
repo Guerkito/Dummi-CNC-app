@@ -1148,6 +1148,7 @@ function mFlotaC(){return mHome()}
 function mMachine(n){
   const m=MQ[n];
   const cons=CONSUMIBLES.filter(c=>c.mq==n);
+  const paradas=PARADAS.filter(p=>p.mq==n);
   const sug=(ALARMAS.find(a=>a.code==(m.alarma||{}).code)||{}).sug||"";
   return `<button class="bigbtn ghost" style="margin-bottom:11px" onclick="M_SEL=null;renderMovil()">← Volver</button>
   <div class="mcard2"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">${n}</div><div class="s">${m.modelo} · ${m.tipoTxt}</div>${st(m.estado)}</div></div>
@@ -1165,9 +1166,28 @@ function mMachine(n){
     <div class="mrow"><span>Uso de herramienta</span><b>${m.horasUsadas} / ${m.vidaUtil} h</b></div>
     <div class="mrow"><span>Última conexión</span><b>hace 4 s</b></div>
   </div>
-  ${m.alarma?`<div class="otitem bb"><b>${m.alarma.code} — ${m.alarma.txt}</b><br>Activa desde hace ${m.alarma.min} min<br>${ic('bulb')} ${sug}</div>`:''}
-  ${cons.length?`<div class="mcard2"><div class="t">Consumibles — uso y RUL detectados automáticamente</div>${cons.map(c=>`<div class="mrow"><span>${c.nombre} <span style="font-size:10px;color:var(--text-3)">${c.ref}</span></span><b style="color:${c.stock<=c.min?'var(--bad)':'var(--ok)'}">${c.stock} / ${c.min}</b></div>`).join("")}<span style="font-size:10px;color:var(--text-3)">Desgaste leído del MODIF.LOG · stock por inventario</span></div>`:''}
-  ${ROL=="operario"?`<button class="bigbtn amber" onclick="go2m(1)">${ic('warn')} Reportar falla</button>`:ROL=="mantenimiento"?`<button class="bigbtn" onclick="toast('OT correctiva creada para ${n}','ok')">${ic('tools')} Crear OT correctiva</button>`:""}`;
+  <div class="mcard2"><div class="t">Timeline 24 h (2 turnos)</div>${tlBar(n)}
+    <div style="display:flex;gap:12px;font-size:10px;color:var(--text-3)"><span><i class="dotc ok"></i>corriendo</span><span><i class="dotc warn"></i>alerta</span><span><i class="dotc bad"></i>parada</span></div>
+  </div>
+  <div class="mcard2"><div class="t">OEE desglose</div>
+    <div class="mrow"><span>Disponibilidad</span><b>${m.estado=="run"?92:45}%</b></div>
+    <div class="mrow"><span>Rendimiento</span><b>85%</b></div>
+    <div class="mrow"><span>Calidad</span><b>${Math.round(m.ok/m.piezas*100)}%</b></div>
+  </div>
+  ${m.alarma?`<div class="otitem bb"><b>${m.alarma.code} — ${m.alarma.txt}</b><br>Activa desde hace ${m.alarma.min} min<br>${ic('bulb')} ${sug}</div>`:`<div class="otitem bo"><b>Sin alarmas activas</b><br>${ic('check')} La máquina opera en condiciones normales</div>`}
+  <div class="mcard2"><div class="t">Variables en vivo</div>
+    ${VARIABLES.map(v=>`<div class="mrow"><span><code style="background:var(--bg);padding:1px 5px;border-radius:4px">${v.code}</code> ${v.nombre}</span><b>${v.val} ${v.ok?'<span class="pill ok" style="margin-left:4px">OK</span>':'<span class="pill bad" style="margin-left:4px">ALERTA</span>'}</b></div>`).join("")}
+  </div>
+  ${cons.length?`<div class="mcard2"><div class="t">Consumibles — uso y RUL detectados automáticamente</div>${cons.map(c=>`<div class="mrow"><span>${c.nombre} <span style="font-size:10px;color:var(--text-3)">${c.ref}</span></span><b>${c.uso}% uso · ${c.rul} h RUL · <span style="color:${c.stock<=c.min?'var(--bad)':'var(--ok)'}">${c.stock}/${c.min}</span></b></div>`).join("")}<span style="font-size:10px;color:var(--text-3)">Desgaste leído del MODIF.LOG · stock por inventario</span></div>`:''}
+  <div class="mcard2"><div class="t">Historial de paradas</div>
+    ${paradas.length?paradas.map(p=>`<div class="otitem ${p.sev=='bad'?'bb':p.sev=='warn'?'':'bg'}"><b>${p.fecha} · ${p.causa}</b><br>${p.clase} · ${p.dur}</div>`).join(""):'<span class="chip">Sin paradas recientes</span>'}
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="bigbtn" style="flex:1;min-width:150px" onclick="toast('OT correctiva creada para ${n}','ok')">${ic('tools')} Crear OT correctiva</button>
+    <button class="bigbtn ghost" style="flex:1;min-width:150px" onclick="toast('Informe PDF descargado','ok')">${ic('doc')} Informe PDF</button>
+    <button class="bigbtn ghost" style="flex:1;min-width:150px" onclick="M_VIEW='chatia';renderMovil()">${ic('chat')} Preguntar al asistente</button>
+    ${ROL=="operario"?`<button class="bigbtn amber" style="flex:1;min-width:150px" onclick="go2m(1)">${ic('warn')} Reportar falla</button>`:""}
+  </div>`;
 }
 function mReportesM(){
   return `<div class="mcard2"><div class="t">OEE por semana</div>
