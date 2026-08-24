@@ -1185,7 +1185,7 @@ function mMachine(n){
   <div style="display:flex;gap:8px;flex-wrap:wrap">
     <button class="bigbtn" style="flex:1;min-width:150px" onclick="toast('OT correctiva creada para ${n}','ok')">${ic('tools')} Crear OT correctiva</button>
     <button class="bigbtn ghost" style="flex:1;min-width:150px" onclick="toast('Informe PDF descargado','ok')">${ic('doc')} Informe PDF</button>
-    <button class="bigbtn ghost" style="flex:1;min-width:150px" onclick="M_VIEW='chatia';renderMovil()">${ic('chat')} Preguntar al asistente</button>
+    <button class="bigbtn ghost" style="flex:1;min-width:150px" onclick="M_SEL=null;M_VIEW='chatia';renderMovil()">${ic('chat')} Preguntar al asistente</button>
     ${ROL=="operario"?`<button class="bigbtn amber" style="flex:1;min-width:150px" onclick="go2m(1)">${ic('warn')} Reportar falla</button>`:""}
   </div>`;
 }
