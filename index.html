@@ -733,7 +733,7 @@ function vMachine(){
         <button class="btn sm" onclick="toast('OT correctiva creada para ${SEL_MQ}','ok')">${ic('tools')} Crear OT correctiva</button> <button class="btn ghost sm" onclick="toast('Informe PDF descargado','ok')">${ic('doc')} Informe PDF</button> <button class="btn ghost sm" onclick="go('chatia')">${ic('chat')} Preguntar al manual</button>
         </div>
         <div class="card"><h3>Alarmas activas</h3>
-          ${m.alarma?`<div class="otitem ${m.alarma.sev=='bad'?'bb':''}"><b>${m.alarma.code}</b> · ${m.alarma.min} min<br>${m.alarma.txt}<br><span style="color:var(--primary-2)">${ic('bulb')} ${(ALARMAS.find(a=>a.code==m.alarma.code)||{}).sug||""}</span></div>`:'<span class="chip">Sin alarmas activas ${ic('check')}</span>'}
+          ${m.alarma?`<div class="otitem ${m.alarma.sev=='bad'?'bb':''}"><b>${m.alarma.code}</b> · ${m.alarma.min} min<br>${m.alarma.txt}<br><span style="color:var(--primary-2)">${ic('bulb')} ${(ALARMAS.find(a=>a.code==m.alarma.code)||{}).sug||""}</span></div>`:'<span class="chip">Sin alarmas activas '+ic('check')+'</span>'}
         <h3 style="margin-top:14px">Indicadores en vivo</h3>
         <div class="row" style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0"><span>Horas operación</span><b>${m.horas} h</b></div>
         <div class="row" style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0"><span>Metros cortados</span><b>${m.estado=="run"?"352 m":"128 m"}</b></div>
