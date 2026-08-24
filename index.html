@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="CNC Monitor — demo de la plataforma de monitoreo y mantenimiento remoto de máquinas CNC. Módulos M1 a M15, 5 roles, web y móvil.">
-<title>CNC Monitor — Demo plataforma de telemetría CNC</title>
+<meta name="description" content="CNC Monitor — plataforma de monitoreo y mantenimiento remoto de máquinas CNC. 15 módulos, 5 roles, web y móvil.">
+<title>CNC Monitor — Plataforma de telemetría CNC</title>
 <style>
 /* ================= TOKENS (cnc-design-system) ================= */
 :root{
@@ -23,7 +23,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:13px;line-height:1.45}
+body{font-family:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 input,select,textarea{font-family:inherit;font-size:13px;padding:9px 11px;border:1px solid var(--line);border-radius:var(--r-sm);width:100%;background:var(--field);color:var(--text)}
 input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
@@ -73,7 +73,6 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 .demo-bar .clock{margin-left:auto;font-size:11px;color:#9db1c9;font-variant-numeric:tabular-nums}
 .demo-bar .logout{background:var(--chrome-soft);color:#dce6f2;border:1px solid rgba(255,255,255,.22);padding:6px 13px;border-radius:8px;font-size:12px;transition:.15s}
 .demo-bar .logout:hover{background:rgba(255,255,255,.14)}
-.demo-note{position:sticky;top:46px;z-index:49;background:var(--warn-bg);color:#7a4a04;font-size:11px;text-align:center;padding:4px;border-bottom:1px solid #f0ddb8}
 
 /* ================= LAYOUT ================= */
 .layout{display:flex;min-height:calc(100vh - 70px);max-width:1400px;margin:0 auto}
@@ -95,7 +94,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 .kpi:hover{box-shadow:var(--sh-2);transform:translateY(-2px)}
 .kpi .n{font-size:22px;font-weight:750;color:var(--primary-2);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 .kpi .n small{font-size:12px;color:var(--text-3);font-weight:500}
-.kpi .l{font-size:11.5px;color:var(--text-3);margin-top:2px;letter-spacing:.2px}
+.kpi .l{font-size:10.5px;color:var(--text-3);margin-top:3px;letter-spacing:.5px;text-transform:uppercase}
 .kpi .pill{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;margin-top:7px;font-weight:650}
 .pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.warn{background:var(--warn-bg);color:var(--warn-ink)} .pill.bad{background:var(--bad-bg);color:var(--bad)} .pill.grey{background:var(--grey-bg);color:var(--text-3)}
 
@@ -272,44 +271,7 @@ tr:hover td{background:rgba(14,99,168,.045)}
   .mach .spark{display:none}
 }
 
-/* ================= TEMA OSCURO — premium minimalista ================= */
-@media (prefers-color-scheme: dark){
-  :root{
-    --ink-900:#050a14; --ink-800:#0b1424; --ink-700:#16233a;
-    --chrome:#0a1120; --chrome-soft:#101c31;
-    --bg:#070d18; --card:#0f1829; --line:#1e2c47; --line-soft:#17233a;
-    --text:#e6edf7; --text-2:#a9b9cf; --text-3:#7f90a8;
-    --primary:#4a90d9; --primary-hover:#5ea3e0; --primary-2:#96c4f0; --accent:#2fb9cf;
-    --primary-soft:rgba(74,144,217,.14);
-    --ok:#3dd68c; --ok-bg:rgba(61,214,140,.10);
-    --warn:#e0a03c; --warn-hover:#c78f2f; --warn-ink:#e0a03c; --warn-bg:rgba(224,160,60,.12);
-    --bad:#ef7070; --bad-bg:rgba(239,112,112,.11);
-    --info:#6cb2ff; --info-bg:rgba(108,178,255,.12);
-    --track:#182540; --field:#0b1322; --grey-bg:#1a2740;
-    --sh-1:0 1px 2px rgba(0,0,0,.35);
-    --sh-2:0 4px 14px rgba(0,0,0,.4);
-    --sh-3:0 16px 40px rgba(0,0,0,.5);
-  }
-  body{color-scheme:dark}
-  th{background:#0c1526}
-  .login-box,.login-roles{background:var(--card)}
-  #loginOv{background:radial-gradient(1100px 700px at 20% -10%,#12304f 0%,#070d18 62%)}
-  .demo-note{background:rgba(224,160,60,.12);color:#e9c37a;border-bottom-color:rgba(224,160,60,.28)}
-  .toast{background:#1c2b47;border:1px solid #2a3d5f}
-  .badge,.bell{color:#170d0d}
-  .timeline-ot .step.done .c{color:#06301f}
-  .timeline-ot .step.cur .c{color:#241a05}
-  .sidebar{border-right:1px solid rgba(30,44,71,.55)}
-  .phone{border-color:#101b2e}
-  .mach .m-body{fill:#1b2b47}
-  .mach .m-bed{fill:#24344f}
-  .mach .m-mat{fill:#7e91ab}
-  .mach .m-gantry{fill:#2f6fb8}
-  .mach .m-head{fill:#4a90d9}
-  .mach .m-spindle{fill:#16233a}
-  .mach .m-drill{fill:#aebdd0}
-  .mach .m-part{fill:#5f7390}
-}
+/* ================= TEMA CLARO — único (premium) ================= */
 </style>
 </head>
 <body>
@@ -327,11 +289,11 @@ tr:hover td{background:rgba(14,99,168,.045)}
       <input id="loginPass" type="password" value="********">
       <button class="btn" onclick="closeLogin()">Ingresar</button>
       <div class="links"><span>Recuperar contraseña</span><span>Activar 2FA</span></div>
-      <div class="hint"><b>Demo visual</b> — sin backend. Superadmin ve todas las máquinas de todos los clientes; el operario solo su máquina.</div>
+      <div class="hint"><b>Plataforma de demostración</b> — los datos son de ejemplo. Cada rol ve solo sus módulos y su información.</div>
     </div>
     <div class="login-roles">
-      <h3>Prueba la demo — entra con un rol</h3>
-      <div class="sub">Cada rol ve solo sus módulos y datos (matriz de permisos de REQUERIMIENTOS_PLATAFORMA_CNC.md). Después cambia entre Web y Celular en la barra superior.</div>
+      <h3>Acceso rápido — elige un rol</h3>
+      <div class="sub">Cada rol ve solo sus módulos y datos. Después cambia entre la vista Web y Celular en la barra superior.</div>
       <button class="lrole" onclick="enterAs('superadmin')"><span class="ic" aria-hidden="true"><svg class="iv" aria-hidden="true"><use href="#i-sat"/></svg></span><span><span class="nm">Superadmin</span><span class="ds">Onyx · ve TODAS las máquinas de todos los clientes</span></span><span class="go">Entrar →</span></button>
       <button class="lrole" onclick="enterAs('cliente')"><span class="ic" aria-hidden="true"><svg class="iv" aria-hidden="true"><use href="#i-bld"/></svg></span><span><span class="nm">Cliente</span><span class="ds">Aceros del Norte · solo sus máquinas y reportes</span></span><span class="go">Entrar →</span></button>
       <button class="lrole" onclick="enterAs('gerente')"><span class="ic" aria-hidden="true"><svg class="iv" aria-hidden="true"><use href="#i-clip"/></svg></span><span><span class="nm">Gerente de planta</span><span class="ds">Planta Norte · OEE, paradas, aprueba OT</span></span><span class="go">Entrar →</span></button>
@@ -343,7 +305,7 @@ tr:hover td{background:rgba(14,99,168,.045)}
 </div>
 
 <div class="demo-bar">
-  <span class="logo"><span class="dot"></span> CNC&nbsp;Monitor <span style="font-weight:400;font-size:11px;opacity:.7">demo · M1 a M15</span></span>
+  <span class="logo"><span class="dot"></span> CNC&nbsp;Monitor <span style="font-weight:400;font-size:11px;opacity:.7">telemetría y mantenimiento CNC</span></span>
   <label for="roleSel">Rol</label>
   <select id="roleSel">
     <option value="superadmin">Superadmin (Onyx)</option>
@@ -360,7 +322,6 @@ tr:hover td{background:rgba(14,99,168,.045)}
   </span>
   <button class="logout" onclick="document.getElementById('loginOv').style.display='flex'">Salir</button>
 </div>
-<div class="demo-note">DEMO VISUAL — datos ficticios según REQUERIMIENTOS_PLATAFORMA_CNC.md · cambia de rol y de vista para recorrer todos los módulos</div>
 
 <!-- ================= WEB ================= -->
 <div id="webView" class="layout">
@@ -381,8 +342,8 @@ tr:hover td{background:rgba(14,99,168,.045)}
 <!-- ================= GUÍA DE ROLES ================= -->
 <div class="roles-guide">
   <div class="box">
-    <h3>Roles de prueba — haz clic para entrar al instante</h3>
-    <div class="sub">Cada rol ve solo sus módulos y datos (matriz de permisos del documento de requerimientos). Después cambia la vista Web / Celular en la barra superior.</div>
+    <h3>Acceso rápido por rol</h3>
+    <div class="sub">Cada rol ve solo sus módulos y datos. Cambia la vista Web / Celular en la barra superior.</div>
     <div class="roles-grid">
       <button class="role-btn" onclick="setRole('superadmin')"><span class="ic" aria-hidden="true"><svg class="iv" aria-hidden="true"><use href="#i-sat"/></svg></span><span><span class="nm">Superadmin</span><br><span class="ds">Onyx · ve TODAS las máquinas de todos los clientes</span></span><span class="go">Entrar →</span></button>
       <button class="role-btn" onclick="setRole('cliente')"><span class="ic" aria-hidden="true"><svg class="iv" aria-hidden="true"><use href="#i-bld"/></svg></span><span><span class="nm">Cliente</span><br><span class="ds">Aceros del Norte · solo sus máquinas y reportes</span></span><span class="go">Entrar →</span></button>
@@ -393,7 +354,7 @@ tr:hover td{background:rgba(14,99,168,.045)}
   </div>
 </div>
 
-<div class="foot">CNC Monitor · demo estático para Vercel · módulos: dashboard · máquinas · alarmas · OT · preventivo · repuestos · reportes · analítica IA · chat IA · documentos · gateways · tickets · clientes · administración · auditoría · perfil</div>
+<div class="foot">CNC Monitor — Plataforma de telemetría y mantenimiento remoto de máquinas CNC · módulos: Dashboard · Máquinas · Alarmas · OT · Preventivo · Repuestos · Reportes · Analítica IA · Asistente IA · Documentos · Gateways · Soporte · Clientes · Administración · Auditoría · Perfil</div>
 
 <div id="toastBox" aria-live="polite"></div>
 
@@ -470,14 +431,14 @@ const HERR = [
   {mq:"P803A", tool:"Broca Ø20 HSS", uso:64, rul:240, sev:"ok"}
 ];
 const VARIABLES = [
-  {name:"NumAll", desc:"Número de alarma activa", val:"77", ok:false},
-  {name:"ParAll", desc:"Parámetro de alarma", val:"56", ok:false},
-  {name:"I_TermMotSpazz", desc:"Térmica motor (BOOLEANO)", val:"OFF", ok:true},
-  {name:"I_PressEsclPos", desc:"Presostato posición", val:"OK", ok:true},
-  {name:"All_aznok", desc:"Falla de accionamiento", val:"OK", ok:true},
-  {name:"ContPezzi", desc:"Contador piezas del turno", val:"96", ok:true},
-  {name:"T_Ciclo_Real", desc:"Tiempo de ciclo real (s)", val:"142", ok:true},
-  {name:"Vel_Avanze", desc:"Avance de herramienta (mm/min)", val:"310", ok:true}
+  {code:"NumAll", nombre:"N.º de alarma activa", desc:"Código de la alarma que está activa en este momento", val:"77", ok:false},
+  {code:"ParAll", nombre:"Parámetro de la alarma", desc:"Detalle numérico de la alarma activa", val:"56", ok:false},
+  {code:"I_TermMotSpazz", nombre:"Protección térmica del motor", desc:"Indica si la térmica del motor principal se ha disparado", val:"OFF", ok:true},
+  {code:"I_PressEsclPos", nombre:"Presión de aire correcta", desc:"El presostato confirma presión adecuada en el circuito neumático", val:"OK", ok:true},
+  {code:"All_aznok", nombre:"Falla del accionamiento", desc:"El variador de velocidad reporta alguna falla", val:"OK", ok:true},
+  {code:"ContPezzi", nombre:"Piezas del turno", desc:"Contador de piezas producidas en el turno actual", val:"96", ok:true},
+  {code:"T_Ciclo_Real", nombre:"Tiempo de ciclo real", desc:"Duración real del ciclo de mecanizado en segundos", val:"142 s", ok:true},
+  {code:"Vel_Avanze", nombre:"Avance de herramienta", desc:"Velocidad de avance actual de la herramienta", val:"310 mm/min", ok:true}
 ];
 const PARADAS = [
   {fecha:"hoy 06:12", mq:"Plasma 02", causa:"Presión aire insuficiente", dur:"3 h 35 m", clase:"Falla", sev:"bad"},
@@ -543,14 +504,17 @@ const NOTIFS = [
 ];
 const CHAT_QA = [
   {q:"¿Qué significa la alarma ALL 77:56?", a:"Transductor guía de cinta averiado. Causa probable: desalineación o falla del transductor. Sugerencia: inspeccionar y reemplazar si no restablece.", src:"ALL_HFIC.SPA · diccionario FICEP — código 77:56"},
-  {q:"¿Cómo ajusto la presión de aire de la línea?", a:"El presostato I_PressEsclPos debe indicar OK. Regule el regulador del circuito neumático a 6 bar (manual sección 4.2). Si la presión cae, revise compresor y filtros.", src:"P803A_ES.pdf · pág. 4-2 · Plano Neumático P803A.pdf"},
-  {q:"¿Cada cuánto cambio la broca Ø12?", a:"La vida útil declarada es 6.400 h de uso (MODIF.LOG). Láser 01 lleva 5.120 h (RUL 214 h). La plataforma generará OT automática al llegar al límite.", src:"MODIF.LOG · datos de desgaste en vivo"},
+  {q:"¿Cómo ajusto la presión de aire de la línea?", a:"El presostato de posición debe indicar OK. Regule el regulador del circuito neumático a 6 bar (manual sección 4.2). Si la presión cae, revise compresor y filtros.", src:"P803A_ES.pdf · pág. 4-2 · Plano Neumático P803A.pdf"},
+  {q:"¿Por qué está detenida la Plasma 02?", a:"La máquina está detenida por la alarma MSG 200:2 — presión de aire insuficiente —, activa desde hace 3 h 35 m. El diccionario sugiere revisar compresor y filtros del circuito neumático. La OT-1042 está en progreso con el técnico C. Ruiz.", src:"ALL_HFIC.SPA · MSG 200:2 · estado en vivo"},
+  {q:"¿Cada cuánto cambio la broca Ø12?", a:"La vida útil declarada es 6.400 h de uso. Láser 01 lleva 5.120 h (RUL 214 h). La plataforma generará una OT automática al llegar al límite.", src:"MODIF.LOG · datos de desgaste en vivo"},
+  {q:"¿Qué mantenimiento diario necesita el P803A?", a:"Inspección visual de mangueras y fugas, verificación de presostatos y contadores, y lubricación de guías según horas de uso. El plan preventivo genera OT automáticas por calendario y por uso.", src:"P803A_ES.pdf · plan de mantenimiento"},
+  {q:"¿Qué repuestos hay bajo mínimo?", a:"Dos ítems: electrodo plasma FICEP-3101 (stock 1, mínimo 2) en Plasma 02, y broca Ø16. La plataforma sugiere solicitar la reposición al gerente.", src:"MODIF.LOG · inventario en vivo"},
   {q:"¿Qué repuestos necesita el eje Y?", a:"El plano eléctrico lista: servomotor Mitsubishi/Servostar, driver del eje Y y fusibles de potencia. El listado de elementos eléctricos P803A tiene las referencias completas.", src:"Lista de Elementos Electricos P803A.pdf"}
 ];
 
 /* ================= ESTADOS ================= */
 const EST = {run:["Corriendo","st-run"], stop:["Detenida","st-stop"], alert:["Alerta","st-alert"]};
-let ROL = "superadmin", DEV = "web", VIEW = "dashboard", SEL_MQ = "Láser 01", OT_SEL = null, CHAT_LOG = null, SUBTAB = 0;
+let ROL = "superadmin", DEV = "web", VIEW = "dashboard", SEL_MQ = "Láser 01", OT_SEL = null, CHAT_LOG = null, SUBTAB = 0, M_SEL = null;
 const q = id => document.getElementById(id);
 function st(m){const e=EST[m]; return `<span class="status ${e[1]}"><span class="dot"></span>${e[0]}</span>`}
 function pill(s,t){return `<span class="pill ${s}">${t}</span>`}
@@ -626,13 +590,13 @@ const MENUS = {
   superadmin: {nombre:"Superadmin · Onyx", icon:"sat", items:[
     ["Dashboard","chart","dashboard"],["Máquinas","factory","machines"],["Alarmas","siren","alarms"],["OT","wrench","workorders"],
     ["Preventivo","cal","preventivo"],["Repuestos","toolbox","repuestos"],["Reportes","trend","reports"],
-    ["Analítica IA","robot","analitica"],["Chat IA docs","chat","chatia"],["Documentos","folder","documentos"],
+    ["Analítica IA","robot","analitica"],["Asistente IA","chat","chatia"],["Documentos","folder","documentos"],
     ["Gateways IoT","ant","gateways"],["Soporte","tick","tickets"],["Clientes","bld","clients"],
     ["Administración","gear","admin"],["Auditoría","eye","auditoria"],["Perfil","user","perfil"]]},
   cliente: {nombre:"Cliente · Aceros del Norte", icon:"bld", items:[
     ["Mi flota","chart","dashboard"],["Máquinas","factory","machines"],["Alarmas","siren","alarms"],["OT","wrench","workorders"],
     ["Preventivo","cal","preventivo"],["Reportes","trend","reports"],["Analítica","robot","analitica"],
-    ["Chat IA docs","chat","chatia"],["Documentos","folder","documentos"],["Soporte","tick","tickets"],["Perfil","user","perfil"]]},
+    ["Asistente IA","chat","chatia"],["Documentos","folder","documentos"],["Soporte","tick","tickets"],["Perfil","user","perfil"]]},
   gerente: {nombre:"Gerente · Planta Norte", icon:"clip", items:[
     ["Dashboard planta","chart","dashboard"],["Máquinas","factory","machines"],["Alarmas","siren","alarms"],["OT","wrench","workorders"],
     ["Preventivo","cal","preventivo"],["Repuestos","toolbox","repuestos"],["Reportes","trend","reports"],["Analítica","robot","analitica"],
@@ -642,7 +606,7 @@ const MENUS = {
   mantenimiento: {nombre:"Mantenimiento", icon:"tools", items:[
     ["Panel técnico","chart","dashboard"],["Máquinas","factory","machines"],["Alarmas","siren","alarms"],["OT","wrench","workorders"],
     ["Preventivo","cal","preventivo"],["Repuestos","toolbox","repuestos"],["Reportes","trend","reports"],["Analítica","robot","analitica"],
-    ["Chat IA docs","chat","chatia"],["Documentos","folder","documentos"],["Soporte","tick","tickets"],["Perfil","user","perfil"]]}
+    ["Asistente IA","chat","chatia"],["Documentos","folder","documentos"],["Soporte","tick","tickets"],["Perfil","user","perfil"]]}
 };
 const MENU_GROUPS = {superadmin:["Operación","Gestión","Soporte","Sistema"], cliente:["Operación","Gestión","Soporte"], gerente:["Operación","Gestión","Soporte"], operario:["Operación"], mantenimiento:["Operación","Gestión","Soporte"]};
 
@@ -658,14 +622,14 @@ function vDashboard(){
   const run=mqs.filter(k=>MQ[k].estado=="run").length, al=mqs.filter(k=>MQ[k].estado=="alert").length, stp=mqs.filter(k=>MQ[k].estado=="stop").length;
   let h="";
   if(ROL=="superadmin"){
-    h=`<h1>Dashboard global — todas las máquinas de todos los clientes</h1><div class="sub">Vista multi-tenant del proveedor · datos en vivo (WebSocket) · RF-3.1</div>
+    h=`<h1>Dashboard global — todas las máquinas de todos los clientes</h1><div class="sub">Vista multi-tenant del proveedor · datos en vivo (WebSocket)</div>
     <div class="kpis">
       ${kpi(`${mqs.length} <small>máquinas</small>`,"Flota total conectada",pill("ok",`${run} corriendo`))}
       ${kpi(`${al} <small>máquinas</small>`,"En alerta activa",pill("warn","atención"))}
       ${kpi(`${stp} <small>máquinas</small>`,"Detenidas",pill("bad","paradas"))}
       ${kpi(`${OTS.filter(o=>o.estado!="Cerrada").length} <small>OT</small>`,"Órdenes abiertas",pill("warn","1 crítica"))}
       ${kpi("100%","Gateways en línea")}
-      ${kpi("12","Clientes activos",pill("ok","2 con máquinas demo"))}
+      ${kpi("12","Clientes activos",pill("ok","2 con máquinas activas"))}
     </div>
     <div class="grid2">
       <div class="card"><h3>Flota por cliente</h3><table><tr><th scope="col">Cliente</th><th scope="col">Sede</th><th scope="col">Máquina</th><th scope="col">Estado</th><th scope="col">OEE</th></tr>
@@ -680,7 +644,7 @@ function vDashboard(){
     const oeeAvg=Math.round(mine.reduce((s,k)=>s+MQ[k].oee,0)/mine.length);
     const piezas=mine.reduce((s,k)=>s+MQ[k].piezas,0);
     const alarmas=mine.filter(k=>MQ[k].alarma).length;
-    h=`<h1>Mi flota — Aceros del Norte</h1><div class="sub">Solo tus máquinas y sedes · reportes e indicadores · RF-3.2</div>
+    h=`<h1>Mi flota — Aceros del Norte</h1><div class="sub">Solo tus máquinas y sedes · reportes e indicadores</div>
     <div class="kpis">
       ${kpi(`${mine.length} <small>máquinas</small>`,"Flota total",pill("ok",`${mine.filter(k=>MQ[k].estado=="run").length} corriendo`))}
       ${kpi(`${oeeAvg}%`,"OEE promedio")}
@@ -693,7 +657,7 @@ function vDashboard(){
     </div></div>
     <div class="mch">${mine.map(machCard).join("")}</div>`;
   } else if(ROL=="gerente"){
-    h=`<h1>Dashboard — Planta Norte · Medellín</h1><div class="sub">OEE, producción, paradas y decisiones de planta · RF-3.3</div>
+    h=`<h1>Dashboard — Planta Norte · Medellín</h1><div class="sub">OEE, producción, paradas y decisiones de planta</div>
     <div class="kpis">
       ${kpi("78%","OEE hoy",pill("ok","+4% vs ayer"))}
       ${kpi("352 <small>m</small>","Metros cortados",pill("ok","OK"))}
@@ -716,7 +680,7 @@ function vDashboard(){
     </table></div>`;
   } else if(ROL=="operario"){
     const m=MQ["Láser 01"];
-    h=`<h1>Mi máquina — Láser 01</h1><div class="sub">Turno actual 06:00–14:00 · solo tu máquina asignada · RF-3.4</div>
+    h=`<h1>Mi máquina — Láser 01</h1><div class="sub">Turno actual 06:00–14:00 · solo tu máquina asignada</div>
     <div class="kpis">
       ${kpi(`${st("run")}`,"Estado en vivo")}
       ${kpi(`${m.piezas} <small>piezas</small>`,"Producción del turno",pill("ok","OK"))}
@@ -725,7 +689,7 @@ function vDashboard(){
     </div>
     <div class="mch">${machCard("Láser 01")}</div>`;
   } else {
-    h=`<h1>Panel técnico — máquinas a su cargo</h1><div class="sub">Diagnóstico: código + causa + sugerencia · RF-3.5</div>
+    h=`<h1>Panel técnico — máquinas a su cargo</h1><div class="sub">Diagnóstico: código + causa + sugerencia</div>
     <div class="kpis">
       ${kpi(`${OTS.filter(o=>o.estado!="Cerrada").length} <small>OT</small>`,"Abiertas",pill("bad","1 crítica"))}
       ${kpi("2 <small>h</small>","Tiempo medio respuesta",pill("ok","en SLA"))}
@@ -744,7 +708,7 @@ function vDashboard(){
 
 function vMachines(){
   const sub = ROL=="superadmin"?"Todas las máquinas de todos los clientes":ROL=="cliente"?"Máquinas de tu empresa":ROL=="operario"?"Máquinas asignadas a tu turno":"Máquinas a tu cargo";
-  return `<h1>Máquinas</h1><div class="sub">${sub} · RF-4.1 a RF-4.8 · ilustraciones animadas según estado real</div><div class="mch">${Object.keys(MQ).map(machCard).join("")}</div>`;
+  return `<h1>Máquinas</h1><div class="sub">${sub} · ilustraciones animadas según estado real</div><div class="mch">${Object.keys(MQ).map(machCard).join("")}</div>`;
 }
 
 const MTABS = [["Resumen","resumen"],["Variables PLC","vars"],["Historial","hist"],["Consumibles","cons"]];
@@ -776,17 +740,17 @@ function vMachine(){
         </div>
       </div>`;
   } else if(tab=="vars"){
-    body=`<div class="card"><h3>Variables PLC en vivo — mapa travi.sym.xml (2.562 declaradas) · RF-4.6</h3>
-    <table><tr><th scope="col">Variable</th><th scope="col">Descripción</th><th scope="col">Valor</th><th scope="col">Estado</th><th scope="col">Tendencia</th></tr>
-    ${VARIABLES.map(v=>`<tr><td><code style="background:var(--bg);padding:1px 6px;border-radius:4px">${v.name}</code></td><td>${v.desc}</td><td><b>${v.val}</b></td><td>${v.ok?'<span class="pill ok">OK</span>':'<span class="pill bad">ALERTA</span>'}</td><td>${v.name=="T_Ciclo_Real"?"<span style='color:var(--bad)'>▲ +18%</span>":"<span style='color:var(--text-3)'>estable</span>"}</td></tr>`).join("")}
-    </table><br><button class="btn ghost sm" onclick="toast('Configuración de variables y umbrales (demo)','ok')">${ic('gear')} Configurar variables y umbrales</button></div>`;
+    body=`<div class="card"><h3>Variables de la máquina en vivo — lectura del control (2.562 variables declaradas)</h3>
+    <table><tr><th scope="col">Variable</th><th scope="col">Qué significa</th><th scope="col">Valor</th><th scope="col">Estado</th><th scope="col">Tendencia</th></tr>
+    ${VARIABLES.map(v=>`<tr><td><code style="background:var(--bg);padding:1px 6px;border-radius:4px">${v.code}</code></td><td><b>${v.nombre}</b><br><span style="font-size:10.5px;color:var(--text-3)">${v.desc}</span></td><td><b>${v.val}</b></td><td>${v.ok?'<span class="pill ok">OK</span>':'<span class="pill bad">ALERTA</span>'}</td><td>${v.code=="T_Ciclo_Real"?"<span style='color:var(--bad)'>▲ +18%</span>":"<span style='color:var(--text-3)'>estable</span>"}</td></tr>`).join("")}
+    </table><br><button class="btn ghost sm" onclick="toast('Umbrales de alerta guardados','ok')">${ic('gear')} Configurar variables y umbrales</button></div>`;
   } else if(tab=="hist"){
-    body=`<div class="card"><h3>Historial de paradas (duración real desde MSGALL) · RF-4.4</h3>
+    body=`<div class="card"><h3>Historial de paradas (duración real desde MSGALL)</h3>
     <table><tr><th scope="col">Fecha</th><th scope="col">Máquina</th><th scope="col">Causa</th><th scope="col">Clase</th><th scope="col">Duración</th></tr>
     ${PARADAS.map(p=>`<tr><td>${p.fecha}</td><td>${p.mq}</td><td>${p.causa}</td><td>${pill(p.sev=="bad"?"bad":p.sev=="warn"?"warn":"grey",p.clase)}</td><td><b>${p.dur}</b></td></tr>`).join("")}
     </table></div>`;
   } else {
-    body=`<div class="card"><h3>Consumibles y desgaste (MODIF.LOG) · RF-9.4</h3>
+    body=`<div class="card"><h3>Consumibles y desgaste (MODIF.LOG)</h3>
     <table><tr><th scope="col">Consumible</th><th scope="col">Ref.</th><th scope="col">Uso</th><th scope="col">RUL</th><th scope="col">Stock</th><th scope="col">Mín.</th><th scope="col">Estado</th></tr>
     ${CONSUMIBLES.map(c=>`<tr><td>${c.nombre}</td><td>${c.ref}</td><td>${c.uso}%</td><td><b>${c.rul} h</b></td><td>${c.stock}</td><td>${c.min}</td><td>${c.rul<50?'<span class="pill bad">cambio pronto</span>':c.rul<100?'<span class="pill warn">vigilar</span>':'<span class="pill ok">ok</span>'}</td></tr>`).join("")}
     </table></div>`;
@@ -798,11 +762,11 @@ function vMachine(){
 }
 
 function vAlarms(){
-  return `<h1>Alarmas</h1><div class="sub">Código → texto → causa → sugerencia (diccionario FICEP, 180 códigos) · severidad y duración · RF-6.1 a RF-6.6</div>
+  return `<h1>Alarmas</h1><div class="sub">Código → texto → causa → sugerencia (diccionario FICEP, 180 códigos) · severidad y duración</div>
   <div class="card"><table><tr><th scope="col">Severidad</th><th scope="col">Código</th><th scope="col">Máquina</th><th scope="col">Descripción</th><th scope="col">Duración</th><th scope="col">Sugerencia</th><th scope="col">Acción</th></tr>
   ${ALARMAS.map(a=>`<tr><td>${pill(a.sev=="bad"?"bad":a.sev=="warn"?"warn":"ok",a.sev=="bad"?"CRÍTICA":a.sev=="warn"?"MEDIA":"BAJA")}</td><td><b>${a.code}</b></td><td>${a.mq}</td><td>${a.txt}</td><td>${a.dur}</td><td>${ic('bulb')} ${a.sug}</td><td><button class="btn sm" onclick="toast('OT creada desde alarma ${a.code}','ok')">Crear OT</button> <button class="btn ghost sm" onclick="toast('Alarma ${a.code} reconocida','ok')">Reconocer</button></td></tr>`).join("")}
   </table></div>
-  <div class="card"><h3>Reglas de alertas (configurables) · RF-6.2</h3><table><tr><th scope="col">Regla</th><th scope="col">Condición</th><th scope="col">Acción</th><th scope="col">Estado</th></tr>
+  <div class="card"><h3>Reglas de alertas (configurables)</h3><table><tr><th scope="col">Regla</th><th scope="col">Condición</th><th scope="col">Acción</th><th scope="col">Estado</th></tr>
   <tr><td>Alarma crítica</td><td>severidad = crítica</td><td>push + email + crear OT</td><td><span class="pill ok">activa</span></td></tr>
   <tr><td>Escalamiento</td><td>crítica sin reconocer &gt; 30 min</td><td>notificar siguiente nivel</td><td><span class="pill ok">activa</span></td></tr>
   <tr><td>Gateway offline</td><td>sin datos &gt; 10 min</td><td>alertar superadmin</td><td><span class="pill ok">activa</span></td></tr>
@@ -812,7 +776,7 @@ function vAlarms(){
 
 function vWorkorders(){
   if(ROL=="operario"){
-    return `<h1>Reportar falla — Láser 01</h1><div class="sub">El reporte del operario genera OT automática con datos de la máquina y alarma activa adjunta · RF-8.2</div>
+    return `<h1>Reportar falla — Láser 01</h1><div class="sub">El reporte del operario genera OT automática con datos de la máquina y alarma activa adjunta</div>
     <div class="grid2">
     <div class="card"><h3>Nuevo reporte</h3>
       <label style="font-size:11px;color:var(--text-3);font-weight:600">Tipo de falla</label>
@@ -829,7 +793,7 @@ function vWorkorders(){
     </div>
     </div>`;
   }
-  return `<h1>Órdenes de trabajo</h1><div class="sub">Origen: manual · alarma · preventivo · reporte de operario · asignación, estados y cierre con checklist · RF-8.1 a RF-8.7</div>
+  return `<h1>Órdenes de trabajo</h1><div class="sub">Origen: manual · alarma · preventivo · reporte de operario · asignación, estados y cierre con checklist</div>
   <div class="card"><table><tr><th scope="col">OT</th><th scope="col">Máquina</th><th scope="col">Tipo</th><th scope="col">Prioridad</th><th scope="col">Técnico</th><th scope="col">Estado</th><th scope="col">SLA</th><th scope="col"></th></tr>
   ${OTS.map(o=>`<tr><td><b>${o.id}</b></td><td>${o.mq}</td><td>${o.tipo}</td><td>${pill(o.prio=="CRÍTICA"?"bad":o.prio=="ALTA"?"warn":"grey",o.prio)}</td><td>${o.tech}</td><td>${o.estado}</td><td>${o.sla}</td><td><button class="btn ghost sm" onclick="OT_SEL='${o.id}';go('otdetail')">Ver</button></td></tr>`).join("")}
   </table></div>`;
@@ -844,12 +808,12 @@ function vOTDetail(){
   <div class="sub">${o.tipo} · ${pill(o.prio=="CRÍTICA"?"bad":o.prio=="ALTA"?"warn":"grey",o.prio)} · ${o.tech} · <button class="btn ghost sm" onclick="go('workorders')">← Volver</button></div>
   <div class="timeline-ot">${steps.map((s,i)=>`<div class="step ${i<cur?'done':i==cur?'cur':''}"><div class="c">${i<cur?ic('check'):i==cur?'<i style="display:block;width:5px;height:5px;border-radius:50%;background:#fff;margin:7px auto"></i>':""}</div>${s}</div>`).join("")}</div>
   <div class="grid2">
-    <div class="card"><h3>Checklist de ejecución · RF-8.4</h3>
+    <div class="card"><h3>Checklist de ejecución</h3>
     ${o.check.map(c=>`<div class="check ${c[1]?'done':''}"><input type="checkbox" ${c[1]?'checked':''}> <span>${c[0]}</span></div>`).join("")}
-    <br><button class="btn sm" onclick="toast('Foto adjunta a la OT (demo)','ok')">${ic('cam')} Adjuntar foto</button> <button class="btn sm" onclick="toast('Paso completado','ok')">${ic('plus')} Marcar paso completado</button><br><br>
+    <br><button class="btn sm" onclick="toast('Foto adjunta a la OT','ok')">${ic('cam')} Adjuntar foto</button> <button class="btn sm" onclick="toast('Paso completado','ok')">${ic('plus')} Marcar paso completado</button><br><br>
     <button class="btn amber sm" onclick="toast('OT ${o.id} cerrada con checklist','ok')">Cerrar OT con checklist</button>
     </div>
-    <div class="card"><h3>Detalle y tiempos · RF-8.7</h3>
+    <div class="card"><h3>Detalle y tiempos</h3>
     <div class="row" style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0"><span>Prioridad / SLA</span><b>${o.sla}</b></div>
     <div class="row" style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0"><span>Origen</span><b>${o.tipo.includes("Preventiva")?"automático (uso)":"alarma activa"}</b></div>
     <div class="row" style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0"><span>Tiempo de respuesta</span><b>${o.estado=="En progreso"?"28 min":"—"}</b></div>
@@ -860,20 +824,20 @@ function vOTDetail(){
 }
 
 function vPreventivo(){
-  return `<h1>Mantenimiento preventivo</h1><div class="sub">Programación por calendario y por uso (horas, piezas, ciclos) · checklist · OT automáticas · RF-7.1 a RF-7.4</div>
+  return `<h1>Mantenimiento preventivo</h1><div class="sub">Programación por calendario y por uso (horas, piezas, ciclos) · checklist · OT automáticas</div>
   <div class="grid2">
   <div class="card"><h3>Plan por máquina</h3><table><tr><th scope="col">Máquina</th><th scope="col">Tarea</th><th scope="col">Criterio</th><th scope="col">Próxima</th><th scope="col">Última</th></tr>
   ${PLAN_PREV.map(p=>`<tr><td>${p.mq}</td><td>${p.tipo}</td><td>${p.criterio}</td><td><b>${p.prox}</b></td><td>${p.ult}</td></tr>`).join("")}
   </table></div>
   <div class="card"><h3>Estado y acciones</h3>
   ${PLAN_PREV.map(p=>`<div class="otitem ${p.sev=="bad"?"bb":p.sev=="warn"?"":"bo"}"><b>${p.mq} — ${p.tipo}</b> · ${p.prox}<br>${p.criterio}${p.sev=="bad"?'<br><span style="color:var(--bad)">'+ic('warn')+' Vencido: generar OT automática</span>':""}</div>`).join("")}
-  <br><button class="btn sm" onclick="toast('Nuevo plan de mantenimiento (demo)','ok')">${ic('plus')} Nuevo plan de mantenimiento</button>
+  <br><button class="btn sm" onclick="toast('Nuevo plan de mantenimiento creado','ok')">${ic('plus')} Nuevo plan de mantenimiento</button>
   </div>
   </div>`;
 }
 
 function vRepuestos(){
-  return `<h1>Repuestos y consumibles</h1><div class="sub">Inventario por máquina/sede · niveles mínimos con alerta de reposición · consumo asociado a OT · RF-9.1 a RF-9.5</div>
+  return `<h1>Repuestos y consumibles</h1><div class="sub">Inventario por máquina/sede · niveles mínimos con alerta de reposición · consumo asociado a OT</div>
   <div class="kpis">
     ${kpi(`${CONSUMIBLES.length} <small>ítems</small>`,"En inventario")}
     ${kpi(`${CONSUMIBLES.filter(c=>c.stock<=c.min).length} <small>ítems</small>`,"Bajo mínimo",pill("bad","reponer"))}
@@ -895,7 +859,7 @@ function vRepuestos(){
 }
 
 function vReports(){
-  return `<h1>Reportes</h1><div class="sub">OEE · producción · paradas (Pareto) · consumo · mantenimiento · exportación CSV/PDF y programación por email · RF-10.1 a RF-10.5</div>
+  return `<h1>Reportes</h1><div class="sub">OEE · producción · paradas (Pareto) · consumo · mantenimiento · exportación CSV/PDF y programación por email</div>
   <div class="kpis">
     ${kpi("78%","OEE semanal",pill("ok","+7 pts"))}
     ${kpi("2.340 <small>piezas</small>","Producción semana")}
@@ -916,7 +880,7 @@ function vReports(){
 }
 
 function vAnalitica(){
-  return `<h1>Analítica predictiva (IA)</h1><div class="sub">Health score, RUL, anomalías y predicciones · los modelos solo sugieren, el humano decide · RF-12.1 a RF-12.6</div>
+  return `<h1>Analítica predictiva (IA)</h1><div class="sub">Health score, RUL, anomalías y predicciones · los modelos solo sugieren, el humano decide</div>
   <div class="kpis">
     ${kpi("62","Health promedio flota",pill("warn","Plasma 02 = 35"))}
     ${kpi("4 <small>predicciones</small>","Activas",pill("bad","1 crítica"))}
@@ -927,21 +891,21 @@ function vAnalitica(){
   <div class="card"><h3>Health score por máquina</h3><div class="bars">
     ${Object.keys(MQ).map(n=>{const m=MQ[n];return `<div class="bar-row"><span class="lb">${n}</span><div class="track"><div class="fill" style="width:${m.salud}%;background:${m.salud>75?'var(--ok)':m.salud>50?'var(--warn)':'var(--bad)'}"></div></div><span class="val">${m.salud}/100</span></div>`}).join("")}
   </div></div>
-  <div class="card"><h3>Predicciones de falla (RUL) · RF-12.2</h3>
+  <div class="card"><h3>Predicciones de falla (RUL)</h3>
   ${PREDICCIONES.map(p=>`<div class="otitem ${p.sev=='bad'?'bb':p.sev=='warn'?'':'bo'}"><b>${p.mq} — ${p.item}</b> · falla estimada ${p.en} · confianza ${p.conf}%<br><span style="color:var(--text-3)">Acción sugerida: ${p.sev=='bad'?"desplazar técnico":"programar OT preventiva"}</span></div>`).join("")}
   </div>
-  <div class="card"><h3>Anomalías detectadas · RF-12.3</h3>
+  <div class="card"><h3>Anomalías detectadas</h3>
   ${ANOMALIAS.map(a=>`<div class="otitem ${a.sev=='bad'?'bb':a.sev=='warn'?'':'bg'}"><b>${a.mq}</b> — ${a.señal}: ${a.desv}<br><span style="color:var(--text-3)">observándose desde hace ${a.dias} día(s)</span></div>`).join("")}
   </div>
-  <div class="card"><h3>Decisión humana (nunca automática) · RF-12.5</h3>
+  <div class="card"><h3>Decisión humana (nunca automática)</h3>
   <div class="otitem bb"><b>Plasma 02 — falla de compresor estimada en ~12 h (85%)</b><br>${ic('warn')} La IA sugiere intervención. La decisión la toma el superadmin: <button class="btn sm" onclick="go('tickets')">Crear ticket</button> <button class="btn ghost sm" onclick="toast('Predicción descartada (decisión humana)','ok')">Descartar</button></div>
   <span style="font-size:11px;color:var(--text-3)">Entrenado con histórico real (MODIF.LOG, MSGALL, PROD_TIME desde 2004) · la decisión siempre es humana</span></div>
   </div>`;
 }
 
 function vChatIA(){
-  const start = CHAT_LOG || [{role:"bot", txt:"Hola, soy el asistente de la máquina. Pregúntame sobre el manual, planos, alarmas o repuestos del P803A. Mis respuestas citan la fuente.", src:null}];
-  return `<h1>Chat IA — documentos de máquina (RAG)</h1><div class="sub">Pregunta sobre manuales, planos, diccionario y backups · respuestas con cita a la fuente · RF-11.1 a RF-11.5 · IA local (Ollama)</div>
+  const start = CHAT_LOG || [{role:"bot", txt:"Hola, soy el asistente de tu máquina. Pregúntame por el estado, las alarmas, el mantenimiento, los repuestos o la documentación (manuales y planos). Mis respuestas citan la fuente.", src:null}];
+  return `<h1>Asistente IA — tu máquina responde</h1><div class="sub">Pregunta por estado, alarmas, mantenimiento, repuestos y documentación (manuales, planos, diccionario). Respuestas con cita a la fuente.</div>
   <div class="chat">
     <div class="msgs" id="chatMsgs" aria-live="polite">${start.map(x=>`<div class="msg ${x.role}">${x.txt}${x.src?`<span class="src">${ic('doc')} ${x.src}</span>`:""}</div>`).join("")}</div>
     <div class="chips">${CHAT_QA.map((c,i)=>`<button onclick="askQA(${i})">${c.q}</button>`).join("")}</div>
@@ -955,20 +919,20 @@ function askQA(i){
 }
 function askInput(){
   const inp=q("chatIn"); if(!inp||!inp.value.trim())return;
-  CHAT_LOG=[...(CHAT_LOG||[]),{role:"user",txt:inp.value.trim(),src:null},{role:"bot",txt:"No tengo respuesta verificada para esa consulta en los documentos indexados. Sugiero revisar el manual P803A_ES.pdf o preguntar al superadmin.",src:"P803A_ES.pdf · índice"}];
+  CHAT_LOG=[...(CHAT_LOG||[]),{role:"user",txt:inp.value.trim(),src:null},{role:"bot",txt:"No encontré una respuesta verificada en la documentación indexada. Prueba preguntar por alarmas, mantenimiento o repuestos, o revisa el manual P803A_ES.pdf.",src:"P803A_ES.pdf · índice"}];
   inp.value="";
   renderWeb();
 }
 
 function vDocumentos(){
-  return `<h1>Documentos por máquina</h1><div class="sub">Manuales, planos, listas de elementos, diccionario y backups · OCR para escaneados · RF-11.1 y RF-11.2</div>
+  return `<h1>Documentos por máquina</h1><div class="sub">Manuales, planos, listas de elementos, diccionario y backups · OCR para escaneados</div>
   <div class="card"><table><tr><th scope="col">Tipo</th><th scope="col">Archivo</th><th scope="col">Tamaño</th><th scope="col">OCR</th><th scope="col"></th></tr>
-  ${DOCS.map(d=>`<tr><td>${d.tipo}</td><td>${d.nombre}</td><td>${d.size}</td><td>${d.ocr=="verificado"?'<span class="pill ok">verificado</span>':d.ocr}</td><td><button class="btn ghost sm" onclick="toast('Vista previa (demo)','ok')">Ver</button> <button class="btn ghost sm" onclick="go('chatia')">${ic('chat')} Preguntar</button></td></tr>`).join("")}
-  </table><br><button class="btn sm" onclick="toast('Subida de documento (demo)','ok')">${ic('ul')} Subir documento</button></div>`;
+  ${DOCS.map(d=>`<tr><td>${d.tipo}</td><td>${d.nombre}</td><td>${d.size}</td><td>${d.ocr=="verificado"?'<span class="pill ok">verificado</span>':d.ocr}</td><td><button class="btn ghost sm" onclick="toast('Vista previa abierta','ok')">Ver</button> <button class="btn ghost sm" onclick="go('chatia')">${ic('chat')} Preguntar</button></td></tr>`).join("")}
+  </table><br><button class="btn sm" onclick="toast('Documento subido e indexado','ok')">${ic('ul')} Subir documento</button></div>`;
 }
 
 function vGateways(){
-  return `<h1>Gateways IoT</h1><div class="sub">Estado de dispositivos: señal 4G, firmware, buffer, última conexión · endpoint MQTT/HTTPS configurable · RF-13.1 a RF-13.5</div>
+  return `<h1>Gateways IoT</h1><div class="sub">Estado de dispositivos: señal 4G, firmware, buffer, última conexión · endpoint MQTT/HTTPS configurable</div>
   <div class="grid2">
   <div class="card"><table><tr><th scope="col">Gateway</th><th scope="col">Máquina</th><th scope="col">Señal 4G</th><th scope="col">Firmware</th><th scope="col">Buffer</th><th scope="col">Últ. conexión</th><th scope="col">Estado</th></tr>
   ${Object.keys(MQ).map(n=>{const m=MQ[n];return `<tr><td><b>GW-${n.replace(/[^0-9]/g,"")}</b></td><td>${n}</td><td>${m.estado=="stop"?"−92 dBm":"−64 dBm"} ${m.estado=="stop"?'<span class="pill warn">baja</span>':""}</td><td>v2.4.1</td><td>${m.estado=="stop"?"214 msgs":"0"}</td><td>${m.estado=="stop"?"hace 3 h":"hace 4 s"}</td><td>${m.estado=="stop"?pill("warn",ic('warn')+" degradado"):pill("ok","en línea")}</td></tr>`}).join("")}
@@ -985,7 +949,7 @@ function vGateways(){
 }
 
 function vTickets(){
-  return `<h1>Soporte y tickets</h1><div class="sub">Ticket con datos automáticos de la máquina · flujo de diagnóstico remoto: remoto vs desplazamiento · RF-14.1 a RF-14.3</div>
+  return `<h1>Soporte y tickets</h1><div class="sub">Ticket con datos automáticos de la máquina · flujo de diagnóstico remoto: remoto vs desplazamiento</div>
   <div class="grid2">
   <div class="card"><table><tr><th scope="col">Ticket</th><th scope="col">Máquina</th><th scope="col">Asunto</th><th scope="col">Estado</th><th scope="col">Fecha</th></tr>
   ${TICKETS.map(t=>`<tr><td><b>${t.id}</b></td><td>${t.mq}</td><td>${t.asunto}</td><td>${t.estado=="En diagnóstico"?'<span class="pill warn">en diagnóstico</span>':t.estado=="Resuelto remoto"?'<span class="pill ok">resuelto remoto</span>':'<span class="pill grey">cerrado</span>'}</td><td>${t.fec}</td></tr>`).join("")}
@@ -999,39 +963,39 @@ function vTickets(){
 }
 
 function vClients(){
-  return `<h1>Clientes</h1><div class="sub">Solo superadmin · gestión de clientes, sedes, máquinas, usuarios y planes · RF-2.1 a RF-2.8</div>
+  return `<h1>Clientes</h1><div class="sub">Solo superadmin · gestión de clientes, sedes, máquinas, usuarios y planes</div>
   <div class="card"><table><tr><th scope="col">Cliente</th><th scope="col">NIT</th><th scope="col">Sedes</th><th scope="col">Máquinas</th><th scope="col">Plan</th><th scope="col">Estado</th><th scope="col"></th></tr>
-  ${CLIENTES.map(c=>`<tr><td><b>${c.nombre}</b></td><td>${c.nit}</td><td>${c.sedes.join(", ")}</td><td>${c.maquinas.map(m=>`<span class="chip">${m}</span>`).join("")}</td><td>${c.plan}</td><td><span class="pill ok">Activo</span></td><td><button class="btn ghost sm" onclick="toast('Administración del cliente (demo)','ok')">Administrar</button></td></tr>`).join("")}
-  </table><br><button class="btn sm" onclick="toast('Nuevo cliente (demo)','ok')">${ic('plus')} Nuevo cliente</button> <button class="btn ghost sm" onclick="toast('Importación CSV (demo)','ok')">${ic('ul')} Importar CSV</button></div>`;
+  ${CLIENTES.map(c=>`<tr><td><b>${c.nombre}</b></td><td>${c.nit}</td><td>${c.sedes.join(", ")}</td><td>${c.maquinas.map(m=>`<span class="chip">${m}</span>`).join("")}</td><td>${c.plan}</td><td><span class="pill ok">Activo</span></td><td><button class="btn ghost sm" onclick="toast('Cliente actualizado','ok')">Administrar</button></td></tr>`).join("")}
+  </table><br><button class="btn sm" onclick="toast('Nuevo cliente creado','ok')">${ic('plus')} Nuevo cliente</button> <button class="btn ghost sm" onclick="toast('Importación CSV completada','ok')">${ic('ul')} Importar CSV</button></div>`;
 }
 
 function vAdmin(){
-  return `<h1>Administración</h1><div class="sub">Usuarios con RBAC por tenant, máquinas, planes y auditoría · RF-2.4, RF-2.6, RF-15</div>
+  return `<h1>Administración</h1><div class="sub">Usuarios con RBAC por tenant, máquinas, planes y auditoría</div>
   <div class="grid2">
   <div class="card"><h3>Usuarios</h3><table><tr><th scope="col">Usuario</th><th scope="col">Rol</th><th scope="col">Alcance</th><th scope="col">2FA</th><th scope="col"></th></tr>
-  <tr><td>j.morales</td><td>Gerente planta</td><td>Planta Norte</td><td>${ic('check')}</td><td><button class="btn ghost sm" onclick="toast('Edición de usuario (demo)','ok')">Editar</button></td></tr>
-  <tr><td>c.ruiz</td><td>Mantenimiento</td><td>Planta Norte y Sur</td><td>${ic('check')}</td><td><button class="btn ghost sm" onclick="toast('Edición de usuario (demo)','ok')">Editar</button></td></tr>
-  <tr><td>a.gomez</td><td>Operario</td><td>Láser 01</td><td>—</td><td><button class="btn ghost sm" onclick="toast('Edición de usuario (demo)','ok')">Editar</button></td></tr>
-  <tr><td>m.lopez</td><td>Cliente</td><td>Aceros del Norte</td><td>${ic('check')}</td><td><button class="btn ghost sm" onclick="toast('Edición de usuario (demo)','ok')">Editar</button></td></tr>
-  </table><br><button class="btn sm" onclick="toast('Nuevo usuario (demo)','ok')">${ic('plus')} Nuevo usuario</button></div>
+  <tr><td>j.morales</td><td>Gerente planta</td><td>Planta Norte</td><td>${ic('check')}</td><td><button class="btn ghost sm" onclick="toast('Cambios guardados','ok')">Editar</button></td></tr>
+  <tr><td>c.ruiz</td><td>Mantenimiento</td><td>Planta Norte y Sur</td><td>${ic('check')}</td><td><button class="btn ghost sm" onclick="toast('Cambios guardados','ok')">Editar</button></td></tr>
+  <tr><td>a.gomez</td><td>Operario</td><td>Láser 01</td><td>—</td><td><button class="btn ghost sm" onclick="toast('Cambios guardados','ok')">Editar</button></td></tr>
+  <tr><td>m.lopez</td><td>Cliente</td><td>Aceros del Norte</td><td>${ic('check')}</td><td><button class="btn ghost sm" onclick="toast('Cambios guardados','ok')">Editar</button></td></tr>
+  </table><br><button class="btn sm" onclick="toast('Nuevo usuario creado','ok')">${ic('plus')} Nuevo usuario</button></div>
   <div class="card"><h3>Planes y máquinas</h3>
   <div class="otitem bo"><b>Plan Monitoreo</b> — telemetría + alarmas + reportes</div>
   <div class="otitem bo"><b>Plan Premium</b> — + OT, repuestos, chat IA y soporte remoto</div>
   <div class="otitem bg"><b>Máquina nueva</b> — alta: marca, modelo, serie, cliente, sede, gateway y plan SIM</div>
-  <button class="btn sm" onclick="toast('Alta de máquina (demo)','ok')">${ic('plus')} Registrar máquina</button> <button class="btn ghost sm" onclick="toast('Cuenta suspendida (demo)','ok')">Suspender cuenta</button>
+  <button class="btn sm" onclick="toast('Máquina registrada','ok')">${ic('plus')} Registrar máquina</button> <button class="btn ghost sm" onclick="toast('Cuenta suspendida','ok')">Suspender cuenta</button>
   </div>
   </div>`;
 }
 
 function vAuditoria(){
-  return `<h1>Auditoría</h1><div class="sub">Registro inmutable de acciones de humanos y del sistema · filtros por usuario/módulo/fecha · RF-15.1 y RF-15.2</div>
+  return `<h1>Auditoría</h1><div class="sub">Registro inmutable de acciones de humanos y del sistema · filtros por usuario/módulo/fecha</div>
   <div class="card"><table><tr><th scope="col">Usuario</th><th scope="col">Acción</th><th scope="col">Módulo</th><th scope="col">Fecha</th></tr>
   ${AUDIT.map(a=>`<tr><td>${a.usr}</td><td>${a.acc}</td><td>${a.mod}</td><td>${a.fec}</td></tr>`).join("")}
   </table></div>`;
 }
 
 function vPerfil(){
-  return `<h1>Perfil y notificaciones</h1><div class="sub">Datos personales, preferencias de notificación por tipo de evento y severidad · RF-1.4 a RF-1.6</div>
+  return `<h1>Perfil y notificaciones</h1><div class="sub">Datos personales, preferencias de notificación por tipo de evento y severidad</div>
   <div class="grid2">
   <div class="card"><h3>Mi cuenta</h3>
     <div class="row" style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0"><span>Nombre</span><b>Admin Onyx</b></div>
@@ -1039,7 +1003,7 @@ function vPerfil(){
     <div class="row" style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0"><span>Idioma</span><b>Español (ES) / English (EN)</b></div>
     <div class="row" style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0"><span>Zona horaria</span><b>America/Bogotá</b></div>
     <div class="row" style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0"><span>2FA</span><b>${ic('check')} activo</b></div>
-    <br><button class="btn sm" onclick="toast('Cambio de contraseña (demo)','ok')">Cambiar contraseña</button> <button class="btn ghost sm" onclick="toast('Sesiones cerradas remotamente','ok')">Cerrar sesiones activas</button>
+    <br><button class="btn sm" onclick="toast('Contraseña actualizada','ok')">Cambiar contraseña</button> <button class="btn ghost sm" onclick="toast('Sesiones cerradas remotamente','ok')">Cerrar sesiones activas</button>
   </div>
   <div class="card"><h3>Notificaciones y centro de alertas</h3>
   <div class="check done"><input type="checkbox" checked> <span>Push · alarmas críticas y medias</span></div>
@@ -1057,13 +1021,14 @@ function mHome(){
   if(ROL=="operario"){
     const m=MQ["Láser 01"];
     return `<div class="push">${ic('bell')} <div><b>Sin alarmas activas</b> · tu máquina opera normal</div></div>
-    <div class="mcard2"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">Láser 01 — FiberCut FC-3015</div><div class="s">Planta Norte · Medellín</div>${st(m.estado)}</div></div>
+    <div class="mcard2" style="cursor:pointer" onclick="M_SEL='Láser 01';renderMovil()"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">Láser 01 — FiberCut FC-3015</div><div class="s">Planta Norte · Medellín</div>${st(m.estado)}</div></div>
       <div class="big">${m.piezas} <span style="font-size:13px;color:var(--text-3)">piezas hoy</span></div>
       <div class="mrow"><span>Producción turno</span><b>${m.ok} OK · ${m.ko} KO</b></div>
       <div class="mrow"><span>Horas operación</span><b>${m.horas} h</b></div>
       <div class="mrow"><span>OEE hoy</span><b>${m.oee}%</b></div>
       <div class="mrow"><span>Consumo gas</span><b>${m.gas}</b></div>
       <div class="mrow"><span>RUL herramienta</span><b>214 h</b></div>
+      <div class="mrow"><span>Ver ficha completa</span><b style="color:var(--primary)">tocar la tarjeta →</b></div>
       <div style="display:flex;gap:8px;margin-top:10px">
         <button class="bigbtn amber" style="flex:1" onclick="toast('Formulario de reporte de falla','ok')">${ic('warn')} Reportar falla</button>
         <button class="bigbtn ghost" style="flex:1" onclick="toast('Cambio de turno registrado','ok')">Cambio de turno</button>
@@ -1096,7 +1061,7 @@ function mHome(){
       <div class="mrow"><span>OT abiertas</span><b>${OTS.filter(o=>o.estado!="Cerrada").length}</b></div>
       <div class="mrow"><span>Gateways degradados</span><b>1</b></div>
     </div>
-    ${mqs.map(n=>{const m=MQ[n];return `<div class="mcard2"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">${n} <span style="font-size:10px;color:var(--text-3)">${m.cliente}</span></div>${st(m.estado)}</div></div>
+    ${mqs.map(n=>{const m=MQ[n];return `<div class="mcard2" style="cursor:pointer" onclick="M_SEL='${n}';renderMovil()"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">${n} <span style="font-size:10px;color:var(--text-3)">${m.cliente}</span></div>${st(m.estado)}</div></div>
       <div class="mrow"><span>OEE</span><b>${m.oee}%</b></div>
       <div class="mrow"><span>Alarma</span><b style="color:${m.alarma?(m.alarma.sev=='bad'?'var(--bad)':'var(--warn-ink)'):'var(--ok)'}">${m.alarma?m.alarma.code:"—"}</b></div></div>`}).join("")}`;
   }
@@ -1108,14 +1073,14 @@ function mHome(){
       <div class="mrow"><span>Paradas por falla</span><b>38 min</b></div>
       <div class="mrow"><span>OT por aprobar</span><b>1</b></div>
     </div>
-    ${Object.keys(MQ).filter(k=>MQ[k].cliente=="Aceros del Norte").map(n=>{const m=MQ[n];return `<div class="mcard2"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">${n}</div>${st(m.estado)}</div></div><div class="mrow"><span>OEE</span><b>${m.oee}%</b></div><div class="mrow"><span>Piezas</span><b>${m.ok}/${m.ko}</b></div></div>`}).join("")}`;
+    ${Object.keys(MQ).filter(k=>MQ[k].cliente=="Aceros del Norte").map(n=>{const m=MQ[n];return `<div class="mcard2" style="cursor:pointer" onclick="M_SEL='${n}';renderMovil()"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">${n}</div>${st(m.estado)}</div></div><div class="mrow"><span>OEE</span><b>${m.oee}%</b></div><div class="mrow"><span>Piezas</span><b>${m.ok}/${m.ko}</b></div></div>`}).join("")}`;
   }
   return `<div class="mcard2"><div class="t">Aceros del Norte — mi flota</div>
     <div class="mrow"><span>Máquinas</span><b>${Object.keys(MQ).filter(k=>MQ[k].cliente=="Aceros del Norte").length}</b></div>
     <div class="mrow"><span>OEE promedio</span><b>77%</b></div>
     <div class="mrow"><span>Alarmas activas</span><b style="color:var(--warn)">1</b></div>
   </div>
-  ${Object.keys(MQ).filter(k=>MQ[k].cliente=="Aceros del Norte").map(n=>{const m=MQ[n];return `<div class="mcard2"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">${n}</div>${st(m.estado)}</div></div><div class="mrow"><span>OEE</span><b>${m.oee}%</b></div><div class="mrow"><span>Piezas OK/KO</span><b>${m.ok}/${m.ko}</b></div></div>`}).join("")}`;
+  ${Object.keys(MQ).filter(k=>MQ[k].cliente=="Aceros del Norte").map(n=>{const m=MQ[n];return `<div class="mcard2" style="cursor:pointer" onclick="M_SEL='${n}';renderMovil()"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">${n}</div>${st(m.estado)}</div></div><div class="mrow"><span>OEE</span><b>${m.oee}%</b></div><div class="mrow"><span>Piezas OK/KO</span><b>${m.ok}/${m.ko}</b></div></div>`}).join("")}`;
 }
 function mAlerts(){
   return ALARMAS.map(a=>`<div class="otitem ${a.sev=='bad'?'bb':a.sev=='warn'?'':'bg'}"><b>${a.code}</b> · ${a.mq} · ${a.dur}<br>${a.txt}<br><span style="color:var(--primary-2)">${ic('bulb')} ${a.sug}</span><br><button class="bigbtn ghost" style="margin-top:7px;padding:8px" onclick="toast('OT creada desde la alarma','ok')">Crear OT</button></div>`).join("");
@@ -1133,11 +1098,11 @@ function mRepuestos(){
 }
 function mChat(){
   const start = CHAT_LOG || [];
-  const msgs = start.length?start:[{role:"bot",txt:"Hola, ¿qué necesitas saber del manual o de las alarmas de la máquina?",src:null}];
+  const msgs = start.length?start:[{role:"bot",txt:"Hola, ¿qué necesitas saber de tu máquina o de sus documentos?",src:null}];
   return `<div class="mcard2" style="padding:0;overflow:hidden">
     <div style="padding:11px">${msgs.slice(-4).map(x=>`<div class="msg ${x.role}" style="max-width:92%">${x.txt}${x.src?`<span class="src">${ic('doc')} ${x.src}</span>`:""}</div>`).join("")}</div>
     <div style="display:flex;gap:6px;padding:9px;flex-wrap:wrap;border-top:1px solid var(--line)">${CHAT_QA.slice(0,2).map((c,i)=>`<button class="bigbtn ghost" style="padding:7px;font-size:10px;flex:1" onclick="askQA(${i});go2m(4)">${c.q}</button>`).join("")}</div>
-    <div style="display:flex;gap:6px;padding:9px;border-top:1px solid var(--line)"><input placeholder="Pregunta…" style="font-size:12px" aria-label="Pregunta para el asistente"><button class="bigbtn" style="width:auto;padding:9px 15px" onclick="toast('Consulta enviada (demo)','ok')">Enviar</button></div>
+    <div style="display:flex;gap:6px;padding:9px;border-top:1px solid var(--line)"><input placeholder="Pregunta…" style="font-size:12px" aria-label="Pregunta para el asistente"><button class="bigbtn" style="width:auto;padding:9px 15px" onclick="toast('Consulta enviada','ok')">Enviar</button></div>
   </div>`;
 }
 function mAnalitica(){
@@ -1155,7 +1120,7 @@ function mReport(){
   <div class="mfield"><label for="mfStop">¿Máquina detenida?</label><select id="mfStop"><option>No, sigue produciendo</option><option>Sí, detenida</option></select></div>
   <div class="mfield"><label>Foto (opcional)</label><div style="border:1.5px dashed var(--line);border-radius:10px;padding:16px;text-align:center;color:var(--text-3);font-size:11px">${ic('cam')} Agregar foto del problema</div></div>
   <br><button class="bigbtn amber" onclick="toast('OT generada con datos de la máquina y el turno','ok')">${ic('send')} Enviar → genera OT automática</button>
-  <p style="font-size:10px;color:var(--text-3);text-align:center;margin-top:7px">La OT se crea con datos de la máquina, alarma activa y tu turno (RF-8.2)</p>
+  <p style="font-size:10px;color:var(--text-3);text-align:center;margin-top:7px">La OT se crea con datos de la máquina, alarma activa y tu turno</p>
   </div>`;
 }
 function mAvisos(){
@@ -1169,6 +1134,30 @@ function mAvisos(){
   <div style="display:flex;gap:12px;font-size:10px;color:var(--text-3);margin-top:4px"><span><i class="dotc ok"></i>corriendo</span><span><i class="dotc warn"></i>alerta</span><span><i class="dotc bad"></i>parada</span></div></div>`;
 }
 function mFlotaC(){return mHome()}
+function mMachine(n){
+  const m=MQ[n];
+  const cons=CONSUMIBLES.filter(c=>c.mq==n);
+  const sug=(ALARMAS.find(a=>a.code==(m.alarma||{}).code)||{}).sug||"";
+  return `<button class="bigbtn ghost" style="margin-bottom:11px" onclick="M_SEL=null;renderMovil()">← Volver</button>
+  <div class="mcard2"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">${n}</div><div class="s">${m.modelo} · ${m.tipoTxt}</div>${st(m.estado)}</div></div>
+    <div class="mrow"><span>Sede</span><b>${m.sede}</b></div>
+    <div class="mrow"><span>Cliente</span><b>${m.cliente}</b></div>
+  </div>
+  <div class="mcard2"><div class="t">Indicadores en vivo</div>
+    <div class="mrow"><span>OEE hoy</span><b>${m.oee}%</b></div>
+    <div class="mrow"><span>Producción hoy</span><b>${m.piezas} piezas</b></div>
+    <div class="mrow"><span>Piezas OK / KO</span><b>${m.ok} / ${m.ko}</b></div>
+    <div class="mrow"><span>Horas de operación</span><b>${m.horas} h</b></div>
+    <div class="mrow"><span>Salud (health)</span><b style="color:${m.salud>75?'var(--ok)':m.salud>50?'var(--warn-ink)':'var(--bad)'}">${m.salud}/100</b></div>
+    <div class="mrow"><span>RUL herramienta</span><b>${m.rul} h</b></div>
+    <div class="mrow"><span>Consumo de gas</span><b>${m.gas}</b></div>
+    <div class="mrow"><span>Uso de herramienta</span><b>${m.horasUsadas} / ${m.vidaUtil} h</b></div>
+    <div class="mrow"><span>Última conexión</span><b>hace 4 s</b></div>
+  </div>
+  ${m.alarma?`<div class="otitem bb"><b>${m.alarma.code} — ${m.alarma.txt}</b><br>Activa desde hace ${m.alarma.min} min<br>${ic('bulb')} ${sug}</div>`:''}
+  ${cons.length?`<div class="mcard2"><div class="t">Consumibles de esta máquina</div>${cons.map(c=>`<div class="mrow"><span>${c.nombre} <span style="font-size:10px;color:var(--text-3)">${c.ref}</span></span><b style="color:${c.stock<=c.min?'var(--bad)':'var(--ok)'}">${c.stock} / ${c.min}</b></div>`).join("")}</div>`:''}
+  ${ROL=="operario"?`<button class="bigbtn amber" onclick="go2m(1)">${ic('warn')} Reportar falla</button>`:ROL=="mantenimiento"?`<button class="bigbtn" onclick="toast('OT correctiva creada para ${n}','ok')">${ic('tools')} Crear OT correctiva</button>`:""}`;
+}
 function mReportesM(){
   return `<div class="mcard2"><div class="t">OEE por semana</div>
   ${["78%","71%","74%","68%"].map((v,i)=>`<div class="mrow"><span>Hace ${i==0?"esta semana":i+" semana(s)"}</span><b>${v}</b></div>`).join("")}
@@ -1199,7 +1188,7 @@ function mTabsDef(){
   const tabs={
     superadmin:   [["Flota","home",mHome],["Alertas","siren",mAlerts],["Gateways","ant",mGateways],["Analítica","robot",mAnalitica],["Perfil","user",mPerfil]],
     cliente:      [["Flota","home",mFlotaC],["Reportes","chart",mReportesM],["Perfil","user",mPerfil]],
-    gerente:      [["Inicio","home",mHome],["Máquinas","factory",()=>`${Object.keys(MQ).filter(k=>MQ[k].cliente=="Aceros del Norte").map(n=>{const m=MQ[n];return `<div class="mcard2"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">${n}</div>${st(m.estado)}</div></div><div class="mrow"><span>OEE</span><b>${m.oee}%</b></div></div>`}).join("")}`],["Reportes","chart",mReportesM],["Perfil","user",mPerfil]],
+    gerente:      [["Inicio","home",mHome],["Máquinas","factory",()=>`${Object.keys(MQ).filter(k=>MQ[k].cliente=="Aceros del Norte").map(n=>{const m=MQ[n];return `<div class="mcard2" style="cursor:pointer" onclick="M_SEL='${n}';renderMovil()"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">${n}</div>${st(m.estado)}</div></div><div class="mrow"><span>OEE</span><b>${m.oee}%</b></div></div>`}).join("")}`],["Reportes","chart",mReportesM],["Perfil","user",mPerfil]],
     operario:     [["Inicio","home",mHome],["Reportar","warn",mReport],["Avisos","bell",mAvisos],["Perfil","user",mPerfil]],
     mantenimiento:[["Inicio","home",mHome],["Alarmas","siren",mAlerts],["OT","wrench",mOTs],["Repuestos","toolbox",mRepuestos],["Chat IA","chat",mChat],["Perfil","user",mPerfil]]
   };
@@ -1209,11 +1198,11 @@ let mTab=0;
 function renderMovil(){
   const tabs=mTabsDef();
   mTab=Math.min(mTab,tabs.length-1);
-  q("mTitle").textContent=tabs[mTab][0];
-  q("mContent").innerHTML=tabs[mTab][2]();
-  q("mTabs").innerHTML=tabs.map((t,i)=>`<button class="${i==mTab?"on":""}" onclick="mTab=${i};renderMovil()"><span class="ic" aria-hidden="true">${ic(t[1])}</span>${t[0]}</button>`).join("");
+  q("mTitle").textContent=M_SEL?`Máquina · ${M_SEL}`:tabs[mTab][0];
+  q("mContent").innerHTML=M_SEL?mMachine(M_SEL):tabs[mTab][2]();
+  q("mTabs").innerHTML=tabs.map((t,i)=>`<button class="${i==mTab?"on":""}" onclick="mTab=${i};M_SEL=null;renderMovil()"><span class="ic" aria-hidden="true">${ic(t[1])}</span>${t[0]}</button>`).join("");
 }
-function go2m(i){mTab=i;renderMovil()}
+function go2m(i){M_SEL=null;mTab=i;renderMovil()}
 
 /* ================= RENDER ================= */
 function renderWeb(){
@@ -1240,7 +1229,7 @@ function renderWeb(){
 }
 function go(v){VIEW=v;renderWeb()}
 function setRole(r){
-  ROL=r;VIEW="dashboard";mTab=0;CHAT_LOG=null;
+  ROL=r;VIEW="dashboard";mTab=0;CHAT_LOG=null;M_SEL=null;
   q("roleSel").value=r;
   render();
 }
