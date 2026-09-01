@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="CNC Monitor — plataforma de monitoreo y mantenimiento remoto de máquinas CNC. 15 módulos, 5 roles, web y móvil.">
 <title>CNC Monitor — Plataforma de telemetría CNC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ================= TOKENS (cnc-design-system) ================= */
 :root{
@@ -346,6 +349,112 @@ input,select,textarea{background:var(--field);border-color:var(--line);color:var
 input::placeholder{color:var(--text-3)}
 code{background:var(--chrome-soft)!important}
 
+/* ============ PREMIUM · HMI 3D / GLASS (referencias Behance) ============ */
+body{font-family:"Fira Sans","Inter","Segoe UI",system-ui,sans-serif}
+.mono,.num{font-family:"Fira Code",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.hd{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:linear-gradient(180deg,#181820 0%,#12121a 100%);border:1px solid var(--line);border-radius:16px;padding:14px 18px;margin-bottom:14px;box-shadow:var(--sh-1)}
+.hd .wc{font-size:10px;color:var(--text-3);letter-spacing:1.4px;text-transform:uppercase}
+.hd h1{font-size:21px;font-weight:700;letter-spacing:-.01em;color:var(--text)}
+.hd .srch{margin-left:auto;display:flex;align-items:center;gap:8px;background:#0e0e13;border:1px solid var(--line);border-radius:24px;padding:9px 15px;width:250px;color:var(--text-3)}
+.hd .srch:hover{border-color:#3a3a4c}
+.hd .srch input{background:none;border:none;padding:0;font-size:12px;color:var(--text);width:100%}
+.segp{display:flex;background:#0e0e13;border:1px solid var(--line);border-radius:22px;padding:3px}
+.segp button{font-size:11px;font-weight:600;color:var(--text-3);padding:7px 15px;border-radius:18px;transition:.25s}
+.segp button:hover{color:var(--text)}
+.segp button.on{background:var(--primary);color:#fff;box-shadow:0 0 16px rgba(232,71,95,.45)}
+.hd .avat{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#e8475f,#7c2a4d);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;cursor:pointer;border:2px solid #2a2a35;transition:.2s}
+.hd .avat:hover{border-color:var(--primary)}
+.kpis2{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin-bottom:14px}
+.kpi2{position:relative;background:linear-gradient(180deg,#1a1a22 0%,#131318 100%);border:1px solid var(--line);border-radius:14px;padding:13px 15px;overflow:hidden;transition:.25s}
+.kpi2:hover{transform:translateY(-3px);border-color:#3d3d50;box-shadow:var(--sh-2)}
+.kpi2 .row1{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.kpi2 .ico{width:28px;height:28px;border-radius:8px;background:#20202c;border:1px solid #2b2b3a;display:flex;align-items:center;justify-content:center;color:var(--primary-2);flex-shrink:0}
+.kpi2 .nm{font-size:11px;color:var(--text-2);font-weight:600}
+.kpi2 .big{font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1}
+.kpi2 .chg{display:inline-flex;align-items:center;gap:4px;margin-left:8px;font-family:"Fira Code",monospace;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;vertical-align:3px}
+.kpi2 .chg.up{background:var(--ok-bg);color:var(--ok)} .kpi2 .chg.dn{background:var(--bad-bg);color:var(--bad)} .kpi2 .chg.md{background:var(--warn-bg);color:var(--warn-ink)}
+.kpi2 .lbl{font-size:10px;color:var(--text-3);letter-spacing:.6px;text-transform:uppercase;margin-top:6px}
+.kpi2 .spark{position:absolute;top:14px;right:14px;opacity:.85;pointer-events:none}
+.hmi{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.col7{grid-column:span 7} .col5{grid-column:span 5}
+@media(max-width:1100px){.col7,.col5{grid-column:span 12}}
+.three3d{position:relative;height:360px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:radial-gradient(700px 420px at 50% 15%,#231421 0%,#0c0c10 68%),#0c0c10;box-shadow:inset 0 0 60px rgba(232,71,95,.06)}
+.three3d canvas{width:100%!important;height:100%!important;display:block;cursor:grab}
+.three3d canvas:active{cursor:grabbing}
+.three3d .tag3d{position:absolute;top:12px;left:14px;font-size:10px;letter-spacing:1.6px;color:var(--text-3);display:flex;gap:8px;align-items:center;text-transform:uppercase}
+.three3d .tag3d .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);animation:pulse 1.8s infinite}
+.three3d .hint3d{position:absolute;bottom:10px;left:14px;font-size:9.5px;color:var(--text-3);letter-spacing:.4px}
+.three3d .m3dchip{position:absolute;bottom:10px;right:14px;display:flex;gap:6px}
+.three3d .m3dchip span{font-size:9.5px;font-family:"Fira Code",monospace;padding:4px 10px;border-radius:14px;background:rgba(14,14,19,.75);border:1px solid var(--line);color:var(--text-2);backdrop-filter:blur(6px)}
+.capp{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.capp h3{font-size:12.5px;color:var(--text);display:flex;align-items:center;gap:7px}
+.capp h3::before{content:"";width:4px;height:14px;border-radius:3px;background:var(--primary);box-shadow:0 0 8px rgba(232,71,95,.6)}
+.viewall{font-size:11px;color:var(--primary-2);font-weight:600;cursor:pointer;transition:.15s}
+.viewall:hover{color:var(--text)}
+.pillx{display:inline-block;font-size:10px;padding:3px 9px;border-radius:8px;font-weight:600;font-family:"Fira Code",monospace;white-space:nowrap}
+.px-r{background:rgba(255,93,93,.13);color:#ff8585;border:1px solid rgba(255,93,93,.28)}
+.px-y{background:rgba(240,180,76,.13);color:#f5c169;border:1px solid rgba(240,180,76,.28)}
+.px-g{background:rgba(62,207,122,.13);color:#6ce3a0;border:1px solid rgba(62,207,122,.28)}
+.px-b{background:rgba(74,134,255,.13);color:#84abff;border:1px solid rgba(74,134,255,.28)}
+.px-n{background:#23232c;color:#a9aab8;border:1px solid #2e2e3a}
+.tab2{width:100%;border-collapse:collapse;font-size:11.5px}
+.tab2 th{font-size:9.5px;color:var(--text-3);text-transform:uppercase;letter-spacing:.9px;padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;background:none;font-weight:600}
+.tab2 td{padding:9px 10px;border-bottom:1px solid #1e1e28;color:var(--text-2)}
+.tab2 tr:last-child td{border-bottom:none}
+.tab2 tr:hover td{background:rgba(255,255,255,.022)}
+.tab2 td b{color:var(--text);font-weight:600}
+.donut{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.donut svg{width:178px;height:178px;flex-shrink:0}
+.donut circle{transition:filter .2s}
+.donut circle:hover{filter:brightness(1.25)}
+.legend{flex:1;display:flex;flex-direction:column;gap:10px;font-size:11.5px;min-width:180px}
+.legend .li{display:flex;align-items:center;gap:8px;color:var(--text-2)}
+.legend .li .sw{width:9px;height:9px;border-radius:3px;flex-shrink:0;box-shadow:0 0 8px currentColor}
+.legend .li b{margin-left:auto;font-family:"Fira Code",monospace;color:var(--text);font-weight:600}
+.b12{display:flex;align-items:flex-end;gap:5px;height:150px;padding-top:8px}
+.b12 .c{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.b12 .b{width:100%;max-width:34px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#41415a 0%,#23232f 100%);transform-origin:bottom;animation:grow .7s cubic-bezier(.2,1,.35,1) backwards;cursor:pointer}
+.b12 .b:hover{filter:brightness(1.3)}
+.b12 .b.hot{background:linear-gradient(180deg,#ff7a92 0%,#e8475f 100%);box-shadow:0 0 16px rgba(232,71,95,.55)}
+.b12 .ml{font-size:8.5px;color:var(--text-3);font-family:"Fira Code",monospace}
+.bly{display:flex;gap:20px;margin-bottom:12px;flex-wrap:wrap}
+.bly .v{font-family:"Fira Code",monospace;font-size:15px;font-weight:700}
+.bly .l{font-size:9.5px;color:var(--text-3);letter-spacing:.7px;text-transform:uppercase;margin-top:2px}
+@keyframes grow{from{transform:scaleY(0)}}
+.gauges{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gc{background:var(--chrome-soft);border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.gc .gl{font-size:9.5px;color:var(--text-3);text-transform:uppercase;letter-spacing:.8px;font-weight:600}
+.dg{position:relative;width:108px;height:64px}
+.dg svg{width:100%;height:auto;display:block}
+.dg .trk,.dg .arc{fill:none;stroke-width:9;stroke-linecap:round}
+.dg .trk{stroke:#23232f}
+.dg .arc{stroke-dasharray:0 var(--dc);animation:dgin .9s cubic-bezier(.2,1,.35,1) forwards}
+@keyframes dgin{to{stroke-dasharray:var(--da) var(--dc)}}
+.dg .needle{transform-origin:54px 54px;transform:rotate(-135deg);animation:ndlin .9s cubic-bezier(.2,1,.35,1) forwards}
+@keyframes ndlin{to{transform:rotate(var(--ang))}}
+.dg .dv{position:absolute;top:30px;left:0;width:100%;text-align:center;font-family:"Fira Code",monospace;font-size:15px;font-weight:700}
+.nlist{display:flex;flex-direction:column;gap:7px}
+.nrow{display:flex;justify-content:space-between;align-items:center;padding:8px 11px;background:#101016;border:1px solid #22222c;border-radius:9px;font-size:11.5px;transition:.15s}
+.nrow:hover{border-color:#33334a}
+.nrow .d{display:flex;align-items:center;gap:8px;color:var(--text-2)}
+.nrow .res{font-family:"Fira Code",monospace;font-weight:600}
+.inv{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:900px){.inv{grid-template-columns:1fr}}
+.invc{border-radius:14px;padding:13px 15px;border:1px solid rgba(255,255,255,.09);position:relative;overflow:hidden;min-height:88px;transition:.2s}
+.invc:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.invc .lab{font-size:11px;display:flex;gap:8px;align-items:center;color:rgba(255,255,255,.9);font-weight:600}
+.invc .lab i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.95);box-shadow:0 0 10px rgba(255,255,255,.9);font-style:normal}
+.invc .v{font-family:"Fira Code",monospace;font-size:22px;font-weight:700;color:#fff;margin-top:9px}
+.invc .s{font-size:10px;color:rgba(255,255,255,.6);margin-top:2px}
+.ic-red{background:linear-gradient(135deg,#5e1b2c 0%,#2e0f1b 100%)}
+.ic-gre{background:linear-gradient(135deg,#173d2b 0%,#0d211a 100%)}
+.ic-amb{background:linear-gradient(135deg,#4c3512 0%,#281c0b 100%)}
+.mchip3d{cursor:pointer}
+.mchip3d.on{background:var(--primary)!important;color:#fff!important;border-color:var(--primary)!important}
+.hd .avt2,.avat{flex-shrink:0}
+@media(max-width:700px){.hd .srch{width:100%;order:5;margin-left:0}}
+
+
 </style>
 </head>
 <body>
@@ -473,7 +582,73 @@ code{background:var(--chrome-soft)!important}
   <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></symbol>
 </svg>
 
-<script>/* ================= DATOS (mock según requerimientos) ================= */
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>/* ================= MÁQUINA 3D (isométrica, WebGL) ================= */
+let T3D=null;
+function init3D(id,config){
+  const cv=document.getElementById(id); if(!cv) return;
+  if(T3D){cancelAnimationFrame(T3D.raf);T3D.cleanup();T3D=null;}
+  const W=cv.clientWidth||700, H=cv.clientHeight||340;
+  const r=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2)); r.setSize(W,H,false);
+  r.setClearColor(0x000000,0);
+  const sc=new THREE.Scene(), c=new THREE.PerspectiveCamera(38,W/H,.1,200);
+  c.position.set(9.5,7,11); c.lookAt(0,1.2,0);
+  const amb=new THREE.AmbientLight(0xffffff,.85); sc.add(amb);
+  const d1=new THREE.DirectionalLight(0xffffff,.9); d1.position.set(8,12,6); sc.add(d1);
+  const d2=new THREE.DirectionalLight(0xe8475f,.6); d2.position.set(-8,4,-6); sc.add(d2);
+  const d3=new THREE.PointLight(0x4a86ff,.9,30); d3.position.set(0,3,-8); sc.add(d3);
+  const grid=new THREE.GridHelper(30,30,0x2a2a35,0x1c1c24); grid.position.y=0; sc.add(grid);
+  const grp=new THREE.Group(); sc.add(grp);
+  const steel=(col,mt,rs)=>new THREE.MeshStandardMaterial({color:col,metalness:mt??.65,roughness:rs??.35});
+  const body=new THREE.Mesh(new THREE.BoxGeometry(6.4,1.6,4.2),steel(0x48485c));
+  const body2=new THREE.Mesh(new THREE.BoxGeometry(5.6,.9,3.4),steel(0x5a5a6e)); body2.position.y=1.25;
+  const bed=new THREE.Mesh(new THREE.BoxGeometry(5.2,.5,2.9),steel(0x7a7a8e)); bed.position.y=1.4;
+  const colL=new THREE.Mesh(new THREE.BoxGeometry(.7,3.4,.7),steel(0x3a3a4a)); colL.position.set(-2.8,2.85,-1);
+  const colR=colL.clone(); colR.position.x=2.8;
+  const gap=new THREE.Mesh(new THREE.BoxGeometry(6.3,.55,.9),steel(0x606076)); gap.position.set(0,4.25,-1);
+  const gantry=new THREE.Group(); gantry.position.y=3.35; grp.add(gantry);
+  const gb=new THREE.Mesh(new THREE.BoxGeometry(.65,.65,4.4),steel(0x70708a)); gantry.add(gb);
+  const head=new THREE.Group(); gantry.add(head);
+  const hb=new THREE.Mesh(new THREE.BoxGeometry(.9,1.1,.8),steel(0x8a8aa2)); head.add(hb);
+  const spindle=new THREE.Mesh(new THREE.CylinderGeometry(.16,.16,.9,12),steel(0xb8b8c8,.45,.2)); spindle.position.y=-.85; head.add(spindle);
+  const tool=config.tipo=="taladro"
+    ? new THREE.Mesh(new THREE.ConeGeometry(.22,.8,8),steel(0xe0e0ea,.2,.5))
+    : new THREE.Mesh(new THREE.CylinderGeometry(.07,.07,.7,8),new THREE.MeshBasicMaterial({color:0xe8475f}));
+  tool.position.y=-1.5; head.add(tool);
+  const part=new THREE.Mesh(new THREE.BoxGeometry(1.7,.5,1.2),steel(0x9a9ab0,.55,.4)); part.position.set(.8,1.9,.2); grp.add(part);
+  const plinth=new THREE.Mesh(new THREE.CylinderGeometry(2.6,2.6,.25,48),steel(0x2e2e3a)); plinth.position.y=.12; grp.add(plinth);
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(2.6,.05,8,60),new THREE.MeshStandardMaterial({color:0xe8475f,emissive:0xe8475f,emissiveIntensity:1.4,metalness:.3,roughness:.3}));
+  ring.rotation.x=-Math.PI/2; ring.position.y=.28; grp.add(ring);
+  [body,body2,bed,colL,colR,gap,gb,hb,part,plinth].forEach(m=>grp.add(m));
+  const pGeo=new THREE.BufferGeometry(); const n=60,pos=new Float32Array(n*3),vel=new Float32Array(n);
+  for(let i=0;i<n;i++){pos[i*3]+=(Math.random()-.5)*.6;pos[i*3+1]=Math.random()*3;pos[i*3+2]+=(Math.random()-.5)*2.2;vel[i]=.02+Math.random()*.05;}
+  pGeo.setAttribute("position",new THREE.BufferAttribute(pos,3));
+  const pts=new THREE.Points(pGeo,new THREE.PointsMaterial({color:0xe8475f,size:.09,transparent:true,opacity:.85,blending:THREE.AdditiveBlending,depthWrite:false}));
+  sc.add(pts);
+  let dragging=false,px=0,py=0,rotY=0,rotX=.1;
+  const onDown=e=>{dragging=true;px=e.clientX;py=e.clientY};
+  const onMove=e=>{if(!dragging)return;rotY+=(e.clientX-px)*.006;rotX=Math.max(-.2,Math.min(.7,rotX+(e.clientY-py)*.005));px=e.clientX;py=e.clientY};
+  const onUp=()=>dragging=false;
+  cv.addEventListener("pointerdown",onDown);window.addEventListener("pointermove",onMove);window.addEventListener("pointerup",onUp);
+  const run=config.estado=="run",alert=config.estado=="alert";
+  const col=config.estado=="stop"?(x)=>new THREE.Color(x).multiplyScalar(.45):(x)=>new THREE.Color(x);
+  let t=0;
+  const tick=()=>{t+=.016;
+    if(!dragging){rotY+=.0035}
+    grp.rotation.y=rotY; grp.rotation.x=rotX;
+    if(run||alert){gantry.position.z=Math.sin(t*1.2)*1.5;head.position.x=Math.sin(t*.9)*1.9;}
+    head.position.y=(run||alert)?Math.abs(Math.sin(t*6))*.12:0;
+    ring.material.emissiveIntensity=(alert?2.2+Math.sin(t*8)*1.2:1.2+Math.sin(t*2)*.3);
+    pts.visible=run||alert;
+    if(pts.visible){const a=pGeo.attributes.position.array;for(let i=0;i<n;i++){a[i*3+1]+=vel[i];if(a[i*3+1]>3.2)a[i*3+1]=0.1;}pGeo.attributes.position.needsUpdate=true;}
+    r.render(sc,c); T3D={raf:requestAnimationFrame(tick),cleanup:()=>{cv.removeEventListener("pointerdown",onDown);window.removeEventListener("pointermove",onMove);window.removeEventListener("pointerup",onUp);r.dispose();}};
+  };
+  tick();
+}
+function clean3D(){if(T3D){cancelAnimationFrame(T3D.raf);T3D.cleanup();T3D=null;}}
+
+/* ================= DATOS (mock según requerimientos) ================= */
 const MQ = {
   "Láser 01": {tipo:"laser", modelo:"FiberCut FC-3015", tipoTxt:"Láser fibra 6kW", sede:"Planta Norte · Medellín", cliente:"Aceros del Norte", estado:"run", oee:82, horas:14.2, piezas:128, ok:121, ko:7, rul:214, salud:88, gas:"12.4 m³", alarma:null, horasUsadas:5120, vidaUtil:6400},
   "Láser 03": {tipo:"laser", modelo:"FiberCut FC-3015", tipoTxt:"Láser fibra 6kW", sede:"Planta Norte · Medellín", cliente:"Aceros del Norte", estado:"alert", oee:71, horas:11.8, piezas:96, ok:90, ko:6, rul:42, salud:62, gas:"10.1 m³", alarma:{code:"ALL 77:56", txt:"Transductor guía de cinta averiado", sev:"warn", min:38}, horasUsadas:5720, vidaUtil:6400},
@@ -691,23 +866,83 @@ function barras(items){
   return items.map(i=>`<div class="bar-row"><span class="lb">${i.lb}</span><div class="track"><div class="fill" style="width:${i.w}%;background:${i.c}"></div></div><span class="val">${i.v}</span></div>`).join("");
 }
 
+/* ================= HELPERS PREMIUM ================= */
+function spark(data,color,w,h){w=w||96;h=h||30;const mx=Math.max(...data),mn=Math.min(...data),ran=(mx-mn)||1;
+  const pts=data.map((v,i)=>`${(i/(data.length-1)*w).toFixed(1)},${(h-2-((v-mn)/ran)*(h-6)).toFixed(1)}`).join(" ");
+  return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/><path d="M${0},${h} L${pts.replace(/ /g," L")} L${w},${h} Z" fill="${color}" opacity=".12"/></svg>`}
+function donut(segs,center){
+  const R=62,r=78,off=0;let acc=0;
+  const arcs=segs.map(s=>{const frac=s.v/100,len=2*Math.PI*R*frac;const a=`<circle cx="${r}" cy="${r}" r="${R}" fill="none" stroke="${s.c}" stroke-width="16" stroke-dasharray="${Math.max(len-3,0)} ${2*Math.PI*R}" stroke-dashoffset="${acc}" transform="rotate(-90 ${r} ${r})"><title>${s.n}: ${s.v}%</title></circle>`;acc-=len;return a}).join("");
+  return `<div style="display:flex;flex-direction:column;align-items:center"><svg viewBox="0 0 156 156" width="156" height="156" role="img" aria-label="Distribución: ${segs.map(s=>`${s.n} ${s.v}%`).join(", ")}">${arcs}</svg><b class="mono" style="margin-top:-88px;font-size:17px">${center}</b></div>`}
+function bars12(data,hot){
+  const mx=Math.max(...data.map(d=>d.v));
+  return `<div class="b12">${data.map((d,i)=>`<div class="c"><div class="b ${i==hot?"hot":""}" style="height:${(d.v/mx*100).toFixed(0)}%;animation-delay:${i*40}ms" title="${d.m}: ${d.v}"></div><span class="ml">${d.m}</span></div>`).join("")}</div>`;
+}
+function kpi2(icon,nm,val,chg,cls){
+  const pw=val.replace(/&nbsp;/g,"");
+  return `<div class="kpi2"><div class="row1"><span class="ico">${icon}</span><span class="nm">${nm}</span></div>
+  <div class="big"><span class="num">${val}</span><span class="chg ${cls}">${chg}</span></div>
+  <div class="lbl">vs periodo anterior</div></div>`}
+function gaugeSVG(pct,col,label){
+  const R=44,C=2*Math.PI*R,ta=C*.75,da=ta*pct/100;
+  return `<div class="gc"><div class="dg"><svg viewBox="0 0 108 66">
+    <circle class="trk" cx="54" cy="54" r="${R}" transform="rotate(135 54 54)" stroke-dasharray="${ta} ${C}"/>
+    <circle class="arc" cx="54" cy="54" r="${R}" transform="rotate(135 54 54)" stroke="${col}" style="--da:${da};--dc:${C}"/>
+    <line class="needle" x1="54" y1="54" x2="54" y2="19" style="--ang:${-135+270*pct/100}deg" stroke="${col}" stroke-width="2.4" stroke-linecap="round"/></svg>
+    <div class="dv">${pct}%</div></div><span class="gl">${label}</span></div>`}
+function heroHeader(name,avat,right){
+  return `<div class="hd">
+    <div><div class="wc">Bienvenido</div><h1>${name}</h1></div>
+    <div class="srch">${ic('zoom')}<input placeholder="Buscar máquina, OT, cliente…" aria-label="Buscar en el panel"></div>
+    <span class="segp" role="group" aria-label="Periodo">${right||`<button class="on">Hoy</button><button>Semana</button><button>Mes</button>`}</span>
+    <button class="btn ghost sm" onclick="toast('Exportación de datos programada','ok')">${ic('dl')} Exportar</button>
+    <span class="avat" title="${name}">${avat}</span>
+  </div>`}
+
 /* ================= VISTAS WEB ================= */
 function vDashboard(){
   const mqs=Object.keys(MQ);
   const run=mqs.filter(k=>MQ[k].estado=="run").length, al=mqs.filter(k=>MQ[k].estado=="alert").length, stp=mqs.filter(k=>MQ[k].estado=="stop").length;
   let h="";
   if(ROL=="superadmin"){
-    h=`<h1>Dashboard global — todas las máquinas de todos los clientes</h1><div class="sub">Vista multi-tenant del proveedor · datos en vivo (WebSocket)</div>
-    <div class="kpis">
-      ${kpi(`${mqs.length} <small>máquinas</small>`,"Flota total conectada",pill("ok",`${run} corriendo`))}
-      ${kpi(`${al} <small>máquinas</small>`,"En alerta activa",pill("warn","atención"))}
-      ${kpi(`${stp} <small>máquinas</small>`,"Detenidas",pill("bad","paradas"))}
-      ${kpi(`${OTS.filter(o=>o.estado!="Cerrada").length} <small>OT</small>`,"Órdenes abiertas",pill("warn","1 crítica"))}
-      ${kpi("100%","Gateways en línea")}
-      ${kpi("12","Clientes activos",pill("ok","2 con máquinas activas"))}
+    const oeeAll=Math.round(mqs.reduce((s,k)=>s+MQ[k].oee,0)/mqs.length);
+    const piezas=mqs.reduce((s,k)=>s+MQ[k].piezas,0);
+    const ventas=[85,92,78,96,88,102,95,110,91,104,118,86];
+    const meses=["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+    const BAR=meses.map((m,i)=>({m,v:ventas[i]}));
+    const segs2=[[run,"Corriendo","#3ecf7a"],[al,"En alerta","#f0b44c"],[stp,"Detenidas","#ff5d5d"]].map(s=>({n:s[1],v:Math.round(s[0]/mqs.length*100),c:s[2]})).filter(x=>x.v>0);
+    h=`${heroHeader("Superadmin · Onyx","SO",
+      `<button class="${SUBTAB==0?"on":""}" onclick="SUBTAB=0;renderWeb()">Hoy</button><button class="${SUBTAB==1?"on":""}" onclick="SUBTAB=1;renderWeb()">Semana</button><button class="${SUBTAB==2?"on":""}" onclick="SUBTAB=2;renderWeb()">Mes</button>`)}
+    <div class="kpis2">
+      ${kpi2(ic('factory'),"Máquinas en línea",`${run}/${mqs.length}`,"+2 hoy","up")}
+      ${kpi2(ic('siren'),"Alertas activas",`${al}`,"1 crítica","md")}
+      ${kpi2(ic('trend'),"OEE flota global",`${oeeAll}%`,"+4 pts","up")}
+      ${kpi2(ic('chart'),"Producción hoy",`${piezas} <small style="font-size:12px;color:var(--text-3)">pz</small>`,"+8%","up")}
+    </div>
+    <div class="hmi">
+      <div class="card col7">
+        <div class="capp"><h3>Rendimiento de producción</h3><span class="viewall" onclick="go('reports')">Ver reportes →</span></div>
+        <div class="donut">${donut(segs2, mqs.length+" máq.")}
+          <div class="legend">${segs2.map(s=>`<div class="li"><span class="sw" style="background:${s.c};color:${s.c}"></span>${s.n}<b>${s.v}%</b></div>`).join("")}
+          <div class="li"><span class="sw" style="background:#4a86ff;color:#4a86ff"></span>OT abiertas<b>${OTS.filter(o=>o.estado!="Cerrada").length}</b></div></div>
+        </div>
+        <div class="bly" style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line)"><div><div class="v mono">418 <span style="color:var(--ok);font-size:11px">▲ +6.2%</span></div><div class="l">Unidades mes</div></div><div><div class="v mono">92%</div><div class="l">Disponibilidad</div></div><div><div class="v mono">${oeeAll}%</div><div class="l">OEE promedio</div></div><div><div class="v mono">138</div><div class="l">Subidas manuales</div></div></div>
+        ${bars12(BAR,SUBTAB==1?10:SUBTAB==2?2:8)}
+      </div>
+      <div class="card col5">
+        <div class="capp"><h3>Órdenes de trabajo</h3><span class="viewall" onclick="go('workorders')">Ver todas →</span></div>
+        <table class="tab2"><tr><th>OT</th><th>Máquina</th><th>Prioridad</th><th>SLA</th></tr>
+        ${OTS.slice(0,5).map(o=>`<tr><td><b class="mono">${o.id}</b></td><td>${o.mq}</td><td><span class="pillx ${o.prio=="CRÍTICA"?"px-r":o.prio=="ALTA"?"px-y":"px-n"}">${o.prio}</span></td><td class="mono" style="color:${o.prio=="CRÍTICA"?"var(--bad)":"var(--text-2)"}">${o.sla}</td></tr>`).join("")}
+        </table>
+        <div class="inv" style="margin-top:14px">
+          <div class="invc ic-red"><div class="lab"><i></i>Consumibles bajos</div><div class="v">02 <span style="font-size:11px;opacity:.6">ítems</span></div><div class="s">electrodo · broca Ø16</div></div>
+          <div class="invc ic-gre"><div class="lab"><i></i>Piezas OK hoy</div><div class="v">${piezas-20} <span style="font-size:11px;opacity:.6">pz</span></div><div class="s">tasa 97%</div></div>
+          <div class="invc ic-amb"><div class="lab"><i></i>Predicciones IA</div><div class="v">04 <span style="font-size:11px;opacity:.6">alertas</span></div><div class="s">1 crítica</div></div>
+        </div>
+      </div>
     </div>
     <div class="grid2">
-      <div class="card"><h3>Flota por cliente</h3><table><tr><th scope="col">Cliente</th><th scope="col">Sede</th><th scope="col">Máquina</th><th scope="col">Estado</th><th scope="col">OEE</th></tr>
+      <div class="card"><h3>Flota por cliente</h3><table class="tab2"><tr><th>Cliente</th><th scope="col">Sede</th><th scope="col">Máquina</th><th scope="col">Estado</th><th scope="col">OEE</th></tr>
       ${CLIENTES.map(c=>c.maquinas.map(n=>`<tr><td>${c.nombre}</td><td>${c.sedes[0]}</td><td>${n}</td><td>${st(MQ[n].estado)}</td><td><b>${MQ[n].oee}%</b></td></tr>`).join("")).join("")}
       </table></div>
       <div class="card"><h3>Alertas críticas recientes</h3>
@@ -720,11 +955,11 @@ function vDashboard(){
     const piezas=mine.reduce((s,k)=>s+MQ[k].piezas,0);
     const alarmas=mine.filter(k=>MQ[k].alarma).length;
     h=`<h1>Mi flota — Aceros del Norte</h1><div class="sub">Solo tus máquinas y sedes · reportes e indicadores</div>
-    <div class="kpis">
-      ${kpi(`${mine.length} <small>máquinas</small>`,"Flota total",pill("ok",`${mine.filter(k=>MQ[k].estado=="run").length} corriendo`))}
-      ${kpi(`${oeeAvg}%`,"OEE promedio")}
-      ${kpi(`${alarmas} <small>alarma${alarmas==1?"":"s"}</small>`,"Activas",pill("warn","media"))}
-      ${kpi(`${piezas} <small>piezas</small>`,"Producción hoy",pill("ok","+12%"))}
+    <div class="kpis2">
+      ${kpi2(ic('factory'),"Flota total",`${mine.length}`,"2 corriendo","up")}
+      ${kpi2(ic('trend'),"OEE promedio",`${oeeAvg}%`,"+4 pts","up")}
+      ${kpi2(ic('siren'),"Alarmas activas",`${alarmas}`,"media","md")}
+      ${kpi2(ic('chart'),"Producción hoy",`${piezas} <small style="font-size:12px;color:var(--text-3)">pz</small>`,"+12%","up")}
     </div>
     <div class="card"><h3>Comparativo por sede</h3><div class="bars">
       <div class="bar-row"><span class="lb">Planta Norte · Medellín</span><div class="track"><div class="fill" style="width:${oeeAvg}%;background:var(--primary-2)"></div></div><span class="val">${oeeAvg}% OEE</span></div>
@@ -733,11 +968,11 @@ function vDashboard(){
     <div class="mch">${mine.map(machCard).join("")}</div>`;
   } else if(ROL=="gerente"){
     h=`<h1>Dashboard — Planta Norte · Medellín</h1><div class="sub">OEE, producción, paradas y decisiones de planta</div>
-    <div class="kpis">
-      ${kpi("78%","OEE hoy",pill("ok","+4% vs ayer"))}
-      ${kpi("352 <small>m</small>","Metros cortados",pill("ok","OK"))}
-      ${kpi("38 <small>min</small>","Paradas por falla",pill("warn","1 evento"))}
-      ${kpi(`${OTS.filter(o=>o.estado!="Cerrada"&&o.mq!="Plasma 02").length} <small>OT</small>`,"Pendientes",pill("warn","1 por aprobar"))}
+    <div class="kpis2">
+      ${kpi2(ic('trend'),"OEE hoy",`78%`,"+4%","up")}
+      ${kpi2(ic('factory'),"Metros cortados",`352 <small style="font-size:12px;color:var(--text-3)">m</small>`,"OK","up")}
+      ${kpi2(ic('siren'),"Paradas por falla",`38 <small style="font-size:12px;color:var(--text-3)">min</small>`,"1 evento","md")}
+      ${kpi2(ic('wrench'),"OT pendientes",`${OTS.filter(o=>o.estado!="Cerrada"&&o.mq!="Plasma 02").length}`,"1 por aprobar","md")}
     </div>
     <div class="grid2">
       <div class="card"><h3>Ranking de máquinas (OEE)</h3><div class="bars">
@@ -756,20 +991,20 @@ function vDashboard(){
   } else if(ROL=="operario"){
     const m=MQ["Láser 01"];
     h=`<h1>Mi máquina — Láser 01</h1><div class="sub">Turno actual 06:00–14:00 · solo tu máquina asignada</div>
-    <div class="kpis">
-      ${kpi(`${st("run")}`,"Estado en vivo")}
-      ${kpi(`${m.piezas} <small>piezas</small>`,"Producción del turno",pill("ok","OK"))}
-      ${kpi(`${m.horas} <small>h</small>`,"Horas del día")}
-      ${kpi("12.4 <small>m³</small>","Consumo gas")}
+    <div class="kpis2">
+      ${kpi2(ic('factory'),"Máquina",`${st("run")}`,"en vivo","up")}
+      ${kpi2(ic('chart'),"Producción del turno",`${m.piezas} <small style="font-size:12px;color:var(--text-3)">pz</small>`,"OK","up")}
+      ${kpi2(ic('clock'),"Horas del día",`${m.horas} <small style="font-size:12px;color:var(--text-3)">h</small>`,"","")}
+      ${kpi2(ic('bulb'),"Consumo gas",`12.4 <small style="font-size:12px;color:var(--text-3)">m³</small>`,"","")}
     </div>
     <div class="mch">${machCard("Láser 01")}</div>`;
   } else {
     h=`<h1>Panel técnico — máquinas a su cargo</h1><div class="sub">Diagnóstico: código + causa + sugerencia</div>
-    <div class="kpis">
-      ${kpi(`${OTS.filter(o=>o.estado!="Cerrada").length} <small>OT</small>`,"Abiertas",pill("bad","1 crítica"))}
-      ${kpi("2 <small>h</small>","Tiempo medio respuesta",pill("ok","en SLA"))}
-      ${kpi("1 <small>herramienta</small>","RUL crítico",pill("bad","Plasma 02"))}
-      ${kpi("92%","Disponibilidad")}
+    <div class="kpis2">
+      ${kpi2(ic('wrench'),"OT abiertas",`${OTS.filter(o=>o.estado!="Cerrada").length}`,"1 crítica","md")}
+      ${kpi2(ic('clock'),"Tiempo medio respuesta",`2 <small style="font-size:12px;color:var(--text-3)">h</small>`,"en SLA","up")}
+      ${kpi2(ic('toolbox'),"RUL crítico",`1 <small style="font-size:12px;color:var(--text-3)">herram.</small>`,"Plasma 02","md")}
+      ${kpi2(ic('trend'),"Disponibilidad",`92%`,"+1 pt","up")}
     </div>
     <div class="grid2">
       <div class="card"><h3>Mis OT</h3>${OTS.filter(o=>o.estado!="Cerrada").map(o=>`<div class="otitem ${o.prio=="CRÍTICA"?"bb":o.prio=="ALTA"?"":"bg"}" onclick="OT_SEL='${o.id}';go('otdetail')" style="cursor:pointer"><b>${o.id}</b> · ${o.mq} · ${pill(o.prio=="CRÍTICA"?"bad":"warn",o.prio)}<br>${o.tipo} · ${o.tech} · <span style="color:var(--text-3)">${o.sla}</span></div>`).join("")}</div>
@@ -792,20 +1027,34 @@ function vMachine(){
   let tab = MTABS[SUBTAB%4][1];
   let body="";
   if(tab=="resumen"){
-    body=`<div class="grid2">
-      <div class="card">
-        <div class="machbox" style="width:220px;margin:0 auto 12px">${machSVG(m.tipo,m.estado)}</div>
-        <h3>Timeline 24 h (2 turnos)</h3>${tlBar(SEL_MQ)}<div style="display:flex;gap:14px;font-size:11px;color:var(--text-3)"><span><i class="dotc ok"></i>corriendo</span><span><i class="dotc warn"></i>alerta</span><span><i class="dotc bad"></i>detenida</span></div>
-        <br><h3>OEE desglose</h3><div class="bars">
-          <div class="bar-row"><span class="lb">Disponibilidad</span><div class="track"><div class="fill" style="width:${m.estado=="run"?92:45}%;background:var(--ok)"></div></div><span class="val">${m.estado=="run"?92:45}%</span></div>
-          <div class="bar-row"><span class="lb">Rendimiento</span><div class="track"><div class="fill" style="width:85%;background:var(--primary-2)"></div></div><span class="val">85%</span></div>
-          <div class="bar-row"><span class="lb">Calidad</span><div class="track"><div class="fill" style="width:${Math.round(m.ok/m.piezas*100)}%;background:var(--primary-2)"></div></div><span class="val">${Math.round(m.ok/m.piezas*100)}%</span></div>
+    body=`<div class="card" style="padding:10px">
+      <div class="three3d" style="height:340px">
+        <canvas id="cv3d"></canvas>
+        <span class="tag3d"><span class="dot"></span> ${SEL_MQ} · vista HMI 3D — ${m.modelo}</span>
+        <div class="hint3d">Arrastra para rotar el modelo · retroalimentación en vivo</div>
+        <div class="m3dchip"><span>OEE ${m.oee}%</span><span>RUL ${m.rul} h</span><span>${m.estado.toUpperCase()}</span></div>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card"><h3>Indicadores clave</h3>
+        <div class="gauges">
+          ${gaugeSVG(m.estado=="run"?92:45,"var(--ok)","Disponibilidad")}
+          ${gaugeSVG(85,"var(--primary-2)","Rendimiento")}
+          ${gaugeSVG(Math.round(m.ok/m.piezas*100),"var(--info)","Calidad")}
+          ${gaugeSVG(m.oee,"var(--warn)","OEE")}
         </div>
+        <h3 style="margin-top:14px">Timeline 24 h (2 turnos)</h3>${tlBar(SEL_MQ)}<div style="display:flex;gap:14px;font-size:11px;color:var(--text-3)"><span><i class="dotc ok"></i>corriendo</span><span><i class="dotc warn"></i>alerta</span><span><i class="dotc bad"></i>detenida</span></div>
         <br><h3>Acciones</h3>
         <button class="btn sm" onclick="toast('OT correctiva creada para ${SEL_MQ}','ok')">${ic('tools')} Crear OT correctiva</button> <button class="btn ghost sm" onclick="toast('Informe PDF descargado','ok')">${ic('doc')} Informe PDF</button> <button class="btn ghost sm" onclick="go('chatia')">${ic('chat')} Preguntar al manual</button>
         </div>
         <div class="card"><h3>Alarmas activas</h3>
           ${m.alarma?`<div class="otitem ${m.alarma.sev=='bad'?'bb':''}"><b>${m.alarma.code}</b> · ${m.alarma.min} min<br>${m.alarma.txt}<br><span style="color:var(--primary-2)">${ic('bulb')} ${(ALARMAS.find(a=>a.code==m.alarma.code)||{}).sug||""}</span></div>`:'<span class="chip">Sin alarmas activas '+ic('check')+'</span>'}
+        <h3 style="margin-top:14px">Estados del equipo</h3>
+        <div class="nlist">
+          <div class="nrow"><span class="d">${ic('check')} Contadores de ciclo</span><b class="res" style="color:var(--ok)">OK</b></div>
+          <div class="nrow"><span class="d">${ic('check')} Presión de aire</span><b class="res" style="color:${m.tipo=="plasma"?"var(--bad)":"var(--ok)"}">${m.tipo=="plasma"?"LOW":"OK"}</b></div>
+          <div class="nrow"><span class="d">${ic('check')} Gateway IoT</span><b class="res" style="color:var(--ok)">EN LÍNEA</b></div>
+        </div>
         <h3 style="margin-top:14px">Indicadores en vivo</h3>
         <div class="row" style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0"><span>Horas operación</span><b>${m.horas} h</b></div>
         <div class="row" style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0"><span>Metros cortados</span><b>${m.estado=="run"?"352 m":"128 m"}</b></div>
@@ -1371,6 +1620,7 @@ function renderWeb(){
   const el=q("mainContent");
   el.innerHTML=`<div class="fadeIn">${(R[VIEW]||vDashboard)()}</div>`;
   el.focus({preventScroll:true});
+  if(q("cv3d")) init3D("cv3d",{tipo:(MQ[SEL_MQ]||MQ["Láser 01"]).tipo,estado:(MQ[SEL_MQ]||MQ["Láser 01"]).estado});
 }
 function go(v){VIEW=v;renderWeb()}
 function setRole(r){
