@@ -8,18 +8,19 @@
 <style>
 /* ================= TOKENS (cnc-design-system) ================= */
 :root{
-  --ink-900:#0b1526; --ink-800:#10203a; --ink-700:#1a2f4f;
-  --chrome:#0f1d33; --chrome-soft:#16263f;
-  --bg:#f4f7fb; --card:#ffffff; --line:#dfe6ee; --line-soft:#e9eef5;
-  --text:#16233a; --text-2:#42506b; --text-3:#5b6b85;
-  --primary:#0e63a8; --primary-hover:#0c4e84; --primary-2:#0d4f86; --accent:#0891b2; --primary-soft:#e6f1f9;
-  --ok:#0e8a4d; --ok-bg:#e4f6ec; --warn:#b45309; --warn-hover:#92400e; --warn-ink:#8a3d07; --warn-bg:#fdf1dc;
-  --bad:#c81e2e; --bad-bg:#fde8ea; --info:#2563eb; --info-bg:#e8effc;
-  --track:#e6ebf1; --field:#fbfdff; --grey-bg:#e9eef3;
+  color-scheme:dark;
+  --ink-900:#0a0a0d; --ink-800:#141419; --ink-700:#26262e;
+  --chrome:#101014; --chrome-soft:#1a1a20;
+  --bg:#0c0c0f; --card:#16161b; --line:#28282f; --line-soft:#202026;
+  --text:#f2f2f5; --text-2:#b6b6c1; --text-3:#7d7d8b;
+  --primary:#e8475f; --primary-hover:#c93651; --primary-2:#f0627a; --accent:#e8475f; --primary-soft:rgba(232,71,95,.14);
+  --ok:#3ecf7a; --ok-bg:rgba(62,207,122,.13); --warn:#f0b44c; --warn-hover:#d9a238; --warn-ink:#f0b44c; --warn-bg:rgba(240,180,76,.13);
+  --bad:#ff5d5d; --bad-bg:rgba(255,93,93,.15); --info:#4a86ff; --info-bg:rgba(74,134,255,.15);
+  --track:#23232a; --field:#1b1b21; --grey-bg:#222229;
   --r-sm:8px; --r-md:12px; --r-lg:16px;
-  --sh-1:0 1px 2px rgba(11,21,38,.06),0 1px 3px rgba(11,21,38,.08);
-  --sh-2:0 4px 12px rgba(11,21,38,.10),0 2px 4px rgba(11,21,38,.06);
-  --sh-3:0 14px 34px rgba(11,21,38,.18);
+  --sh-1:0 1px 2px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.03);
+  --sh-2:0 8px 20px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04);
+  --sh-3:0 18px 44px rgba(0,0,0,.65);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -38,7 +39,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 .dotc.ok{background:var(--ok)} .dotc.warn{background:var(--warn)} .dotc.bad{background:var(--bad)}
 
 /* ================= LOGIN ================= */
-#loginOv{position:fixed;inset:0;z-index:100;background:radial-gradient(1200px 700px at 20% -10%,var(--primary) 0%,var(--ink-900) 60%);display:flex;align-items:center;justify-content:center;padding:24px;overflow-y:auto}
+#loginOv{position:fixed;inset:0;z-index:100;background:radial-gradient(1000px 520px at 72% -12%,rgba(232,71,95,.28) 0%,transparent 60%),radial-gradient(800px 500px at 8% 110%,rgba(232,71,95,.14) 0%,transparent 55%),var(--ink-900);display:flex;align-items:center;justify-content:center;padding:24px;overflow-y:auto}
 .login-wrap{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;align-items:center}
 .login-box{background:var(--card);border-radius:var(--r-lg);padding:34px 38px;width:370px;box-shadow:var(--sh-3);text-align:center;flex-shrink:0;animation:fadeUp .3s ease}
 .login-box .logo{font-size:22px;font-weight:800;color:var(--primary-2);display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:4px}
@@ -275,7 +276,76 @@ tr:hover td{background:rgba(14,99,168,.045)}
   .mach .spark{display:none}
 }
 
-/* ================= TEMA CLARO — único (premium) ================= */
+/* ================= TEMA OSCURO — estética dashboard de fábrica (Behance) ================= */
+body{background:radial-gradient(1200px 600px at 85% -10%,#161118 0%,var(--bg) 55%)}
+::selection{background:rgba(232,71,95,.35);color:#fff}
+.card{background:linear-gradient(180deg,#18181d 0%,#141419 100%);border:1px solid var(--line);box-shadow:0 0 0 1px rgba(255,255,255,.02),0 6px 18px rgba(0,0,0,.35)}
+.card h3{color:var(--text);font-size:12.5px;letter-spacing:.2px}
+.card h3::before{background:var(--primary);box-shadow:0 0 8px rgba(232,71,95,.6)}
+table{color:var(--text-2)}
+th{background:var(--chrome);color:#9ba0ad;font-size:10px;letter-spacing:.6px;text-transform:uppercase;border-bottom:1px solid var(--line)}
+td{border-bottom:1px solid var(--line-soft)}
+tr:hover td{background:rgba(232,71,95,.06)}
+.kpi{border:1px solid var(--line);background:linear-gradient(180deg,#18181d 0%,#141419 100%)}
+.kpi .n{color:var(--text)}
+.kpi .n small{color:var(--text-3)}
+.kpi:hover{border-color:var(--primary)}
+.pill{background:var(--grey-bg);color:var(--text-2)}
+.pill.ok{background:var(--ok-bg);color:var(--ok)}
+.pill.warn{background:var(--warn-bg);color:var(--warn-ink)}
+.pill.bad{background:var(--bad-bg);color:var(--bad)}
+.btn{background:var(--primary);box-shadow:0 4px 14px rgba(232,71,95,.35)}
+.btn:hover{background:var(--primary-hover)}
+.btn.ghost{background:var(--chrome-soft);color:var(--text-2);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--primary);color:var(--text);background:var(--chrome)}
+.sidebar{position:sticky;top:70px;height:calc(100vh - 70px);overflow-y:auto;background:#0e0e12;border-right:1px solid var(--line)}
+.sidebar .role-tag{background:var(--chrome-soft);border:1px solid var(--line)}
+.sidebar .role-tag b{color:var(--text)}
+.sidebar .grp{color:#5f6472}
+.sidebar a{color:#9ba0ad}
+.sidebar a:hover{background:rgba(255,255,255,.05);color:#fff}
+.sidebar a.on{background:var(--primary-soft);color:var(--primary);font-weight:700}
+.sidebar a.on:hover{background:var(--primary-soft);color:var(--primary)}
+.subtabs button{background:var(--chrome-soft);border:1px solid var(--line);color:var(--text-2)}
+.subtabs button.on{background:var(--primary);color:#fff}
+.chip{background:var(--chrome-soft);color:var(--text-2);border-color:var(--line)}
+.bar-row .track{background:var(--track);box-shadow:inset 0 0 0 1px var(--line)}
+.btn.amber{background:var(--warn);color:#17130a}
+.bigbtn.amber{background:var(--warn);color:#17130a}
+.toast{background:#1d1d24;border-left:4px solid var(--accent)}
+.msg.bot{background:var(--chrome-soft);border-color:var(--line)}
+.chat{background:var(--chrome-soft)}
+.chat .chips button,.chat .in{background:#121217}
+.machine .m-card{border:1px solid var(--line)}
+.mach .m-body{fill:#2a2a33}
+.mach .m-bed{fill:#202028}
+.mach .m-mat{fill:#4a4a56}
+.mach .m-gantry{fill:var(--primary)}
+.mach .m-part{fill:#5a5a66}
+.machbox{filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))}
+.phone{background:var(--bg);border-color:#000;box-shadow:0 0 0 1px var(--line),var(--sh-3)}
+.mheader,.statusbar{background:#0e0e12;border-bottom:1px solid var(--line)}
+.mtabs{background:#0e0e12;border-top:1px solid var(--line)}
+.mtabs button.on{background:var(--primary-soft);color:var(--primary)}
+.mcard2{background:linear-gradient(180deg,#18181d 0%,#141419 100%);border:1px solid var(--line)}
+.mcard2 .t{color:var(--text)}
+.mmod{background:#18181d;border:1px solid var(--line);color:var(--text-2)}
+.mmod:hover{border-color:var(--primary);color:var(--primary)}
+.push{background:var(--chrome-soft);border:1px solid var(--line)}
+.otitem{background:#18181d;border:1px solid var(--line);border-left-width:4px}
+.otitem.bb{border-left-color:var(--bad)} .otitem.bg{border-left-color:var(--text-3)} .otitem.bo{border-left-color:var(--ok)}
+.roles-guide .box,.login-box,.login-roles{background:#141419;border:1px solid var(--line);box-shadow:var(--sh-3)}
+.lrole,.role-btn{background:var(--chrome-soft);border:1px solid var(--line)}
+.lrole .nm,.role-btn .nm,.roles-guide h3{color:var(--text)}
+.login-box .logo{color:var(--primary-2)}
+.login-roles h3{color:var(--text)}
+.login-box label{color:var(--text-2)}
+.role-btn:hover,.lrole:hover{border-color:var(--primary);background:var(--primary-soft)}
+.gauge{background:var(--primary-soft);color:var(--primary)}
+input,select,textarea{background:var(--field);border-color:var(--line);color:var(--text)}
+input::placeholder{color:var(--text-3)}
+code{background:var(--chrome-soft)!important}
+
 </style>
 </head>
 <body>
