@@ -240,44 +240,72 @@ tr:hover td{background:rgba(14,99,168,.045)}
 .mfield label{display:block;font-size:11px;color:var(--text-3);margin:10px 0 4px;font-weight:600}
 
 /* ================= MÁQUINAS ANIMADAS (SVG) ================= */
-.machbox .mach svg{display:block;width:100%;height:auto}
-.mach .m-body{fill:var(--ink-700);stroke:var(--ink-900);stroke-width:1}
-.mach .m-bed{fill:#2c3a50}
-.mach .m-mat{fill:#8ea0b5}
-.mach .m-gantry{fill:var(--primary-2)}
-.mach .m-head{fill:var(--primary);stroke:#ffffff;stroke-width:.8}
-.mach .m-beam{stroke:var(--warn);stroke-width:2.4;stroke-linecap:round}
-.mach .m-arc{stroke:var(--info);stroke-width:2.4;stroke-linecap:round}
-.mach .m-spindle{fill:var(--ink-800);stroke:#0b1526;stroke-width:.6}
-.mach .m-drill{fill:#b9c6d6;stroke:var(--ink-900);stroke-width:.7}
-.mach .m-part{fill:#64748b;rx:2}
-.headg{transform-origin:0 27px}
-.spark{fill:var(--warn);opacity:0}
-.mach.alert .spark{fill:var(--bad)}
-@keyframes gantry{from{transform:translateX(5px)}to{transform:translateX(42px)}}
-@keyframes bob{from{transform:translateY(0)}to{transform:translateY(7px)}}
-@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-@keyframes spark{0%{opacity:0;transform:translate(0,0) scale(.5)}25%{opacity:1}100%{opacity:0;transform:translate(2px,-14px) scale(1.15)}}
-@keyframes beamFlicker{0%,100%{opacity:1}50%{opacity:.45}}
+.machbox .mach svg{display:block;width:100%;height:auto;overflow:visible}
+.mach .m-body{fill:#e8edf5;stroke:#c3cede;stroke-width:1}
+.mach .m-vision{fill:#f6f8fc;stroke:var(--line);stroke-width:1}
+.mach .m-bedl{fill:#b9c6da}
+.mach .m-base{fill:#dde4ef;stroke:#c3cede;stroke-width:1}
+.mach .m-slot{fill:#b4c1d4}
+.mach .m-gantrybeam{fill:#98a9c4}
+.mach .m-gantry{fill:var(--mcol)}
+.mach .m-head{fill:var(--mcol);stroke:#fff;stroke-width:.8}
+.mach .m-htrim{fill:#fff;opacity:.85}
+.mach .m-spindle{fill:var(--ink-800);stroke:#5d708f;stroke-width:.6}
+.mach .m-drill{fill:#96a6bf;stroke:var(--ink-900);stroke-width:.7}
+.mach .m-feed{stroke:#cfd8e6;stroke-width:1;stroke-dasharray:3 4}
+.mach .m-feeddot{fill:var(--mcol)}
+.mach .m-beam{stroke:var(--mcol);stroke-width:2.6;stroke-linecap:round}
+.mach .m-arc{stroke:var(--mcol);stroke-width:2.6;stroke-linecap:round}
+.mach .spark{fill:var(--mcol);opacity:0}
+/* color por estado */
+.mach.run{--mcol:#16a34a;--msoft:#e5f6ec}
+.mach.alert{--mcol:#d97706;--msoft:#fdf2dc}
+.mach.stop{--mcol:#dc2626;--msoft:#fdecec}
+.machbox{background:var(--msoft,#eef1f7);border-radius:10px;padding:6px;transition:background .3s}
+.machbox:has(.mach.run){--msoft:#e5f6ec;--mcol:#16a34a}
+.machbox:has(.mach.alert){--msoft:#fdf2dc;--mcol:#d97706}
+.machbox:has(.mach.stop){--msoft:#fdecec;--mcol:#dc2626}
+.headg{transform-origin:0 30px}
+.carriage{transform-origin:10px 20px}
+.toolg{transform-origin:0 48px}
+@keyframes gantry{from{transform:translateX(23px)}to{transform:translateX(98px)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
+@keyframes sparkUp{0%{opacity:0;transform:translate(0,1px) scale(.5)}25%{opacity:1}100%{opacity:0;transform:translate(2.5px,-7px) scale(1.2)}}
+@keyframes sparkDn{0%{opacity:0;transform:translate(0,-1px) scale(.5)}30%{opacity:1}100%{opacity:0;transform:translate(-2px,6px) scale(1.2)}}
+@keyframes feed{from{stroke-dashoffset:0}to{stroke-dashoffset:-28}}
+@keyframes beamFlicker{0%,100%{opacity:1}50%{opacity:.4}}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.85)}}
 @keyframes blink{50%{opacity:.3}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-.mach.run .headg{animation:gantry 3.4s ease-in-out infinite alternate}
-.mach.run .spark{animation:spark .55s ease-out infinite}
-.mach.run .spark:nth-child(2){animation-delay:.16s}
-.mach.run .spark:nth-child(3){animation-delay:.32s}
-.mach.run .m-beam,.mach.run .m-arc{animation:beamFlicker 1.1s ease infinite}
-.mach.run.taladro .m-spindle{animation:spin 1s linear infinite;transform-origin:0 37px}
-.mach.run.taladro .m-drill{animation:spin 1s linear infinite;transform-origin:0 47px}
-.mach.alert .headg{animation:gantry 2.1s ease-in-out infinite alternate}
-.mach.alert .m-head{animation:blink .9s steps(2) infinite}
-.mach.alert .spark{animation:spark .4s ease-out infinite}
-.mach.alert .spark:nth-child(2){animation-delay:.12s}
-.mach.alert .spark:nth-child(3){animation-delay:.24s}
-.mach.stop svg{filter:grayscale(.85);opacity:.72}
-.mach.stop .headg{animation:none}
+/* ===== EN MARCHA (verde) — máquina trabajando ===== */
+.mach.run .carriage{animation:gantry 3.6s ease-in-out infinite alternate}
+.mach.run .headg{animation:bob 1.15s ease-in-out infinite}
+.mach.run .spark{animation:sparkUp .5s ease-out infinite}
+.mach.run .spark:nth-of-type(2){animation-delay:.14s}
+.mach.run .spark:nth-of-type(3){animation-delay:.28s;animation-name:sparkDn}
+.mach.run .m-beam,.mach.run .m-arc{animation:beamFlicker 1s ease infinite}
+.mach.run .m-feed{animation:feed 1.4s linear infinite}
+.mach.run.taladro .m-drill{animation:blink .5s steps(2) infinite}
+/* ===== EN ALERTA (amarillo) — inestable, casi la para ===== */
+.mach.alert .carriage{animation:gantry 2.2s ease-in-out infinite alternate}
+.mach.alert .headg{animation:bob .3s ease-in-out infinite;}
+.mach.alert .m-head{animation:blink .7s steps(2) infinite}
+.mach.alert .spark{animation:sparkDn .38s ease-out infinite;fill:#c2410c}
+.mach.alert .spark:nth-of-type(2){animation-delay:.1s;animation-name:sparkUp}
+.mach.alert .spark:nth-of-type(3){animation-delay:.2s}
+.mach.alert .m-beam,.mach.alert .m-arc{animation:blink .45s steps(2) infinite}
+.mach.alert .m-feed{animation:feed .6s linear infinite}
+.mach.alert .m-vision{stroke:#f0c97c}
+/* ===== DETENIDA (rojo) — quieta, cabezal estacionado ===== */
+.mach.stop .carriage,.mach.stop .headg{animation:none;transform:translateX(55px)}
 .mach.stop .spark{animation:none;opacity:0}
-.mach.stop .m-beam,.mach.stop .m-arc{animation:none;opacity:.4}
+.mach.stop .m-beam,.mach.stop .m-arc{animation:none;opacity:.35}
+.mach.stop .m-feed{animation:none}
+.mach.stop svg{filter:grayscale(.3)}
+/* ===== TALADRO: spindle que gira ===== */
+.mach.run.taladro .toolg{animation:spin 1s linear infinite;transform-origin:0 8px}
+.mach.alert.taladro .toolg{animation:spin .5s linear infinite;transform-origin:0 8px}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .mach .spark{display:none}
@@ -323,15 +351,6 @@ tr:hover td{background:var(--primary-soft)}
 .msg.bot{background:var(--card);border-color:var(--line)}
 .chat{background:var(--bg)}
 .chat .chips button,.chat .in{background:var(--card)}
-.mach .m-body{fill:#dde4ef;stroke:#a9b7cc}
-.mach .m-bed{fill:#c8d3e3}
-.mach .m-mat{fill:#93a3bd}
-.mach .m-gantry{fill:var(--primary)}
-.mach .m-part{fill:#7b8aa3}
-.mach .m-spindle{fill:var(--ink-800);stroke:#0f1c33}
-.mach .m-drill{fill:#c3cfe0;stroke:var(--ink-900)}
-.mach .m-head{stroke:#fff}
-.machbox{filter:drop-shadow(0 4px 8px rgba(18,32,58,.10))}
 .phone{background:var(--bg);border-color:var(--ink-900);box-shadow:0 0 0 1px var(--line),var(--sh-3)}
 .mheader,.statusbar{background:var(--card);border-bottom:1px solid var(--line);color:var(--text)}
 .mheader h2{color:var(--text)}
@@ -412,9 +431,9 @@ body{font-family:"Plus Jakarta Sans","Inter","Segoe UI",system-ui,sans-serif}
 .tab2 tr:hover td{background:#f4f8ff}
 .tab2 td b{color:var(--text);font-weight:600}
 .donut{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.donut svg{width:178px;height:178px;flex-shrink:0}
 .donut circle{transition:filter .2s}
 .donut circle:hover{filter:brightness(1.15)}
+.donut>div:first-child{display:flex;align-items:center;justify-content:center}
 .legend{flex:1;display:flex;flex-direction:column;gap:10px;font-size:11.5px;min-width:180px}
 .legend .li{display:flex;align-items:center;gap:8px;color:var(--text-2)}
 .legend .li .sw{width:9px;height:9px;border-radius:3px;flex-shrink:0}
@@ -634,11 +653,13 @@ function init3D(id,config){
   c.position.set(8.2,6,9.4); c.lookAt(0,1.6,0);
   const amb=new THREE.AmbientLight(0xffffff,1.05); sc.add(amb);
   const d1=new THREE.DirectionalLight(0xffffff,1.0); d1.position.set(8,12,6); sc.add(d1);
-  const d2=new THREE.DirectionalLight(0x2563eb,.55); d2.position.set(-8,4,-6); sc.add(d2);
+  const d2=new THREE.DirectionalLight(0x2563eb,.35); d2.position.set(-8,4,-6); sc.add(d2);
   const d3=new THREE.PointLight(0x60a5fa,.7,30); d3.position.set(0,3,-8); sc.add(d3);
   const grid=new THREE.GridHelper(30,30,0xcfd9e8,0xe3e9f2); grid.position.y=0; sc.add(grid);
   const grp=new THREE.Group(); sc.add(grp);
   const steel=(col,mt,rs)=>new THREE.MeshStandardMaterial({color:col,metalness:mt??.6,roughness:rs??.4});
+  const SC=config.estado=="run"?0x16a34a:config.estado=="alert"?0xd97706:0xdc2626;
+  const SC2=config.estado=="run"?0x34d399:config.estado=="alert"?0xf59e0b:0xfb5f5f;
   const body=new THREE.Mesh(new THREE.BoxGeometry(6.4,1.6,4.2),steel(0x8fa2bf));
   const body2=new THREE.Mesh(new THREE.BoxGeometry(5.6,.9,3.4),steel(0xa4b5cf)); body2.position.y=1.25;
   const bed=new THREE.Mesh(new THREE.BoxGeometry(5.2,.5,2.9),steel(0xbccadf)); bed.position.y=1.4;
@@ -652,17 +673,17 @@ function init3D(id,config){
   const spindle=new THREE.Mesh(new THREE.CylinderGeometry(.16,.16,.9,12),steel(0xc7d3e4,.4,.25)); spindle.position.y=-.85; head.add(spindle);
   const tool=config.tipo=="taladro"
     ? new THREE.Mesh(new THREE.ConeGeometry(.22,.8,8),steel(0x1d4fd7,.2,.5))
-    : new THREE.Mesh(new THREE.CylinderGeometry(.07,.07,.7,8),new THREE.MeshBasicMaterial({color:0x2563eb}));
+    : new THREE.Mesh(new THREE.CylinderGeometry(.07,.07,.7,8),new THREE.MeshBasicMaterial({color:SC2}));
   tool.position.y=-1.5; head.add(tool);
   const part=new THREE.Mesh(new THREE.BoxGeometry(1.7,.5,1.2),steel(0x3b82f6,.5,.45)); part.position.set(.8,1.9,.2); grp.add(part);
   const plinth=new THREE.Mesh(new THREE.CylinderGeometry(2.6,2.6,.25,48),steel(0xdfe5ef,.3,.6)); plinth.position.y=.12; grp.add(plinth);
-  const ring=new THREE.Mesh(new THREE.TorusGeometry(2.6,.05,8,60),new THREE.MeshStandardMaterial({color:0x2563eb,emissive:0x1d4fd7,emissiveIntensity:1.1,metalness:.3,roughness:.3}));
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(2.6,.05,8,60),new THREE.MeshStandardMaterial({color:SC2,emissive:SC,emissiveIntensity:1.1,metalness:.3,roughness:.3}));
   ring.rotation.x=-Math.PI/2; ring.position.y=.28; grp.add(ring);
   [body,body2,bed,colL,colR,gap,gb,hb,part,plinth].forEach(m=>grp.add(m));
   const pGeo=new THREE.BufferGeometry(); const n=60,pos=new Float32Array(n*3),vel=new Float32Array(n);
   for(let i=0;i<n;i++){pos[i*3]+=(Math.random()-.5)*.6;pos[i*3+1]=Math.random()*3;pos[i*3+2]+=(Math.random()-.5)*2.2;vel[i]=.02+Math.random()*.05;}
   pGeo.setAttribute("position",new THREE.BufferAttribute(pos,3));
-  const pts=new THREE.Points(pGeo,new THREE.PointsMaterial({color:0x60a5fa,size:.09,transparent:true,opacity:.85,blending:THREE.AdditiveBlending,depthWrite:false}));
+  const pts=new THREE.Points(pGeo,new THREE.PointsMaterial({color:SC2,size:.09,transparent:true,opacity:.85,blending:THREE.AdditiveBlending,depthWrite:false}));
   sc.add(pts);
   let dragging=false,px=0,py=0,rotY=0,rotX=.1;
   const onDown=e=>{dragging=true;px=e.clientX;py=e.clientY};
@@ -670,16 +691,28 @@ function init3D(id,config){
   const onUp=()=>dragging=false;
   cv.addEventListener("pointerdown",onDown);window.addEventListener("pointermove",onMove);window.addEventListener("pointerup",onUp);
   const run=config.estado=="run",alert=config.estado=="alert";
-  const col=config.estado=="stop"?(x)=>new THREE.Color(x).multiplyScalar(.45):(x)=>new THREE.Color(x);
   let t=0;
+  const headWorld={x:0,z:0};
   const tick=()=>{t+=.016;
     if(!dragging){rotY+=.0035}
     grp.rotation.y=rotY; grp.rotation.x=rotX;
     if(run||alert){gantry.position.z=Math.sin(t*1.2)*1.5;head.position.x=Math.sin(t*.9)*1.9;}
     head.position.y=(run||alert)?Math.abs(Math.sin(t*6))*.12:0;
-    ring.material.emissiveIntensity=(alert?2.2+Math.sin(t*8)*1.2:1.2+Math.sin(t*2)*.3);
+    part.position.x=.8+Math.sin(t*.35)*1.1;
+    ring.material.emissiveIntensity=(alert?2.2+Math.sin(t*8)*1.2:run?1.3+Math.sin(t*2)*.35:.25);
     pts.visible=run||alert;
-    if(pts.visible){const a=pGeo.attributes.position.array;for(let i=0;i<n;i++){a[i*3+1]+=vel[i];if(a[i*3+1]>3.2)a[i*3+1]=0.1;}pGeo.attributes.position.needsUpdate=true;}
+    if(pts.visible){
+      headWorld.x=head.position.x*Math.cos(rotY)-(gantry.position.z+gb.position.z*-0)*Math.sin(rotY);
+      headWorld.z=head.position.x*Math.sin(rotY)+(gantry.position.z)*Math.cos(rotY);
+      const a=pGeo.attributes.position.array;
+      for(let i=0;i<n;i++){
+        a[i*3]=headWorld.x+(Math.random()-.5)*.5;
+        a[i*3+2]=headWorld.z+(Math.random()-.5)*.5;
+        a[i*3+1]+=vel[i]*(alert?1.8:1);
+        if(a[i*3+1]>3.2)a[i*3+1]=0.4;
+      }
+      pGeo.attributes.position.needsUpdate=true;
+    }
     r.render(sc,c); T3D={raf:requestAnimationFrame(tick),cleanup:()=>{cv.removeEventListener("pointerdown",onDown);window.removeEventListener("pointermove",onMove);window.removeEventListener("pointerup",onUp);r.dispose();}};
   };
   tick();
@@ -822,28 +855,32 @@ function ic(n){return `<svg class="iv" aria-hidden="true"><use href="#i-${n}"/><
 
 /* ================= MÁQUINA ANIMADA (SVG) ================= */
 function machSVG(tipo,estado){
-  const head = tipo=="taladro"
-    ? `<rect class="m-spindle" x="-4" y="34" width="8" height="16" rx="1"/>
-       <path class="m-drill" d="M0 50 L-3.4 60 L3.4 60 Z"/>
-       <rect class="m-part" x="52" y="58" width="36" height="7" rx="2"/>`
-    : `<line class="${tipo=="plasma"?"m-arc":"m-beam"}" x1="0" y1="34" x2="0" y2="66"/>
-       <circle class="spark" cx="-2" cy="64" r="1.7"/>
-       <circle class="spark" cx="2" cy="66" r="1.4"/>
-       <circle class="spark" cx="0" cy="62" r="1.1"/>`;
-  const ySparks = tipo=="taladro"
-    ? `<circle class="spark" cx="-2" cy="60" r="1.6"/><circle class="spark" cx="2" cy="62" r="1.3"/><circle class="spark" cx="0" cy="58" r="1"/>`
-    : "";
+  const cutting = estado=="run"||estado=="alert";
+  const headPart = tipo=="taladro"
+    ? `<g class="toolg">
+         <rect class="m-spindle" x="-3.5" y="19" width="7" height="10" rx="1.5"/>
+         <path class="m-drill" d="M0 29 L-2.6 47.5 L2.6 47.5 Z"/>
+         ${cutting?`<circle class="spark" cx="-2.2" cy="49.5" r="1.5"/><circle class="spark" cx="2.2" cy="50.5" r="1.2"/><circle class="spark" cx="0" cy="48.4" r="1"/>`:""}
+       </g>`
+    : `${cutting?`<line class="${tipo=="plasma"?"m-arc":"m-beam"}" x1="0" y1="19" x2="0" y2="48"/>`:""}
+       ${cutting?`<circle class="spark" cx="-2" cy="48" r="1.6"/><circle class="spark" cx="2.2" cy="49.6" r="1.3"/><circle class="spark" cx="0" cy="47.3" r="1.05"/>`:""}`;
   return `<div class="mach ${estado} ${tipo}" role="img" aria-label="Máquina ${tipo==="taladro"?"de taladrado":tipo} en estado ${EST[estado]?EST[estado][0]:"desconocido"}">
     <svg viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <rect class="m-body" x="1" y="1" width="138" height="88" rx="9"/>
-      <rect class="m-bed" x="10" y="66" width="120" height="8" rx="2"/>
-      <rect class="m-mat" x="12" y="68.4" width="116" height="3.2"/>
-      <rect class="m-gantry" x="8" y="30" width="124" height="6" rx="3"/>
-      <g class="headg">
-        <rect class="m-head" x="-9" y="20" width="18" height="14" rx="3"/>
-        ${head}
-        ${ySparks}
+      <rect class="m-vision" x="12" y="13" width="116" height="42" rx="5"/>
+      <rect class="m-gantrybeam" x="10" y="17" width="120" height="5" rx="2.5"/>
+      <g class="carriage">
+        <g class="headg">
+          <rect class="m-gantry" x="0" y="0" width="6" height="44" rx="2"/>
+          <rect class="m-head" x="-11" y="8" width="22" height="11" rx="3"/>
+          <rect class="m-htrim" x="-4" y="19" width="8" height="2.5" rx="1.25"/>
+          ${headPart}
+        </g>
       </g>
+      <rect class="m-bedl" x="14" y="58" width="112" height="4" rx="2"/>
+      <g class="feedline"><line class="m-feed" x1="14" y1="50" x2="126" y2="50"/><circle class="m-feeddot" r="1.8" cx="14" cy="50"/></g>
+      <rect class="m-base" x="8" y="76" width="124" height="9" rx="3"/>
+      <rect class="m-slot" x="22" y="79.6" width="96" height="1.8" rx=".9"/>
     </svg>
   </div>`;
 }
@@ -909,9 +946,9 @@ function spark(data,color,w,h){w=w||96;h=h||30;const mx=Math.max(...data),mn=Mat
   const pts=data.map((v,i)=>`${(i/(data.length-1)*w).toFixed(1)},${(h-2-((v-mn)/ran)*(h-6)).toFixed(1)}`).join(" ");
   return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/><path d="M${0},${h} L${pts.replace(/ /g," L")} L${w},${h} Z" fill="${color}" opacity=".12"/></svg>`}
 function donut(segs,center){
-  const R=62,r=78,off=0;let acc=0;
-  const arcs=segs.map(s=>{const frac=s.v/100,len=2*Math.PI*R*frac;const a=`<circle cx="${r}" cy="${r}" r="${R}" fill="none" stroke="${s.c}" stroke-width="16" stroke-dasharray="${Math.max(len-3,0)} ${2*Math.PI*R}" stroke-dashoffset="${acc}" transform="rotate(-90 ${r} ${r})"><title>${s.n}: ${s.v}%</title></circle>`;acc-=len;return a}).join("");
-  return `<div style="display:flex;flex-direction:column;align-items:center"><svg viewBox="0 0 156 156" width="156" height="156" role="img" aria-label="Distribución: ${segs.map(s=>`${s.n} ${s.v}%`).join(", ")}">${arcs}</svg><b class="mono" style="margin-top:-88px;font-size:17px">${center}</b></div>`}
+  const R=62,r=78;let acc=0;
+  const arcs=segs.map(s=>{const len=2*Math.PI*R*(s.v/100);const a=`<circle cx="${r}" cy="${r}" r="${R}" fill="none" stroke="${s.c}" stroke-width="16" stroke-dasharray="${Math.max(len-3,0)} ${2*Math.PI*R}" stroke-dashoffset="${acc}" transform="rotate(-90 ${r} ${r})"><title>${s.n}: ${s.v}%</title></circle>`;acc-=len;return a}).join("");
+  return `<div style="position:relative;width:156px;height:156px;flex-shrink:0"><svg viewBox="0 0 156 156" width="156" height="156" role="img" aria-label="Distribución: ${segs.map(s=>`${s.n} ${s.v}%`).join(", ")}">${arcs}</svg><b style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;font-size:15px;line-height:1.1;pointer-events:none">${center}</b></div>`}
 function bars12(data,hot){
   const mx=Math.max(...data.map(d=>d.v));
   return `<div class="b12">${data.map((d,i)=>`<div class="c"><div class="b ${i==hot?"hot":""}" style="height:${(d.v/mx*100).toFixed(0)}%;animation-delay:${i*40}ms" title="${d.m}: ${d.v}"></div><span class="ml">${d.m}</span></div>`).join("")}</div>`;
