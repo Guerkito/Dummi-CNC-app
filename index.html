@@ -42,7 +42,8 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 .dotc.ok{background:var(--ok)} .dotc.warn{background:var(--warn)} .dotc.bad{background:var(--bad)}
 
 /* ================= LOGIN ================= */
-#loginOv{position:fixed;inset:0;z-index:100;background:linear-gradient(180deg,#eef3fb 0%,#e6ecf7 60%,#e3e8f4 100%);display:flex;align-items:center;justify-content:center;padding:24px;overflow-y:auto}
+#loginOv{position:fixed;inset:0;z-index:100;background:linear-gradient(180deg,#eef3fb 0%,#e6ecf7 60%,#e3e8f4 100%);display:flex;padding:24px;overflow-y:auto;overflow-x:hidden}
+#loginOv>.ov{margin:auto}
 .login-wrap{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;align-items:center}
 .login-box{background:var(--card);border-radius:var(--r-lg);padding:30px 32px;margin:0 auto 14px;width:100%;box-shadow:var(--sh-2);border:1px solid var(--line);text-align:center;flex-shrink:0}
 .login-box .logo{font-size:22px;font-weight:800;color:var(--primary-2);display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:4px}
