@@ -307,6 +307,38 @@ tr:hover td{background:rgba(14,99,168,.045)}
 .mach.run.taladro .toolg{animation:spin 1s linear infinite;transform-origin:0 8px}
 .mach.alert.taladro .toolg{animation:spin .5s linear infinite;transform-origin:0 8px}
 @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+/* ===== VARIANTES SIERRA / TUBO / TALADRO LATERAL ===== */
+.mach .m-blade{fill:#cfd8e6;stroke:#7c8fb0;stroke-width:2;stroke-dasharray:4 2.4}
+.mach .m-bladecore{fill:#98a9c4}
+.mach .m-panel{fill:#e3c9a2;stroke:#c9a86c;stroke-width:1}
+.mach .m-panelv{fill:#d9bd92;stroke:#c9a86c;stroke-width:1}
+.mach .m-tube{fill:#9fb2cc;stroke:#6d81a4;stroke-width:1.2}
+.mach .m-roller{fill:#dde4ef;stroke:#b4c1d4;stroke-width:1}
+.mach .m-lbench{fill:#dde4ef;stroke:#c3cede;stroke-width:1}
+.mach .m-chuck{fill:var(--mcol)}
+.mach .m-ldrill{fill:#96a6bf;stroke:var(--ink-900);stroke-width:.7}
+.mach .m-sidehead{fill:var(--mcol);stroke:#fff;stroke-width:.8}
+.bladeg{transform-origin:0 30px}
+.sideg{transform-origin:0 44px}
+@keyframes bladeCut{0%,100%{transform:translateX(22px)}50%{transform:translateX(96px)}}
+@keyframes drillSide{0%,100%{transform:translateX(100px)}50%{transform:translateX(84px)}}
+.mach.run.sierra .bladeg{animation:bladeCut 3.4s ease-in-out infinite alternate,spin .9s linear infinite}
+.mach.alert.sierra .bladeg{animation:bladeCut 2s ease-in-out infinite alternate,spin .5s linear infinite}
+.mach.run.taladrol .sideg{animation:drillSide 2.6s ease-in-out infinite alternate}
+.mach.alert.taladrol .sideg{animation:drillSide 1.6s ease-in-out infinite alternate}
+.mach.run.taladrol .m-ldrill,.mach.alert.taladrol .m-ldrill{animation:blink .5s steps(2) infinite}
+.mach.stop.sierra .bladeg{animation:none;transform:translateX(55px)}
+.mach.stop.taladrol .sideg{animation:none;transform:translateX(100px)}
+.mach.stop.taladrol .headg{transform:none}
+/* ===== FOTO DE MÁQUINA ===== */
+.mphoto{position:relative;height:150px;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--chrome)}
+.mphoto img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.mcard:hover .mphoto img{transform:scale(1.05)}
+.mphoto .status{position:absolute;left:8px;bottom:8px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:14px;padding:3px 10px;font-size:10px;font-weight:700;color:var(--text);box-shadow:var(--sh-1)}
+.mphoto .mcattag{position:absolute;right:8px;top:8px;background:rgba(15,28,51,.72);color:#fff;font-size:9.5px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;padding:3px 9px;border-radius:12px}
+.mthumb{width:64px;height:64px;border-radius:10px;overflow:hidden;flex-shrink:0;border:1px solid var(--line);background:var(--chrome)}
+.mthumb img{width:100%;height:100%;object-fit:cover;display:block}
+.machspec td{vertical-align:top}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .mach .spark{display:none}
@@ -643,6 +675,7 @@ body{font-family:"Plus Jakarta Sans","Inter","Segoe UI",system-ui,sans-serif}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>/* ================= MÁQUINA 3D (isométrica, WebGL) ================= */
 let T3D=null;
+
 function init3D(id,config){
   const cv=document.getElementById(id); if(!cv) return;
   if(T3D){cancelAnimationFrame(T3D.raf);T3D.cleanup();T3D=null;}
@@ -650,75 +683,197 @@ function init3D(id,config){
   const r=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
   r.setPixelRatio(Math.min(devicePixelRatio,2)); r.setSize(W,H,false);
   r.setClearColor(0x000000,0);
+  r.shadowMap.enabled=true; r.shadowMap.type=THREE.PCFSoftShadowMap;
   const sc=new THREE.Scene(), c=new THREE.PerspectiveCamera(34,W/H,.1,200);
-  c.position.set(8.2,6,9.4); c.lookAt(0,1.6,0);
-  const amb=new THREE.AmbientLight(0xffffff,1.05); sc.add(amb);
-  const d1=new THREE.DirectionalLight(0xffffff,1.0); d1.position.set(8,12,6); sc.add(d1);
-  const d2=new THREE.DirectionalLight(0x2563eb,.35); d2.position.set(-8,4,-6); sc.add(d2);
+  c.position.set(8.6,6.2,10); c.lookAt(0,1.7,0);
+  const amb=new THREE.AmbientLight(0xffffff,1.0); sc.add(amb);
+  const d1=new THREE.DirectionalLight(0xffffff,1.1); d1.position.set(8,12,6); d1.castShadow=true;
+  d1.shadow.mapSize.set(1024,1024); d1.shadow.camera.left=-10; d1.shadow.camera.right=10;
+  d1.shadow.camera.top=10; d1.shadow.camera.bottom=-10; d1.shadow.camera.near=1; d1.shadow.camera.far=40;
+  d1.shadow.bias=-.001; sc.add(d1);
+  const d2=new THREE.DirectionalLight(0x2563eb,.4); d2.position.set(-8,4,-6); sc.add(d2);
   const d3=new THREE.PointLight(0x60a5fa,.7,30); d3.position.set(0,3,-8); sc.add(d3);
-  const grid=new THREE.GridHelper(30,30,0xcfd9e8,0xe3e9f2); grid.position.y=0; sc.add(grid);
+  const ground=new THREE.Mesh(new THREE.CircleGeometry(9,48),new THREE.MeshStandardMaterial({color:0xf2f5fb,roughness:1,metalness:0}));
+  ground.rotation.x=-Math.PI/2; ground.receiveShadow=true; sc.add(ground);
+  const grid=new THREE.GridHelper(30,30,0xcfd9e8,0xe3e9f2); grid.position.y=.002; sc.add(grid);
   const grp=new THREE.Group(); sc.add(grp);
   const steel=(col,mt,rs)=>new THREE.MeshStandardMaterial({color:col,metalness:mt??.6,roughness:rs??.4});
+  const wood=()=>new THREE.MeshStandardMaterial({color:0xd9bd92,roughness:.9,metalness:0});
   const SC=config.estado=="run"?0x16a34a:config.estado=="alert"?0xd97706:0xdc2626;
   const SC2=config.estado=="run"?0x34d399:config.estado=="alert"?0xf59e0b:0xfb5f5f;
-  const body=new THREE.Mesh(new THREE.BoxGeometry(6.4,1.6,4.2),steel(0x8fa2bf));
-  const body2=new THREE.Mesh(new THREE.BoxGeometry(5.6,.9,3.4),steel(0xa4b5cf)); body2.position.y=1.25;
-  const bed=new THREE.Mesh(new THREE.BoxGeometry(5.2,.5,2.9),steel(0xbccadf)); bed.position.y=1.4;
-  const colL=new THREE.Mesh(new THREE.BoxGeometry(.7,3.4,.7),steel(0x7c8fb0)); colL.position.set(-2.8,2.85,-1);
-  const colR=colL.clone(); colR.position.x=2.8;
-  const gap=new THREE.Mesh(new THREE.BoxGeometry(6.3,.55,.9),steel(0x97a9c6)); gap.position.set(0,4.25,-1);
-  const gantry=new THREE.Group(); gantry.position.y=3.35; grp.add(gantry);
-  const gb=new THREE.Mesh(new THREE.BoxGeometry(.65,.65,4.4),steel(0x9fb2cc)); gantry.add(gb);
-  const head=new THREE.Group(); gantry.add(head);
-  const hb=new THREE.Mesh(new THREE.BoxGeometry(.9,1.1,.8),steel(0xaebfd8)); head.add(hb);
-  const spindle=new THREE.Mesh(new THREE.CylinderGeometry(.16,.16,.9,12),steel(0xc7d3e4,.4,.25)); spindle.position.y=-.85; head.add(spindle);
-  const tool=config.tipo=="taladro"
-    ? new THREE.Mesh(new THREE.ConeGeometry(.22,.8,8),steel(0x1d4fd7,.2,.5))
-    : new THREE.Mesh(new THREE.CylinderGeometry(.07,.07,.7,8),new THREE.MeshBasicMaterial({color:SC2}));
-  tool.position.y=-1.5; head.add(tool);
-  const part=new THREE.Mesh(new THREE.BoxGeometry(1.7,.5,1.2),steel(0x3b82f6,.5,.45)); part.position.set(.8,1.9,.2); grp.add(part);
-  const plinth=new THREE.Mesh(new THREE.CylinderGeometry(2.6,2.6,.25,48),steel(0xdfe5ef,.3,.6)); plinth.position.y=.12; grp.add(plinth);
-  const ring=new THREE.Mesh(new THREE.TorusGeometry(2.6,.05,8,60),new THREE.MeshStandardMaterial({color:SC2,emissive:SC,emissiveIntensity:1.1,metalness:.3,roughness:.3}));
-  ring.rotation.x=-Math.PI/2; ring.position.y=.28; grp.add(ring);
-  [body,body2,bed,colL,colR,gap,gb,hb,part,plinth].forEach(m=>grp.add(m));
-  const pGeo=new THREE.BufferGeometry(); const n=60,pos=new Float32Array(n*3),vel=new Float32Array(n);
-  for(let i=0;i<n;i++){pos[i*3]+=(Math.random()-.5)*.6;pos[i*3+1]=Math.random()*3;pos[i*3+2]+=(Math.random()-.5)*2.2;vel[i]=.02+Math.random()*.05;}
-  pGeo.setAttribute("position",new THREE.BufferAttribute(pos,3));
-  const pts=new THREE.Points(pGeo,new THREE.PointsMaterial({color:SC2,size:.09,transparent:true,opacity:.85,blending:THREE.AdditiveBlending,depthWrite:false}));
-  sc.add(pts);
+  const run=config.estado=="run",alert=config.estado=="alert";
   let dragging=false,px=0,py=0,rotY=0,rotX=.1;
   const onDown=e=>{dragging=true;px=e.clientX;py=e.clientY};
   const onMove=e=>{if(!dragging)return;rotY+=(e.clientX-px)*.006;rotX=Math.max(-.2,Math.min(.7,rotX+(e.clientY-py)*.005));px=e.clientX;py=e.clientY};
   const onUp=()=>dragging=false;
   cv.addEventListener("pointerdown",onDown);window.addEventListener("pointermove",onMove);window.addEventListener("pointerup",onUp);
-  const run=config.estado=="run",alert=config.estado=="alert";
+  /* partículas de chispa compartidas */
+  const pGeo=new THREE.BufferGeometry(); const n=60,pos=new Float32Array(n*3),vel=new Float32Array(n);
+  for(let i=0;i<n;i++){pos[i*3]+=(Math.random()-.5)*.6;pos[i*3+1]=Math.random()*3;pos[i*3+2]+=(Math.random()-.5)*2.2;vel[i]=.02+Math.random()*.05;}
+  pGeo.setAttribute("position",new THREE.BufferAttribute(pos,3));
+  const pts=new THREE.Points(pGeo,new THREE.PointsMaterial({color:SC2,size:.09,transparent:true,opacity:.85,blending:THREE.AdditiveBlending,depthWrite:false}));
+  sc.add(pts);
+  const sparkAt=(x,z,baseY)=>{
+    const a=pGeo.attributes.position.array;
+    const wx=x*Math.cos(rotY)-z*Math.sin(rotY), wz=x*Math.sin(rotY)+z*Math.cos(rotY);
+    for(let i=0;i<n;i++){
+      a[i*3]=wx+(Math.random()-.5)*.5;
+      a[i*3+2]=wz+(Math.random()-.5)*.5;
+      a[i*3+1]+=vel[i]*(alert?1.8:1);
+      if(a[i*3+1]>baseY+2.8)a[i*3+1]=baseY;
+    }
+    pGeo.attributes.position.needsUpdate=true;
+  };
+  pts.visible=run||alert;
+  const add=m=>{grp.add(m);return m};
+  const lights=[];
+  const lightbar=(w,x,y,z)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w||.7,.07,.2),new THREE.MeshStandardMaterial({color:SC,emissive:SC,emissiveIntensity:1.4,roughness:.4,metalness:.2}));m.position.set(x,y,z);add(m);lights.push(m);return m};
+  const peck=p=>{const q=(p*2)%1;return q<.4?q/.4:(q<.5?1:(q<.9?1-(q-.5)/.4:0));};
+  let anim=()=>{};
+  /* ============ MODELO GENÉRICO (pórtico: láser / plasma / taladro) ============ */
+  if(!config.d3){
+    const body=new THREE.Mesh(new THREE.BoxGeometry(6.4,1.6,4.2),steel(0x8fa2bf));
+    const body2=new THREE.Mesh(new THREE.BoxGeometry(5.6,.9,3.4),steel(0xa4b5cf)); body2.position.y=1.25;
+    const bed=new THREE.Mesh(new THREE.BoxGeometry(5.2,.5,2.9),steel(0xbccadf)); bed.position.y=1.4;
+    const colL=new THREE.Mesh(new THREE.BoxGeometry(.7,3.4,.7),steel(0x7c8fb0)); colL.position.set(-2.8,2.85,-1);
+    const colR=colL.clone(); colR.position.x=2.8;
+    const gap=new THREE.Mesh(new THREE.BoxGeometry(6.3,.55,.9),steel(0x97a9c6)); gap.position.set(0,4.25,-1);
+    const cab=new THREE.Mesh(new THREE.BoxGeometry(.85,1.7,.55),steel(0x5d708f,.7,.4)); cab.position.set(-3.1,1.35,-1.75); add(cab);
+    lightbar(.7,0,4.75,-1);
+    const gantry=new THREE.Group(); gantry.position.y=3.35; add(gantry);
+    const gb=new THREE.Mesh(new THREE.BoxGeometry(.65,.65,4.4),steel(0x9fb2cc)); gantry.add(gb);
+    const head=new THREE.Group(); gantry.add(head);
+    const hb=new THREE.Mesh(new THREE.BoxGeometry(.9,1.1,.8),steel(0xaebfd8)); head.add(hb);
+    const spindle=new THREE.Mesh(new THREE.CylinderGeometry(.16,.16,.9,12),steel(0xc7d3e4,.4,.25)); spindle.position.y=-.85; head.add(spindle);
+    const tool=config.tipo=="taladro"
+      ? new THREE.Mesh(new THREE.ConeGeometry(.22,.8,8),steel(0x1d4fd7,.2,.5))
+      : new THREE.Mesh(new THREE.CylinderGeometry(.07,.07,.7,8),new THREE.MeshBasicMaterial({color:SC2}));
+    tool.position.y=-1.5; head.add(tool);
+    const part=new THREE.Mesh(new THREE.BoxGeometry(1.7,.5,1.2),steel(0x3b82f6,.5,.45)); part.position.set(.8,1.9,.2); add(part);
+    [body,body2,bed,colL,colR,gap].forEach(add);
+    anim=t=>{
+      if(run||alert){gantry.position.z=Math.sin(t*1.2)*1.5;head.position.x=Math.sin(t*.9)*1.9;}
+      head.position.y=(run||alert)?Math.abs(Math.sin(t*6))*.12:0;
+      part.position.x=.8+Math.sin(t*.35)*1.1;
+      if(pts.visible) sparkAt(head.position.x,gantry.position.z,.4);
+    };
+  }
+  /* ============ TUBO — corte láser de tubos TL6160 ============ */
+  else if(config.d3=="tubo"){
+    const colL=new THREE.Mesh(new THREE.BoxGeometry(.5,3.2,.5),steel(0x7c8fb0)); colL.position.set(-2.6,2.6,0);
+    const colR=colL.clone(); colR.position.x=2.6;
+    const topB=new THREE.Mesh(new THREE.BoxGeometry(5.9,.4,.5),steel(0x97a9c6)); topB.position.y=4.25;
+    const tube=new THREE.Mesh(new THREE.CylinderGeometry(.26,.26,6.6,24),steel(0x8fa2bf,.85,.32)); tube.rotation.z=Math.PI/2; tube.position.y=1.15;
+    const chuckL=new THREE.Mesh(new THREE.TorusGeometry(.34,.07,10,20),steel(0x5d708f,.7,.3)); chuckL.rotation.y=Math.PI/2; chuckL.position.set(-3.3,1.15,0);
+    const chuckR=chuckL.clone(); chuckR.position.x=3.3;
+    const rol1=new THREE.Mesh(new THREE.CylinderGeometry(.2,.2,.6,14),steel(0xbccadf,.4,.5)); rol1.rotation.x=Math.PI/2; rol1.position.set(-2.2,.72,0);
+    const rol2=rol1.clone(); rol2.position.x=2.2;
+    const rol3=rol1.clone(); rol3.position.x=-1.1; const rol4=rol1.clone(); rol4.position.x=1.1;
+    const gantry=new THREE.Group(); gantry.position.y=4.05; add(gantry);
+    const gb=new THREE.Mesh(new THREE.BoxGeometry(.45,.45,1.3),steel(0x9fb2cc)); gantry.add(gb);
+    const head=new THREE.Group(); gantry.add(head);
+    const hb=new THREE.Mesh(new THREE.BoxGeometry(.6,.7,.7),steel(0xaebfd8)); head.add(hb);
+    const nozzle=new THREE.Mesh(new THREE.CylinderGeometry(.09,.09,.8,10),steel(0xc7d3e4,.4,.25)); nozzle.position.y=-.7; head.add(nozzle);
+    const hood=new THREE.Mesh(new THREE.BoxGeometry(.7,.22,.8),steel(0x4a5a78,.6,.4)); hood.position.y=.42; head.add(hood);
+    const beam=new THREE.Mesh(new THREE.CylinderGeometry(.04,.04,1.55,6),new THREE.MeshBasicMaterial({color:SC2,transparent:true,opacity:.8})); beam.position.y=-2.2; head.add(beam);
+    const beamCore=new THREE.Mesh(new THREE.CylinderGeometry(.014,.014,1.55,6),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.9})); beamCore.position.y=-2.2; head.add(beamCore);
+    const cutGlow=new THREE.Mesh(new THREE.TorusGeometry(.3,.025,8,24),new THREE.MeshStandardMaterial({color:SC2,emissive:SC2,emissiveIntensity:2,roughness:.4})); cutGlow.rotation.y=Math.PI/2; cutGlow.position.y=1.15; add(cutGlow);
+    [colL,colR,topB,tube,chuckL,chuckR,rol1,rol2,rol3,rol4].forEach(add);
+    lightbar(1.1,0,4.52,0);
+    anim=t=>{
+      gantry.position.z=Math.sin(t*1.1)*1.8;
+      head.position.y=(run||alert)?Math.abs(Math.sin(t*5))*.08:0;
+      tube.position.z=Math.sin(t*.3)*.18;
+      cutGlow.position.x=head.position.x; cutGlow.position.z=gantry.position.z;
+      beam.visible=run||alert; beamCore.visible=beam.visible;
+      beam.material.opacity=(run||alert)?.45+Math.abs(Math.sin(t*9))*.5:0;
+      if(pts.visible) sparkAt(head.position.x,gantry.position.z,1.0);
+    };
+  }
+  /* ============ SIERRA — sierra de mesa ELECNC-420 ============ */
+  else if(config.d3=="sierra"){
+    const table=new THREE.Mesh(new THREE.BoxGeometry(6.6,.7,4.4),steel(0x8fa2bf)); table.position.y=.9;
+    const panel=new THREE.Mesh(new THREE.BoxGeometry(5.8,.14,3.6),wood()); panel.position.set(0,1.32,0);
+    const groove=new THREE.Mesh(new THREE.BoxGeometry(5.8,.03,.16),new THREE.MeshStandardMaterial({color:0x8a7a5c,roughness:1})); groove.position.set(0,1.4,1.5); add(groove);
+    const fence=new THREE.Mesh(new THREE.BoxGeometry(6,.28,.2),new THREE.MeshStandardMaterial({color:0xa8946f,roughness:.8,metalness:.2})); fence.position.set(0,1.36,-1.7); add(fence);
+    const cab=new THREE.Mesh(new THREE.BoxGeometry(.6,1.3,.55),steel(0x5d708f,.7,.4)); cab.position.set(2.95,1.0,-1.8); add(cab);
+    const rail=new THREE.Mesh(new THREE.BoxGeometry(4.8,.5,.5),steel(0x97a9c6)); rail.position.set(0,1.95,1.55);
+    const carr=new THREE.Group(); carr.position.set(0,2.15,1.55); add(carr);
+    const motor=new THREE.Mesh(new THREE.BoxGeometry(.55,.55,.8),steel(0x9fb2cc)); carr.add(motor);
+    const blade=new THREE.Mesh(new THREE.CylinderGeometry(.95,.95,.06,40),steel(0xbccadf,.75,.28)); blade.rotation.z=Math.PI/2; blade.position.y=.05; carr.add(blade);
+    const bladeEdge=new THREE.Mesh(new THREE.TorusGeometry(.95,.02,8,40),new THREE.MeshStandardMaterial({color:SC2,emissive:SC2,emissiveIntensity:1.2})); bladeEdge.rotation.z=Math.PI/2; bladeEdge.position.y=.05; carr.add(bladeEdge);
+    const guard=new THREE.Mesh(new THREE.BoxGeometry(.7,.35,.85),steel(0xaebfd8)); guard.position.y=.42; carr.add(guard);
+    [table,panel,rail].forEach(add);
+    lightbar(.7,0,2.4,1.55);
+    anim=t=>{
+      carr.position.x=Math.sin(t*.8)*1.85;
+      if(run||alert){blade.rotation.x+=alert?.3:.16;bladeEdge.rotation.x=blade.rotation.x;}
+      if(pts.visible) sparkAt(carr.position.x,1.55,1.25);
+    };
+  }
+  /* ============ GABINETE — taladradora vertical EM610 ============ */
+  else if(config.d3=="cabinet"){
+    const base=new THREE.Mesh(new THREE.BoxGeometry(5.8,.5,4),steel(0x8fa2bf)); base.position.y=.45;
+    const colL=new THREE.Mesh(new THREE.BoxGeometry(.5,3.6,.5),steel(0x7c8fb0)); colL.position.set(-2.6,2.4,0);
+    const colR=colL.clone(); colR.position.x=2.6;
+    const cab=new THREE.Mesh(new THREE.BoxGeometry(.55,1.1,.4),steel(0x5d708f,.7,.4)); cab.position.set(2.6,2.1,.6); add(cab);
+    const hb2=new THREE.Group(); hb2.position.y=2.75; add(hb2);
+    const bar=new THREE.Mesh(new THREE.BoxGeometry(5.6,.4,.6),steel(0x9fb2cc)); hb2.add(bar);
+    const bits=[];
+    for(let i=-2;i<=2;i++){
+      const sp=new THREE.Mesh(new THREE.CylinderGeometry(.09,.09,.5,8),steel(0xc7d3e4,.4,.25)); sp.position.set(i*1.1,-.4,0); hb2.add(sp);
+      const bit=new THREE.Mesh(new THREE.ConeGeometry(.1,.8,6),steel(0x1d4fd7,.2,.5)); bit.position.set(i*1.1,-.75,0); hb2.add(bit); bits.push(bit);
+    }
+    const door=new THREE.Mesh(new THREE.BoxGeometry(1.8,.12,2.8),wood()); door.position.set(0,1.21,0);
+    const roller=(x,z)=>{const m=new THREE.Mesh(new THREE.CylinderGeometry(.14,.14,.5,12),steel(0xbccadf,.4,.5));m.rotation.x=Math.PI/2;m.position.set(x,.82,z);return m};
+    const rA=roller(-1.8,-1.2),rB=roller(1.8,-1.2),rC=roller(0,1.3);
+    [base,colL,colR,door,rA,rB,rC].forEach(add);
+    lightbar(1.1,0,4.1,0);
+    anim=t=>{
+      hb2.position.y=2.75+(run||alert?peck(t/2.6)*.28:0);
+      door.position.z=Math.sin(t*.5)*1.25;
+      if(run||alert) bits.forEach(b=>b.rotation.y+=.3);
+      if(pts.visible) sparkAt(0,door.position.z,1.1);
+    };
+  }
+  /* ============ LATERAL — taladro lateral ELECNC100 ============ */
+  else if(config.d3=="side"){
+    const bench=new THREE.Mesh(new THREE.BoxGeometry(6.2,.6,3.6),steel(0x8fa2bf)); bench.position.y=.6;
+    const panel=new THREE.Mesh(new THREE.BoxGeometry(.3,1.1,3.4),wood()); panel.position.set(1.2,1.45,0);
+    const pod=new THREE.Mesh(new THREE.CylinderGeometry(.16,.2,.35,12),steel(0x5d708f,.5,.4)); pod.position.set(1.2,.38,0); add(pod);
+    const col=new THREE.Mesh(new THREE.BoxGeometry(.5,2.1,.5),steel(0x7c8fb0)); col.position.set(-2.6,1.65,0);
+    const cab=new THREE.Mesh(new THREE.BoxGeometry(.55,1.1,.45),steel(0x5d708f,.7,.4)); cab.position.set(-1.5,.95,-1.75); add(cab);
+    const head=new THREE.Group(); head.position.set(-1.35,1.45,0); add(head);
+    const hb=new THREE.Mesh(new THREE.BoxGeometry(.8,.7,.9),steel(0xaebfd8)); head.add(hb);
+    const chuck=new THREE.Mesh(new THREE.CylinderGeometry(.14,.14,.3,10),steel(0x5d708f,.5,.4)); chuck.rotation.z=-Math.PI/2; chuck.position.x=.55; head.add(chuck);
+    const bit=new THREE.Mesh(new THREE.ConeGeometry(.12,.9,8),steel(0x1d4fd7,.2,.5)); bit.rotation.z=-Math.PI/2; bit.position.x=1.05; head.add(bit);
+    const hose=new THREE.Mesh(new THREE.CylinderGeometry(.11,.11,1.1,10),new THREE.MeshStandardMaterial({color:0x3a4a66,roughness:.7})); hose.position.set(0,.75,-.55); hose.rotation.z=-.75; head.add(hose);
+    [bench,panel,col].forEach(add);
+    lightbar(.6,-1.5,1.7,-1.75);
+    anim=t=>{
+      head.position.x=-1.35+(run||alert?peck(t/1.9)*.65+.12:0);
+      if(run||alert) bit.rotation.x+=.4;
+      if(pts.visible) sparkAt(head.position.x+1.5,0,1.2);
+    };
+  }
+  /* plinto + anillo de estado compartidos */
+  const plinth=new THREE.Mesh(new THREE.CylinderGeometry(2.6,2.6,.25,48),steel(0xdfe5ef,.3,.6)); plinth.position.y=.12; add(plinth);
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(2.6,.05,8,60),new THREE.MeshStandardMaterial({color:SC2,emissive:SC,emissiveIntensity:1.1,metalness:.3,roughness:.3}));
+  ring.rotation.x=-Math.PI/2; ring.position.y=.28; add(ring);
+  grp.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true}});
   let t=0;
-  const headWorld={x:0,z:0};
   const tick=()=>{t+=.016;
     if(!dragging){rotY+=.0035}
     grp.rotation.y=rotY; grp.rotation.x=rotX;
-    if(run||alert){gantry.position.z=Math.sin(t*1.2)*1.5;head.position.x=Math.sin(t*.9)*1.9;}
-    head.position.y=(run||alert)?Math.abs(Math.sin(t*6))*.12:0;
-    part.position.x=.8+Math.sin(t*.35)*1.1;
-    ring.material.emissiveIntensity=(alert?2.2+Math.sin(t*8)*1.2:run?1.3+Math.sin(t*2)*.35:.25);
-    pts.visible=run||alert;
-    if(pts.visible){
-      headWorld.x=head.position.x*Math.cos(rotY)-(gantry.position.z+gb.position.z*-0)*Math.sin(rotY);
-      headWorld.z=head.position.x*Math.sin(rotY)+(gantry.position.z)*Math.cos(rotY);
-      const a=pGeo.attributes.position.array;
-      for(let i=0;i<n;i++){
-        a[i*3]=headWorld.x+(Math.random()-.5)*.5;
-        a[i*3+2]=headWorld.z+(Math.random()-.5)*.5;
-        a[i*3+1]+=vel[i]*(alert?1.8:1);
-        if(a[i*3+1]>3.2)a[i*3+1]=0.4;
-      }
-      pGeo.attributes.position.needsUpdate=true;
-    }
+    anim(t);
+    const pulse=alert?2.2+Math.sin(t*8)*1.2:run?1.3+Math.sin(t*2)*.35:.25;
+    ring.material.emissiveIntensity=pulse;
+    lights.forEach(l=>l.material.emissiveIntensity=pulse);
     r.render(sc,c); T3D={raf:requestAnimationFrame(tick),cleanup:()=>{cv.removeEventListener("pointerdown",onDown);window.removeEventListener("pointermove",onMove);window.removeEventListener("pointerup",onUp);r.dispose();}};
   };
   tick();
 }
-function clean3D(){if(T3D){cancelAnimationFrame(T3D.raf);T3D.cleanup();T3D=null;}}
+
 
 /* ================= DATOS (mock según requerimientos) ================= */
 const MQ = {
@@ -726,11 +881,16 @@ const MQ = {
   "Láser 03": {tipo:"laser", modelo:"FiberCut FC-3015", tipoTxt:"Láser fibra 6kW", sede:"Planta Norte · Medellín", cliente:"Aceros del Norte", estado:"alert", oee:71, horas:11.8, piezas:96, ok:90, ko:6, rul:42, salud:62, gas:"10.1 m³", alarma:{code:"ALL 77:56", txt:"Transductor guía de cinta averiado", sev:"warn", min:38}, horasUsadas:5720, vidaUtil:6400},
   "Láser 04": {tipo:"laser", modelo:"FiberCut FC-2015", tipoTxt:"Láser fibra 4kW", sede:"Planta Norte · Medellín", cliente:"Aceros del Norte", estado:"run", oee:78, horas:13.1, piezas:110, ok:107, ko:3, rul:88, salud:81, gas:"9.8 m³", alarma:null, horasUsadas:2140, vidaUtil:3200},
   "Plasma 02": {tipo:"plasma", modelo:"PlasmaPro P-200", tipoTxt:"Plasma 200A", sede:"Planta Sur · Bogotá", cliente:"Metalúrgica Andina", estado:"stop", oee:45, horas:6.4, piezas:52, ok:49, ko:3, rul:12, salud:35, gas:"—", alarma:{code:"MSG 200:2", txt:"Presión aire insuficiente", sev:"bad", min:215}, horasUsadas:2980, vidaUtil:3200},
-  "P803A": {tipo:"taladro", modelo:"FICEP P803A", tipoTxt:"Línea de taladrado CNC", sede:"Planta Norte · Medellín", cliente:"Aceros del Norte", estado:"run", oee:88, horas:15.6, piezas:142, ok:139, ko:3, rul:240, salud:91, gas:"—", alarma:null, horasUsadas:6890, vidaUtil:8000}
+  "P803A": {tipo:"taladro", modelo:"FICEP P803A", tipoTxt:"Línea de taladrado CNC", sede:"Planta Norte · Medellín", cliente:"Aceros del Norte", estado:"run", oee:88, horas:15.6, piezas:142, ok:139, ko:3, rul:240, salud:91, gas:"—", alarma:null, horasUsadas:6890, vidaUtil:8000},
+  "TL6160": {tipo:"tubo", d3:"tubo", modelo:"TL6160", tipoTxt:"Corte láser de fibra para tubos", sede:"Showroom · Bogotá", cliente:"Elefante Azul", marca:"Elefante Azul", categoria:"Máquina de corte láser de fibra", capacidad:"más de 400 unidades en stock", specs:["Potencia del láser: 1.5 – 3 kW","Estándar: CE, ISO9001"], estado:"run", oee:84, horas:13.6, piezas:96, ok:93, ko:3, rul:320, salud:90, gas:"—", alarma:null, horasUsadas:2100, vidaUtil:8000, foto:"img/tl6160.png"},
+  "ELECNC-420": {tipo:"sierra", d3:"sierra", modelo:"ELECNC-420", tipoTxt:"Sierra de mesa computarizada", sede:"Showroom · Bogotá", cliente:"Elefante Azul", marca:"Elefante Azul", categoria:"Máquina de sierra de panel", capacidad:"más de 400 unidades en stock", specs:["Tamaño de la máquina: 7300 × 6530 × 1900 mm","Longitud máxima de corte: 4200 mm","Velocidad de movimiento de la sierra: 100 m/min"], estado:"run", oee:86, horas:14.8, piezas:104, ok:101, ko:3, rul:410, salud:92, gas:"—", alarma:null, horasUsadas:3100, vidaUtil:9000, foto:"img/elecnc420.png"},
+  "EM610": {tipo:"taladro", d3:"cabinet", modelo:"EM610", tipoTxt:"Taladradora de gabinetes y puertas", sede:"Showroom · Bogotá", cliente:"Elefante Azul", marca:"Elefante Azul", categoria:"Máquina integrada para puertas, paredes y armarios", capacidad:"más de 500 unidades en stock", specs:["Espesor de procesamiento: 10 – 60 mm"], estado:"run", oee:83, horas:13.9, piezas:118, ok:114, ko:4, rul:260, salud:89, gas:"—", alarma:null, horasUsadas:1870, vidaUtil:7000, foto:"img/em610.png"},
+  "ELECNC100": {tipo:"taladrol", d3:"side", modelo:"ELECNC100", tipoTxt:"Taladro de agujeros laterales de un solo cabezal", sede:"Showroom · Bogotá", cliente:"Elefante Azul", marca:"Elefante Azul", categoria:"Taladradora CNC", capacidad:"más de 450 unidades en stock", specs:["Potencia: 5.5 kW","Cabezales de perforación: dobles"], estado:"alert", oee:76, horas:12.2, piezas:88, ok:84, ko:4, rul:95, salud:68, gas:"—", alarma:{code:"ALL 77:4", txt:"Accionadas las protecciones térmicas", sev:"warn", min:12}, horasUsadas:2560, vidaUtil:7000, foto:"img/elecnc100.png"}
 };
 const CLIENTES = [
   {nombre:"Aceros del Norte", nit:"900.123.456-7", sedes:["Planta Norte · Medellín"], maquinas:["Láser 01","Láser 03","Láser 04","P803A"], plan:"Premium"},
-  {nombre:"Metalúrgica Andina", nit:"901.987.654-3", sedes:["Planta Sur · Bogotá"], maquinas:["Plasma 02"], plan:"Monitoreo"}
+  {nombre:"Metalúrgica Andina", nit:"901.987.654-3", sedes:["Planta Sur · Bogotá"], maquinas:["Plasma 02"], plan:"Monitoreo"},
+  {nombre:"Elefante Azul", nit:"901.234.567-8", sedes:["Showroom · Bogotá"], maquinas:["TL6160","ELECNC-420","EM610","ELECNC100"], plan:"Showroom"}
 ];
 const OTS = [
   {id:"OT-1042", mq:"Plasma 02", prio:"CRÍTICA", tipo:"Correctiva", estado:"En progreso", tech:"C. Ruiz", sla:"vence en 2 h", check:[["Verificar presión en manómetro del circuito",1],["Inspeccionar filtros y purgar condensación",1],["Revisar compresor y contactor de arranque",0],["Prueba de ciclo con carga",0]]},
@@ -857,6 +1017,69 @@ function ic(n){return `<svg class="iv" aria-hidden="true"><use href="#i-${n}"/><
 /* ================= MÁQUINA ANIMADA (SVG) ================= */
 function machSVG(tipo,estado){
   const cutting = estado=="run"||estado=="alert";
+  if(tipo=="sierra"){
+    return `<div class="mach ${estado} ${tipo}" role="img" aria-label="Sierra de mesa computarizada en estado ${EST[estado]?EST[estado][0]:"desconocido"}">
+    <svg viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect class="m-body" x="1" y="1" width="138" height="88" rx="9"/>
+      <rect class="m-vision" x="12" y="13" width="116" height="42" rx="5"/>
+      <rect class="m-gantrybeam" x="10" y="17" width="120" height="5" rx="2.5"/>
+      <g class="bladeg">
+        <rect class="m-gantry" x="-8" y="10" width="16" height="7" rx="2"/>
+        <circle class="m-blade" cx="0" cy="30" r="13"/>
+        <circle class="m-bladecore" cx="0" cy="30" r="3"/>
+        ${cutting?`<circle class="spark" cx="-2" cy="43" r="1.5"/><circle class="spark" cx="2" cy="43.8" r="1.2"/><circle class="spark" cx="0" cy="42.4" r="1"/>`:""}
+      </g>
+      <rect class="m-panel" x="18" y="44" width="104" height="7" rx="1.5"/>
+      <rect class="m-bedl" x="14" y="58" width="112" height="4" rx="2"/>
+      <g class="feedline"><line class="m-feed" x1="14" y1="50" x2="126" y2="50"/><circle class="m-feeddot" r="1.8" cx="14" cy="50"/></g>
+      <rect class="m-base" x="8" y="76" width="124" height="9" rx="3"/>
+      <rect class="m-slot" x="22" y="79.6" width="96" height="1.8" rx=".9"/>
+    </svg>
+  </div>`;
+  }
+  if(tipo=="tubo"){
+    return `<div class="mach ${estado} ${tipo}" role="img" aria-label="Máquina de corte láser de tubos en estado ${EST[estado]?EST[estado][0]:"desconocido"}">
+    <svg viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect class="m-body" x="1" y="1" width="138" height="88" rx="9"/>
+      <rect class="m-vision" x="12" y="13" width="116" height="42" rx="5"/>
+      <rect class="m-gantrybeam" x="10" y="17" width="120" height="5" rx="2.5"/>
+      <g class="carriage">
+        <g class="headg">
+          <rect class="m-gantry" x="-6" y="8" width="12" height="9" rx="2"/>
+          <rect class="m-head" x="-9" y="17" width="18" height="6" rx="3"/>
+          ${cutting?`<line class="m-beam" x1="0" y1="23" x2="0" y2="42"/>`:""}
+          ${cutting?`<circle class="spark" cx="-2.2" cy="43" r="1.5"/><circle class="spark" cx="2.2" cy="44" r="1.2"/><circle class="spark" cx="0" cy="42.4" r="1"/>`:""}
+        </g>
+      </g>
+      <rect class="m-tube" x="12" y="48" width="116" height="8" rx="4"/>
+      <rect class="m-roller" x="20" y="56" width="6" height="5" rx="1"/>
+      <rect class="m-roller" x="114" y="56" width="6" height="5" rx="1"/>
+      <rect class="m-bedl" x="14" y="62" width="112" height="3" rx="1.5"/>
+      <rect class="m-base" x="8" y="76" width="124" height="9" rx="3"/>
+      <rect class="m-slot" x="22" y="79.6" width="96" height="1.8" rx=".9"/>
+    </svg>
+  </div>`;
+  }
+  if(tipo=="taladrol"){
+    return `<div class="mach ${estado} ${tipo}" role="img" aria-label="Taladro de agujeros laterales en estado ${EST[estado]?EST[estado][0]:"desconocido"}">
+    <svg viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect class="m-body" x="1" y="1" width="138" height="88" rx="9"/>
+      <rect class="m-vision" x="12" y="13" width="116" height="42" rx="5"/>
+      <g class="sideg">
+        <g class="headg">
+          <rect class="m-sidehead" x="-16" y="24" width="14" height="13" rx="3"/>
+          <rect class="m-chuck" x="-8" y="29" width="8" height="4" rx="1"/>
+          <path class="m-ldrill" d="M0 31 L12 28 L12 34 Z"/>
+          ${cutting?`<circle class="spark" cx="12" cy="28.5" r="1.5"/><circle class="spark" cx="12" cy="34.5" r="1.2"/><circle class="spark" cx="12" cy="31" r="1"/>`:""}
+        </g>
+      </g>
+      <rect class="m-panelv" x="30" y="40" width="82" height="22" rx="2"/>
+      <rect class="m-lbench" x="12" y="62" width="116" height="8" rx="2"/>
+      <rect class="m-base" x="8" y="76" width="124" height="9" rx="3"/>
+      <rect class="m-slot" x="22" y="79.6" width="96" height="1.8" rx=".9"/>
+    </svg>
+  </div>`;
+  }
   const headPart = tipo=="taladro"
     ? `<g class="toolg">
          <rect class="m-spindle" x="-3.5" y="19" width="7" height="10" rx="1.5"/>
@@ -885,17 +1108,32 @@ function machSVG(tipo,estado){
     </svg>
   </div>`;
 }
+function machVisual(m){
+  return m.foto
+    ? `<div class="mthumb"><img src="${m.foto}" alt="${m.modelo}" loading="lazy"></div>`
+    : `<div class="machbox">${machSVG(m.tipo,m.estado)}</div>`;
+}
 function machCard(n){
   const m=MQ[n];
-  return `<div class="mcard" onclick="openMq('${n}')">
-    <div class="mhead">
+  const head = m.foto
+    ? `<div class="mphoto"><img src="${m.foto}" alt="${n} — ${m.modelo}" loading="lazy"><span class="mcattag">${m.categoria||m.tipoTxt}</span><span class="status ${EST[m.estado][1]}"><span class="dot"></span>${EST[m.estado][0]}</span></div>
+    <div class="mhead" style="margin-top:10px">
+      <div>
+        <span class="name">${n}</span>
+        <span class="mtype">${m.tipoTxt} · ${m.marca||""}</span><br>
+        <span class="mtype">${m.capacidad?m.capacidad.replace("en stock","").trim():""}</span>
+      </div>
+    </div>`
+    : `<div class="mhead">
       <div class="machbox">${machSVG(m.tipo,m.estado)}</div>
       <div>
         <span class="name">${n}</span>
         <span class="mtype">${m.tipoTxt}</span><br>
         ${st(m.estado)}
       </div>
-    </div>
+    </div>`;
+  return `<div class="mcard" onclick="openMq('${n}')">
+    ${head}
     <div class="sub">${m.modelo} · ${m.sede} · ${m.cliente}</div>
     <div class="rows">
       <div class="row"><span>OEE hoy</span><b>${m.oee}%</b></div>
@@ -1103,13 +1341,38 @@ function vMachine(){
   let tab = MTABS[SUBTAB%4][1];
   let body="";
   if(tab=="resumen"){
-    body=`<div class="card" style="padding:10px">
+    const ficha = m.foto?`<div class="card" style="padding:10px">
+      <div class="mphoto" style="height:250px"><img src="${m.foto}" alt="${SEL_MQ} — ${m.modelo}"></div>
+      <h3 style="margin-top:12px">Ficha técnica</h3>
+      <table class="tab2 machspec"><tr><th>Campo</th><th>Valor</th></tr>
+        <tr><td>Marca</td><td><b>${m.marca||"—"}</b></td></tr>
+        <tr><td>Modelo</td><td><b>${m.modelo}</b></td></tr>
+        <tr><td>Categoría</td><td>${m.categoria||"—"}</td></tr>
+        ${(m.specs||[]).map(s=>`<tr><td>Especificación</td><td>${s}</td></tr>`).join("")}
+        <tr><td>Capacidad de suministro</td><td>${m.capacidad||"—"}</td></tr>
+        <tr><td>Cliente</td><td>${m.cliente} · ${m.sede}</td></tr>
+      </table>
+    </div>`:"";
+    body=`<div class="grid2">
+    <div class="card" style="padding:10px">
       <div class="three3d" style="height:340px">
         <canvas id="cv3d"></canvas>
         <span class="tag3d"><span class="dot"></span> ${SEL_MQ} · vista HMI 3D — ${m.modelo}</span>
         <div class="hint3d">Arrastra para rotar el modelo · retroalimentación en vivo</div>
         <div class="m3dchip"><span>OEE ${m.oee}%</span><span>RUL ${m.rul} h</span><span>${m.estado.toUpperCase()}</span></div>
       </div>
+    </div>
+    ${ficha||`<div class="card" style="padding:10px">
+      <div class="mphoto" style="height:250px;display:flex;align-items:center;justify-content:center;background:var(--chrome)">
+        <div class="machbox" style="max-width:230px">${machSVG(m.tipo,m.estado)}</div>
+      </div>
+      <h3 style="margin-top:12px">Ficha técnica</h3>
+      <table class="tab2 machspec"><tr><th>Campo</th><th>Valor</th></tr>
+        <tr><td>Modelo</td><td><b>${m.modelo}</b></td></tr>
+        <tr><td>Categoría</td><td>${m.tipoTxt}</td></tr>
+        <tr><td>Cliente</td><td>${m.cliente} · ${m.sede}</td></tr>
+      </table>
+    </div>`}
     </div>
     <div class="grid2">
       <div class="card"><h3>Indicadores clave</h3>
@@ -1427,7 +1690,7 @@ function mHome(){
   if(ROL=="operario"){
     const m=MQ["Láser 01"];
     return `<div class="push">${ic('bell')} <div><b>Sin alarmas activas</b> · tu máquina opera normal</div></div>
-    <div class="mcard2" style="cursor:pointer" onclick="M_SEL='Láser 01';renderMovil()"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">Láser 01 — FiberCut FC-3015</div><div class="s">Planta Norte · Medellín</div>${st(m.estado)}</div></div>
+    <div class="mcard2" style="cursor:pointer" onclick="M_SEL='Láser 01';renderMovil()"><div class="mmini">${machVisual(m)}<div><div class="t">Láser 01 — FiberCut FC-3015</div><div class="s">Planta Norte · Medellín</div>${st(m.estado)}</div></div>
       <div class="big">${m.piezas} <span style="font-size:13px;color:var(--text-3)">piezas hoy</span></div>
       <div class="mrow"><span>Producción turno</span><b>${m.ok} OK · ${m.ko} KO</b></div>
       <div class="mrow"><span>Horas operación</span><b>${m.horas} h</b></div>
@@ -1467,7 +1730,7 @@ function mHome(){
       <div class="mrow"><span>OT abiertas</span><b>${OTS.filter(o=>o.estado!="Cerrada").length}</b></div>
       <div class="mrow"><span>Gateways degradados</span><b>1</b></div>
     </div>
-    ${mqs.map(n=>{const m=MQ[n];return `<div class="mcard2" style="cursor:pointer" onclick="M_SEL='${n}';renderMovil()"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">${n} <span style="font-size:10px;color:var(--text-3)">${m.cliente}</span></div>${st(m.estado)}</div></div>
+    ${mqs.map(n=>{const m=MQ[n];return `<div class="mcard2" style="cursor:pointer" onclick="M_SEL='${n}';renderMovil()"><div class="mmini">${machVisual(m)}<div><div class="t">${n} <span style="font-size:10px;color:var(--text-3)">${m.cliente}</span></div>${st(m.estado)}</div></div>
       <div class="mrow"><span>OEE</span><b>${m.oee}%</b></div>
       <div class="mrow"><span>Alarma</span><b style="color:${m.alarma?(m.alarma.sev=='bad'?'var(--bad)':'var(--warn-ink)'):'var(--ok)'}">${m.alarma?m.alarma.code:"—"}</b></div></div>`}).join("")}`;
   }
@@ -1479,14 +1742,14 @@ function mHome(){
       <div class="mrow"><span>Paradas por falla</span><b>38 min</b></div>
       <div class="mrow"><span>OT por aprobar</span><b>1</b></div>
     </div>
-    ${Object.keys(MQ).filter(k=>MQ[k].cliente=="Aceros del Norte").map(n=>{const m=MQ[n];return `<div class="mcard2" style="cursor:pointer" onclick="M_SEL='${n}';renderMovil()"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">${n}</div>${st(m.estado)}</div></div><div class="mrow"><span>OEE</span><b>${m.oee}%</b></div><div class="mrow"><span>Piezas</span><b>${m.ok}/${m.ko}</b></div></div>`}).join("")}`;
+    ${Object.keys(MQ).filter(k=>MQ[k].cliente=="Aceros del Norte").map(n=>{const m=MQ[n];return `<div class="mcard2" style="cursor:pointer" onclick="M_SEL='${n}';renderMovil()"><div class="mmini">${machVisual(m)}<div><div class="t">${n}</div>${st(m.estado)}</div></div><div class="mrow"><span>OEE</span><b>${m.oee}%</b></div><div class="mrow"><span>Piezas</span><b>${m.ok}/${m.ko}</b></div></div>`}).join("")}`;
   }
   return `<div class="mcard2"><div class="t">Aceros del Norte — mi flota</div>
     <div class="mrow"><span>Máquinas</span><b>${Object.keys(MQ).filter(k=>MQ[k].cliente=="Aceros del Norte").length}</b></div>
     <div class="mrow"><span>OEE promedio</span><b>77%</b></div>
     <div class="mrow"><span>Alarmas activas</span><b style="color:var(--warn)">1</b></div>
   </div>
-  ${Object.keys(MQ).filter(k=>MQ[k].cliente=="Aceros del Norte").map(n=>{const m=MQ[n];return `<div class="mcard2" style="cursor:pointer" onclick="M_SEL='${n}';renderMovil()"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">${n}</div>${st(m.estado)}</div></div><div class="mrow"><span>OEE</span><b>${m.oee}%</b></div><div class="mrow"><span>Piezas OK/KO</span><b>${m.ok}/${m.ko}</b></div></div>`}).join("")}`;
+  ${Object.keys(MQ).filter(k=>MQ[k].cliente=="Aceros del Norte").map(n=>{const m=MQ[n];return `<div class="mcard2" style="cursor:pointer" onclick="M_SEL='${n}';renderMovil()"><div class="mmini">${machVisual(m)}<div><div class="t">${n}</div>${st(m.estado)}</div></div><div class="mrow"><span>OEE</span><b>${m.oee}%</b></div><div class="mrow"><span>Piezas OK/KO</span><b>${m.ok}/${m.ko}</b></div></div>`}).join("")}`;
 }
 function mAlerts(){
   return ALARMAS.map(a=>`<div class="otitem ${a.sev=='bad'?'bb':a.sev=='warn'?'':'bg'}"><b>${a.code}</b> · ${a.mq} · ${a.dur}<br>${a.txt}<br><span style="color:var(--primary-2)">${ic('bulb')} ${a.sug}</span><br><button class="bigbtn ghost" style="margin-top:7px;padding:8px" onclick="toast('OT creada desde la alarma','ok')">Crear OT</button></div>`).join("");
@@ -1546,7 +1809,8 @@ function mMachine(n){
   const paradas=PARADAS.filter(p=>p.mq==n);
   const sug=(ALARMAS.find(a=>a.code==(m.alarma||{}).code)||{}).sug||"";
   return `<button class="bigbtn ghost" style="margin-bottom:11px" onclick="M_SEL=null;renderMovil()">← Volver</button>
-  <div class="mcard2"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">${n}</div><div class="s">${m.modelo} · ${m.tipoTxt}</div>${st(m.estado)}</div></div>
+  ${m.foto?`<div class="mphoto" style="height:170px;margin-bottom:11px"><img src="${m.foto}" alt="${n} — ${m.modelo}"><span class="mcattag">${m.categoria||m.tipoTxt}</span><span class="status ${EST[m.estado][1]}"><span class="dot"></span>${EST[m.estado][0]}</span></div>`:""}
+  <div class="mcard2"><div class="mmini">${machVisual(m)}<div><div class="t">${n}</div><div class="s">${m.modelo} · ${m.tipoTxt}</div>${st(m.estado)}</div></div>
     <div class="mrow"><span>Sede</span><b>${m.sede}</b></div>
     <div class="mrow"><span>Cliente</span><b>${m.cliente}</b></div>
   </div>
@@ -1612,7 +1876,7 @@ function mPerfil(){
 }
 function mMachList(){
   const keys = ROL=="superadmin"?Object.keys(MQ):Object.keys(MQ).filter(k=>MQ[k].cliente=="Aceros del Norte");
-  return keys.map(n=>{const m=MQ[n];return `<div class="mcard2" style="cursor:pointer" onclick="M_SEL='${n}';renderMovil()"><div class="mmini"><div class="machbox">${machSVG(m.tipo,m.estado)}</div><div><div class="t">${n}</div><div class="s">${m.modelo}</div>${st(m.estado)}</div></div>
+  return keys.map(n=>{const m=MQ[n];return `<div class="mcard2" style="cursor:pointer" onclick="M_SEL='${n}';renderMovil()"><div class="mmini">${machVisual(m)}<div><div class="t">${n}</div><div class="s">${m.modelo}</div>${st(m.estado)}</div></div>
     <div class="mrow"><span>OEE</span><b>${m.oee}%</b></div>
     <div class="mrow"><span>Salud</span><b style="color:${m.salud>75?'var(--ok)':m.salud>50?'var(--warn-ink)':'var(--bad)'}">${m.salud}/100</b></div>
     <div class="mrow"><span>Alarma</span><b style="color:${m.alarma?(m.alarma.sev=='bad'?'var(--bad)':'var(--warn-ink)'):'var(--ok)'}">${m.alarma?m.alarma.code:"—"}</b></div></div>`}).join("");
@@ -1696,7 +1960,7 @@ function renderWeb(){
   const el=q("mainContent");
   el.innerHTML=`<div class="fadeIn">${(R[VIEW]||vDashboard)()}</div>`;
   el.focus({preventScroll:true});
-  if(q("cv3d")) init3D("cv3d",{tipo:(MQ[SEL_MQ]||MQ["Láser 01"]).tipo,estado:(MQ[SEL_MQ]||MQ["Láser 01"]).estado});
+  if(q("cv3d")){const m=MQ[SEL_MQ]||MQ["Láser 01"];init3D("cv3d",{tipo:m.tipo,d3:m.d3,estado:m.estado});}
 }
 function go(v){VIEW=v;renderWeb()}
 function setRole(r){
